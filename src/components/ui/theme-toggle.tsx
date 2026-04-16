@@ -5,8 +5,7 @@ import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
-  // Prevent hydration mismatch by ensuring mounted state
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
@@ -14,19 +13,21 @@ export function ThemeToggle() {
   }, []);
 
   if (!mounted) {
-    return null; // Don't render until mounted
+    return null;
   }
+
+  const isDark = resolvedTheme === "dark";
 
   return (
     <button
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-white text-zinc-900 shadow-xl ring-1 ring-black/5 transition-all hover:scale-105 active:scale-95 dark:bg-zinc-800 dark:text-zinc-100 dark:ring-white/10 dark:hover:bg-zinc-700"
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      className="fixed bottom-32 right-6 md:bottom-8 md:right-8 z-[999999] flex h-16 w-16 md:h-14 md:w-14 items-center justify-center rounded-full bg-white text-zinc-900 shadow-[0_0_40px_rgba(0,0,0,0.5)] ring-2 ring-zinc-900/10 transition-all active:scale-90 dark:bg-zinc-800 dark:text-zinc-100 dark:ring-white/20"
       aria-label="Toggle theme"
     >
-      {theme === "dark" ? (
-        <Sun className="h-6 w-6" />
+      {isDark ? (
+        <Sun className="h-7 w-7 md:h-6 md:w-6" />
       ) : (
-        <Moon className="h-6 w-6" />
+        <Moon className="h-7 w-7 md:h-6 md:w-6" />
       )}
     </button>
   );
