@@ -153,7 +153,7 @@ export default function Home() {
                     src={`https://images.pexels.com/photos/${1190298 + i}/pexels-photo-${1190298 + i}.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load`}
                     alt="Event"
                     className="absolute inset-0 w-full h-full object-cover scale-[1.02] group-hover:scale-105 transition-transform duration-1000 ease-[cubic-bezier(0.19,1,0.22,1)]"
-                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                    onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1620121692029-d088224ddc74?q=80&w=2832&auto=format&fit=crop'; }}
                   />
 
                   {/* Minimalist Floating Badge */}
@@ -163,7 +163,7 @@ export default function Home() {
                 </div>
 
                 {/* Stark Typography */}
-                <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
+                <div className="flex flex-row items-start justify-between gap-4 mt-1">
                   <div>
                     <p className="text-xs md:text-sm uppercase tracking-widest text-zinc-500 font-semibold mb-3 flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -177,9 +177,8 @@ export default function Home() {
                     </p>
                   </div>
 
-                  <div className="shrink-0 flex md:block items-center justify-between border-t border-zinc-200 dark:border-zinc-800 md:border-none pt-4 md:pt-0 mt-2 md:mt-0">
-                    <p className="text-[10px] md:hidden uppercase tracking-widest text-zinc-400 font-bold mb-1">Price Start</p>
-                    <span className="text-xl md:text-3xl font-black font-mono text-zinc-900 dark:text-white block md:text-right">
+                  <div className="shrink-0 pt-0">
+                    <span className="text-2xl md:text-3xl font-black font-mono text-zinc-900 dark:text-white block text-right mt-1">
                       $45
                     </span>
                   </div>
@@ -210,68 +209,138 @@ export default function Home() {
 
           {/* 
             Bento Grid Layout 
-            Mobile: 1 Column -> Tablet: 2 Columns -> Desktop: 4 Columns
+            Mobile: 2-Column Interlocking Mosaic -> Desktop: 4 Columns
           */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 grid-rows-auto lg:grid-rows-[400px_400px] gap-4 md:gap-6 w-full">
+          <div className="grid grid-cols-2 lg:grid-cols-4 grid-rows-auto lg:grid-rows-[400px_400px] gap-3 md:gap-6 w-full">
             
-            {/* Feature 1: The Massive Monolith (Spans 2 columns, 2 rows on desktop) */}
-            <div className="group relative sm:col-span-2 sm:row-span-2 overflow-hidden rounded-[2rem] bg-zinc-200 dark:bg-zinc-900 cursor-pointer h-[50vh] lg:h-full">
+            {/* Feature 1: The Massive Monolith (Spans 2 cols on mobile, 2 cols 2 rows on desktop) */}
+            <div className="group relative col-span-2 lg:row-span-2 overflow-hidden rounded-2xl md:rounded-[2rem] bg-zinc-200 dark:bg-zinc-900 cursor-pointer h-[350px] lg:h-full">
               <img 
                 src="https://images.unsplash.com/photo-1574391855214-41d8e13f4124?q=80&w=2835&auto=format&fit=crop" 
                 alt="Underground Rave"
                 className="absolute inset-0 w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 scale-100 group-hover:scale-105 transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)]"
-                onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1620121692029-d088224ddc74?q=80&w=2832&auto=format&fit=crop'; }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-8 md:p-12">
-                <span className="inline-block px-4 py-1 border border-white/30 text-white text-xs font-bold uppercase tracking-widest rounded-full mb-4 group-hover:bg-white group-hover:text-black transition-colors">Featured</span>
-                <h3 className="text-4xl md:text-6xl font-black uppercase text-white tracking-tighter leading-none mb-4">Underground <br/> Vault Sessions</h3>
-                <p className="text-zinc-300 font-medium max-w-md hidden md:block">Access the most exclusive, hidden locations with our secret lineup of global DJs.</p>
+              <div className="absolute inset-x-0 bottom-0 p-6 md:p-12">
+                <span className="inline-block px-3 md:px-4 py-1 border border-white/30 text-white text-[10px] md:text-xs font-bold uppercase tracking-widest rounded-full mb-3 md:mb-4 group-hover:bg-white group-hover:text-black transition-colors">Featured</span>
+                <h3 className="text-3xl md:text-6xl font-black uppercase text-white tracking-tighter leading-none mb-2 md:mb-4">Underground <br className="hidden md:block"/> Sessions</h3>
+                <p className="text-zinc-300 font-medium text-xs md:text-sm max-w-md line-clamp-2 md:line-clamp-none">Access the most exclusive, hidden locations with our secret lineup of global DJs.</p>
               </div>
             </div>
 
-            {/* Feature 2: High VIP Cell (Spans 1 column) */}
-            <div className="group relative sm:col-span-1 sm:row-span-1 overflow-hidden rounded-[2rem] bg-zinc-900 cursor-pointer h-[400px]">
+            {/* Feature 2: High VIP Cell (Spans 1 col on both) */}
+            <div className="group relative col-span-1 overflow-hidden rounded-2xl md:rounded-[2rem] bg-zinc-900 cursor-pointer h-[200px] md:h-[400px]">
               <img 
                 src="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?q=80&w=2940&auto=format&fit=crop" 
                 alt="VIP Experience"
                 className="absolute inset-0 w-full h-full object-cover grayscale-[50%] group-hover:grayscale-0 scale-100 group-hover:scale-110 transition-all duration-1000"
-                onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1620121692029-d088224ddc74?q=80&w=2832&auto=format&fit=crop'; }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
-                <h3 className="text-2xl font-black uppercase text-white tracking-tighter mb-2 group-hover:text-amber-400 transition-colors">VIP Tables & Space</h3>
-                <p className="text-zinc-400 text-sm">Ultra-premium table service.</p>
+              <div className="absolute inset-x-0 bottom-0 p-4 md:p-8">
+                <h3 className="text-lg md:text-2xl font-black uppercase text-white tracking-tighter mb-1 md:mb-2 group-hover:text-amber-400 transition-colors">VIP Tables & Space</h3>
+                <p className="text-zinc-400 text-[10px] md:text-sm hidden md:block">Ultra-premium table service.</p>
               </div>
             </div>
 
-            {/* Feature 3: Tall Cell (Spans 1 column, 2 rows on desktop) */}
-            <div className="group relative sm:col-span-1 lg:row-span-2 overflow-hidden rounded-[2rem] bg-zinc-900 cursor-pointer h-[400px] lg:h-full">
+            {/* Feature 3: Tall Cell (Spans 1 col on both, 2 rows on desktop) */}
+            <div className="group relative col-span-1 lg:row-span-2 overflow-hidden rounded-2xl md:rounded-[2rem] bg-zinc-900 cursor-pointer h-[200px] lg:h-full">
               <img 
                 src="https://images.unsplash.com/photo-1545128678-299f05ee4c96?q=80&w=2819&auto=format&fit=crop" 
                 alt="Afterparty"
                 className="absolute inset-0 w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 scale-100 group-hover:scale-105 transition-all duration-1000"
-                onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1620121692029-d088224ddc74?q=80&w=2832&auto=format&fit=crop'; }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/90 via-black/40 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
-                <h3 className="text-3xl lg:text-5xl font-black uppercase text-white tracking-tighter mb-4 leading-none">The <br/> After <br/> Party</h3>
-                <button className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-emerald-500 transition-colors">
+              <div className="absolute inset-x-0 bottom-0 p-4 md:p-8">
+                <h3 className="text-xl md:text-3xl lg:text-5xl font-black uppercase text-white tracking-tighter mb-3 leading-none">The <br/> After <br/> Party</h3>
+                <button className="w-8 h-8 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-emerald-500 transition-colors text-xs md:text-base">
                   &rarr;
                 </button>
               </div>
             </div>
 
-            {/* Feature 4: Small Cell (Spans 1 column) */}
-            <div className="group relative sm:col-span-1 sm:row-span-1 overflow-hidden rounded-[2rem] bg-zinc-900 cursor-pointer h-[400px]">
+            {/* Feature 4: Small Cell (Spans 2 cols on mobile, 1 col on desktop) */}
+            <div className="group relative col-span-2 lg:col-span-1 overflow-hidden rounded-2xl md:rounded-[2rem] bg-zinc-900 cursor-pointer h-[120px] md:h-[400px]">
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 to-purple-900" />
               <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '20px 20px' }} />
-              <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-                <h3 className="text-2xl font-black uppercase text-white tracking-widest mb-4">View All <br/> Categories</h3>
-                <button className="px-6 py-3 bg-white text-black text-sm font-bold uppercase rounded-full group-hover:scale-110 transition-transform">
+              <div className="absolute inset-0 flex flex-col items-center justify-center p-4 md:p-8 text-center">
+                <h3 className="text-xl md:text-2xl font-black uppercase text-white tracking-widest mb-2 md:mb-4">View All <br className="hidden md:block"/> Categories</h3>
+                <button className="px-4 py-2 md:px-6 md:py-3 bg-white text-black text-[10px] md:text-sm font-bold uppercase rounded-full group-hover:scale-110 transition-transform">
                   Explore
                 </button>
               </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 
+        ========================================================
+        NEW SECTION: DISCO FLASHY IMPACT ANALYTICS
+        Highlights the legacy of what Explive has done till now
+        ========================================================
+      */}
+      <section className="relative w-full py-32 md:py-48 bg-black overflow-hidden flex flex-col items-center justify-center border-t border-white/10 z-0">
+        
+        {/* Flashy Disco Background 
+            Creates an intense, moving, vibrant neon dance-floor aesthetic 
+        */}
+        <div className="absolute inset-0 pointer-events-none opacity-90 z-0">
+           {/* Crazy moving neon blurred blobs for the Strobe light effect */}
+           <div className="absolute top-[-10%] left-[-10%] w-[70vw] md:w-[50vw] h-[50vw] bg-fuchsia-600 blur-[100px] md:blur-[120px] rounded-full mix-blend-screen animate-pulse" style={{ animationDuration: '2s' }} />
+           <div className="absolute top-[20%] right-[-10%] w-[80vw] md:w-[60vw] h-[60vw] bg-cyan-500 blur-[120px] md:blur-[140px] rounded-full mix-blend-screen animate-pulse" style={{ animationDuration: '3s', animationDelay: '0.5s' }} />
+           <div className="absolute bottom-[-20%] left-[10%] w-[90vw] md:w-[70vw] h-[50vw] bg-yellow-500 blur-[100px] md:blur-[130px] rounded-full mix-blend-screen animate-pulse" style={{ animationDuration: '2.5s', animationDelay: '1s' }} />
+           
+           {/* Geometric Laser Grid (Synthwave/Disco Floor) */}
+           <div className="absolute inset-0 z-10 opacity-[0.15]" style={{ backgroundImage: 'linear-gradient(rgba(255, 255, 255, 1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 1) 1px, transparent 1px)', backgroundSize: '60px 60px', transform: 'perspective(1000px) rotateX(60deg) scale(2.5) translateY(-100px)', transformOrigin: 'top center' }} />
+        </div>
+
+        {/* Content Container */}
+        <div className="relative w-full max-w-[120rem] mx-auto px-6 md:px-16 xl:px-24 z-20 flex flex-col items-center text-center">
+          
+          <span className="px-6 py-2 border border-white/40 rounded-full font-black uppercase tracking-[0.3em] text-white backdrop-blur-md bg-white/10 mb-8 shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+            The Explive Legacy
+          </span>
+
+          <h2 className="text-6xl md:text-8xl xl:text-[140px] font-black uppercase tracking-tighter text-white drop-shadow-[0_0_40px_rgba(255,255,255,0.4)] mb-20 leading-[0.85] mix-blend-overlay">
+            Create <br/> Elevate <br/> Celebrate
+          </h2>
+
+          {/* Architectural Typography Stats (No bounding boxes) */}
+          <div className="w-full flex flex-col md:flex-row justify-between items-center md:items-start gap-16 lg:gap-8 pt-16 md:pt-24 border-t border-white/20">
+            
+            <div className="flex flex-col items-center md:items-start group cursor-default w-full md:w-1/3">
+              <div className="flex items-center gap-3 mb-4 md:mb-6">
+                <span className="w-2.5 h-2.5 bg-fuchsia-500 rounded-full shadow-[0_0_10px_rgba(217,70,239,0.8)] animate-pulse" />
+                <p className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-zinc-400 group-hover:text-white transition-colors">Celebrity Events</p>
+              </div>
+              {/* Hollow text effect allowing background to shine through */}
+              <h4 className="text-8xl lg:text-[140px] font-black leading-none text-transparent transition-all duration-500 hover:text-white" style={{ WebkitTextStroke: '2px rgba(255,255,255,0.8)' }}>
+                100<span className="text-fuchsia-500 text-6xl lg:text-8xl font-medium -ml-2">+</span>
+              </h4>
+            </div>
+
+            <div className="flex flex-col items-center md:items-start group cursor-default w-full md:w-1/3 md:border-l md:border-white/10 md:pl-12">
+              <div className="flex items-center gap-3 mb-4 md:mb-6">
+                <span className="w-2.5 h-2.5 bg-cyan-500 rounded-full shadow-[0_0_10px_rgba(6,182,212,0.8)] animate-pulse" />
+                <p className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-zinc-400 group-hover:text-white transition-colors">Total Global Reach</p>
+              </div>
+              <h4 className="text-8xl lg:text-[140px] font-black leading-none text-transparent transition-all duration-500 hover:text-white" style={{ WebkitTextStroke: '2px rgba(255,255,255,0.8)' }}>
+                350<span className="text-cyan-500 text-6xl lg:text-8xl font-medium -ml-1">M</span>
+              </h4>
+            </div>
+
+            <div className="flex flex-col items-center md:items-start group cursor-default w-full md:w-1/3 md:border-l md:border-white/10 md:pl-12">
+              <div className="flex items-center gap-3 mb-4 md:mb-6">
+                <span className="w-2.5 h-2.5 bg-yellow-500 rounded-full shadow-[0_0_10px_rgba(234,179,8,0.8)] animate-pulse" />
+                <p className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-zinc-400 group-hover:text-white transition-colors">Verified Attendees</p>
+              </div>
+              <h4 className="text-8xl lg:text-[140px] font-black leading-none text-transparent transition-all duration-500 hover:text-white" style={{ WebkitTextStroke: '2px rgba(255,255,255,0.8)' }}>
+                60<span className="text-yellow-500 text-6xl lg:text-8xl font-medium -ml-1">K</span>
+              </h4>
             </div>
 
           </div>

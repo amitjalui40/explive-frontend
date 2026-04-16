@@ -23,12 +23,12 @@ export function Navbar() {
       {/* Top Navbar */}
       <nav className="fixed top-0 left-0 w-full z-50 pointer-events-none">
         <div className="w-full px-6 md:px-12 py-8 flex items-center justify-between max-w-[120rem] mx-auto pointer-events-auto mix-blend-difference text-white">
-          
+
           {/* Left - Logo */}
           <Link href="/" onClick={closeSidebar} className="text-2xl md:text-3xl font-black tracking-tighter uppercase transition-transform hover:scale-105 active:scale-95">
             Explive
           </Link>
-          
+
           {/* Center - Links (Hidden on mobile) */}
           <div className="hidden md:flex items-center gap-10 text-sm font-bold uppercase tracking-widest">
             <Link href="/shows" className="hover:opacity-50 transition-opacity">Shows</Link>
@@ -41,7 +41,7 @@ export function Navbar() {
             <button className="hidden md:block text-sm font-bold uppercase tracking-widest hover:opacity-50 transition-opacity">
               Sign In
             </button>
-            
+
             {/* Hamburger Button */}
             <button onClick={() => setIsOpen(true)} className="md:hidden p-2 -mr-2 hover:opacity-50 transition-opacity cursor-pointer">
               <Menu className="w-8 h-8" />
@@ -51,17 +51,17 @@ export function Navbar() {
       </nav>
 
       {/* Full Screen Smart Sidebar Overlay */}
-      <div 
+      <div
         className={`fixed inset-0 z-[100] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
       >
         {/* Abstract Backdrop Frost Effect */}
-        <div 
+        <div
           className="absolute inset-0 bg-white/90 dark:bg-zinc-950/90 backdrop-blur-2xl"
           onClick={closeSidebar}
         />
 
         {/* Sidebar Content Sliding Panel */}
-        <div 
+        <div
           className={`absolute top-0 right-0 h-full w-full sm:w-[500px] flex flex-col p-8 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] delay-75 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
         >
           {/* Header */}
