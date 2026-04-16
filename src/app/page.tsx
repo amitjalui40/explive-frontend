@@ -3,15 +3,16 @@ export default function Home() {
     <main className="w-full">
       {/* Hero Section */}
       <section className="relative h-screen w-full overflow-hidden">
-        {/* Local Background Video */}
+        {/* Cloudinary Optimized Background Video */}
         <video
           autoPlay
           loop
           muted
           playsInline
           className="absolute top-0 left-0 h-full w-full object-cover z-0"
+          poster="https://res.cloudinary.com/dgrmsleyc/video/upload/so_0,q_auto,f_auto/v1776357410/Dancing_Club_Stock_Video_Free_qeyiim.jpg"
         >
-          <source src="/videos/hero-bg.mp4" type="video/mp4" />
+          <source src="https://res.cloudinary.com/dgrmsleyc/video/upload/q_auto,f_auto/v1776357410/Dancing_Club_Stock_Video_Free_qeyiim.mp4" />
         </video>
 
         <div className="absolute inset-0 bg-black/50 z-10" />
