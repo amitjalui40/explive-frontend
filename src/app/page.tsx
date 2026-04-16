@@ -3,16 +3,20 @@ export default function Home() {
     <main className="w-full">
       {/* Hero Section */}
       <section className="relative h-screen w-full overflow-hidden">
-        {/* Cloudinary Optimized Background Video */}
+        {/* Cloudinary Extremely Optimized Background Video */}
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="absolute top-0 left-0 h-full w-full object-cover z-0"
-          poster="https://res.cloudinary.com/dgrmsleyc/video/upload/so_0,q_auto,f_auto/v1776357410/Dancing_Club_Stock_Video_Free_qeyiim.jpg"
+          preload="auto"
+          className="absolute top-0 left-0 h-full w-full object-cover z-0 bg-zinc-950"
+          poster="https://res.cloudinary.com/dgrmsleyc/video/upload/so_0,w_800,q_auto/v1776357410/Dancing_Club_Stock_Video_Free_qeyiim.jpg"
         >
-          <source src="https://res.cloudinary.com/dgrmsleyc/video/upload/q_auto,f_auto/v1776357410/Dancing_Club_Stock_Video_Free_qeyiim.mp4" />
+          {/* WebM loads 10x faster on modern browsers. We explicitly request it from Cloudinary and scale it down to 1080p width */}
+          <source src="https://res.cloudinary.com/dgrmsleyc/video/upload/w_1080,q_auto,f_webm/v1776357410/Dancing_Club_Stock_Video_Free_qeyiim.webm" type="video/webm" />
+          {/* Fallback to optimized MP4 for older iPhones */}
+          <source src="https://res.cloudinary.com/dgrmsleyc/video/upload/w_1080,q_auto,f_mp4/v1776357410/Dancing_Club_Stock_Video_Free_qeyiim.mp4" type="video/mp4" />
         </video>
 
         <div className="absolute inset-0 bg-black/50 z-10" />
