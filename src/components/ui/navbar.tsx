@@ -3,9 +3,22 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
+import expliveLogo from '@/assets/logo/Exp Live logo - white.png';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Track scroll position for Apple glass effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check on mount
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Prevent scrolling on the main page when the sidebar is open
   useEffect(() => {
@@ -21,26 +34,36 @@ export function Navbar() {
   return (
     <>
       {/* Top Navbar */}
-      <nav className="fixed top-0 left-0 w-full z-50 pointer-events-none">
-        <div className="w-full px-6 md:px-12 py-8 flex items-center justify-between max-w-[120rem] mx-auto pointer-events-auto mix-blend-difference text-white">
+      <nav className={`fixed top-0 left-0 w-full z-50 pointer-events-none transition-all duration-500 border-b ${
+        isScrolled 
+          ? 'bg-white/70 dark:bg-zinc-950/70 backdrop-blur-2xl shadow-sm border-black/5 dark:border-white/5' 
+          : 'bg-transparent border-transparent'
+      }`}>
+        <div className={`w-full px-6 md:px-12 flex items-center justify-between max-w-[120rem] mx-auto pointer-events-auto transition-all duration-500 ${
+          isScrolled ? 'py-4 text-zinc-900 dark:text-white' : 'py-8 text-white'
+        }`}>
 
           {/* Left - Logo */}
-          <Link href="/" onClick={closeSidebar} className="text-2xl md:text-3xl font-black tracking-tighter uppercase transition-transform hover:scale-105 active:scale-95">
-            Explive
+          <Link href="/" onClick={closeSidebar} className="flex items-center hover:opacity-80 transition-opacity">
+            <img 
+              src={expliveLogo.src} 
+              alt="Explive" 
+              className={`h-8 md:h-10 object-contain scale-[1.8] md:scale-[2.5] origin-left transition-all duration-500 ${
+                isScrolled ? 'invert dark:invert-0' : ''
+              }`}
+            />
           </Link>
 
           {/* Center - Links (Hidden on mobile) */}
           <div className="hidden md:flex items-center gap-10 text-sm font-bold uppercase tracking-widest">
-            <Link href="/shows" className="hover:opacity-50 transition-opacity">Shows</Link>
-            <Link href="/venues" className="hover:opacity-50 transition-opacity">Venues</Link>
-            <Link href="/artists" className="hover:opacity-50 transition-opacity">Artists</Link>
+            <Link href="/" className="hover:opacity-50 transition-opacity">Home</Link>
+            <Link href="/about" className="hover:opacity-50 transition-opacity">About</Link>
+            <Link href="/contract" className="hover:opacity-50 transition-opacity">Contract</Link>
           </div>
 
           {/* Right - Actions */}
           <div className="flex items-center gap-6">
-            <button className="hidden md:block text-sm font-bold uppercase tracking-widest hover:opacity-50 transition-opacity">
-              Sign In
-            </button>
+
 
             {/* Hamburger Button */}
             <button onClick={() => setIsOpen(true)} className="md:hidden p-2 -mr-2 hover:opacity-50 transition-opacity cursor-pointer">
@@ -74,27 +97,17 @@ export function Navbar() {
 
           {/* Brutalist Giant Navigation Links */}
           <nav className="flex flex-col gap-6 text-zinc-900 dark:text-white mt-auto mb-auto px-4">
-            <Link href="/shows" onClick={closeSidebar} className="text-6xl md:text-7xl font-black tracking-tighter uppercase hover:translate-x-6 transition-transform duration-300">
-              Shows
+            <Link href="/" onClick={closeSidebar} className="text-6xl md:text-7xl font-black tracking-tighter uppercase hover:translate-x-6 transition-transform duration-300">
+              Home
             </Link>
-            <Link href="/venues" onClick={closeSidebar} className="text-6xl md:text-7xl font-black tracking-tighter uppercase hover:translate-x-6 transition-transform duration-300">
-              Venues
-            </Link>
-            <Link href="/artists" onClick={closeSidebar} className="text-6xl md:text-7xl font-black tracking-tighter uppercase hover:translate-x-6 transition-transform duration-300">
-              Artists
-            </Link>
-            <Link href="/about" onClick={closeSidebar} className="text-6xl md:text-7xl font-black tracking-tighter uppercase hover:translate-x-6 transition-transform duration-300 text-zinc-400 dark:text-zinc-600">
+            <Link href="/about" onClick={closeSidebar} className="text-6xl md:text-7xl font-black tracking-tighter uppercase hover:translate-x-6 transition-transform duration-300">
               About
+            </Link>
+            <Link href="/contract" onClick={closeSidebar} className="text-6xl md:text-7xl font-black tracking-tighter uppercase hover:translate-x-6 transition-transform duration-300">
+              Contract
             </Link>
           </nav>
 
-          {/* Footer Actions */}
-          <div className="flex flex-col gap-6 mt-16 px-4 text-zinc-900 dark:text-white">
-            <div className="h-px w-full bg-zinc-200 dark:bg-zinc-800" />
-            <button onClick={closeSidebar} className="text-left text-2xl font-bold uppercase tracking-widest hover:opacity-50 transition-opacity">
-              Sign In
-            </button>
-          </div>
         </div>
       </div>
     </>

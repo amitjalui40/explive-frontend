@@ -1,6 +1,7 @@
 "use client";
 import { useRef, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { features } from "@/config/features";
 
 export default function Home() {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -57,137 +58,250 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/50 z-10" />
 
         <div className="relative z-20 flex h-full flex-col items-center justify-center px-4 text-center">
-          <h1 className="text-6xl font-bold tracking-tight text-white md:text-8xl drop-shadow-xl">
+          
+          {/* Massive Cinematic Title */}
+          <h1 
+            className="text-7xl md:text-[12vw] font-black tracking-tighter uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-white/80 to-white/10 leading-[0.8]"
+            style={{ WebkitTextStroke: '1px rgba(255,255,255,0.1)' }}
+          >
             Explive
           </h1>
-          <p className="mt-6 text-xl text-zinc-200 md:text-2xl max-w-2xl drop-shadow-md">
-            The canvas is ready for your full-screen video experience.
+          
+          {/* High-End Minimal Tagline */}
+          <p className="mt-8 md:mt-12 text-xs md:text-sm font-semibold text-zinc-300 uppercase tracking-[0.5em] md:tracking-[0.8em] ml-[0.5em] md:ml-[0.8em] drop-shadow-2xl">
+            Experience It Live
           </p>
+
+          {/* Aesthetic Scroll Indicator */}
+          <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-60">
+             <div className="w-[1px] h-16 md:h-24 bg-gradient-to-b from-transparent via-white to-transparent animate-pulse" />
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Spotlight Section (Glassmorphism Hierarchy) */}
+      <section className="relative py-24 md:py-32 w-full max-w-[120rem] mx-auto overflow-hidden bg-zinc-50 dark:bg-zinc-950">
+
+        {/* Abstract Glowing Orbs & Disco Light Background */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+          {/* Sweeping Volumetric Disco Lasers - Cranked up intensity */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200vmax] h-[200vmax] opacity-80 dark:opacity-60 dark:mix-blend-screen animate-[spin_40s_linear_infinite]" style={{
+            background: 'conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(236,72,153,0.8) 45deg, transparent 90deg, rgba(6,182,212,0.8) 135deg, transparent 180deg, rgba(16,185,129,0.8) 225deg, transparent 270deg, rgba(236,72,153,0.8) 315deg, transparent 360deg)'
+          }} />
+
+          {/* Ambient Glowing Orbs - Cranked up intensity */}
+          <div className="absolute top-[10%] left-[5%] w-[60vw] h-[60vw] bg-fuchsia-500/40 dark:bg-fuchsia-500/30 blur-[120px] dark:mix-blend-screen rounded-full animate-pulse" style={{ animationDuration: '7s' }} />
+          <div className="absolute top-[40%] right-[10%] w-[50vw] h-[50vw] bg-cyan-500/40 dark:bg-cyan-500/30 blur-[120px] dark:mix-blend-screen rounded-full animate-pulse" style={{ animationDuration: '10s' }} />
+        </div>
+
+        <div className="relative z-10 md:px-16 xl:px-24 flex flex-col gap-12">
+
+          {/* Section Header & Actions */}
+          <div className="flex flex-col md:flex-row items-baseline justify-between gap-6 w-full px-6 md:px-0">
+            <div className="flex flex-col gap-2">
+              <span className="text-sm md:text-base font-bold tracking-widest uppercase text-emerald-500">Upcoming Events</span>
+              <h2 className="text-5xl md:text-7xl xl:text-8xl font-black tracking-tighter uppercase text-zinc-900 dark:text-zinc-50">
+                Featured <br className="hidden md:block" /> Spotlight
+              </h2>
+            </div>
+
+            <button className="group flex items-center gap-2 text-sm md:text-base font-bold uppercase tracking-widest text-zinc-900 dark:text-zinc-100 hover:text-emerald-500 transition-colors">
+              View More Upcoming
+              <span className="block transition-transform duration-300 group-hover:translate-x-2">&rarr;</span>
+            </button>
+          </div>
+
+          {/* Container: Horizontal Carousel (Mobile) / Custom Grid (Desktop) */}
+          <div
+            className="flex md:grid md:grid-cols-2 gap-6 w-full overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-smooth pb-8 md:pb-0 px-6 md:px-0"
+            style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
+          >
+            <style dangerouslySetInnerHTML={{ __html: `::-webkit-scrollbar { display: none; }` }} />
+
+            {/* The Headliner (Show #1) - Full Width on Desktop */}
+            <div className="shrink-0 snap-center w-[85vw] md:w-auto md:col-span-2 group relative h-[500px] md:h-[600px] rounded-[2rem] overflow-hidden flex flex-col justify-end p-8 md:p-12 cursor-pointer bg-white/60 dark:bg-zinc-900/40 backdrop-blur-3xl border border-black/5 dark:border-white/10 shadow-2xl transition-transform duration-500 hover:scale-[1.01]">
+              <img
+                src="https://images.unsplash.com/photo-1540039155732-d6741b687cb8?q=80&w=2000&auto=format&fit=crop"
+                alt="Main Event"
+                className="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-overlay dark:mix-blend-normal dark:opacity-50 transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-100/90 via-zinc-100/20 to-transparent dark:from-black/90 dark:via-black/20" />
+
+              <div className="relative z-10">
+                <span className="inline-block px-4 py-1 mb-4 rounded-full text-xs font-bold uppercase tracking-widest bg-zinc-900 text-white dark:bg-white dark:text-zinc-900">Next Event</span>
+                <h3 className="text-5xl md:text-7xl font-black tracking-tighter uppercase text-zinc-900 dark:text-white drop-shadow-sm">Neon Dreams Festival</h3>
+                <p className="mt-4 text-lg md:text-xl font-medium text-zinc-700 dark:text-zinc-300 max-w-2xl whitespace-normal">A transcendent audio-visual experience featuring top electronic artists from around the globe.</p>
+                <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
+                  <span className="text-sm font-bold tracking-widest uppercase text-zinc-900 dark:text-zinc-400">Oct 24, 2026</span>
+                  <span className="hidden sm:block w-1.5 h-1.5 rounded-full bg-zinc-400" />
+                  <span className="text-sm font-bold tracking-widest uppercase text-zinc-900 dark:text-zinc-400">Grand Arena</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Show #2 */}
+            <div className="shrink-0 snap-center w-[85vw] md:w-auto group relative h-[450px] md:h-[400px] rounded-[2rem] overflow-hidden flex flex-col justify-end p-8 cursor-pointer bg-white/60 dark:bg-zinc-900/40 backdrop-blur-3xl border border-black/5 dark:border-white/10 shadow-xl transition-transform duration-500 hover:scale-[1.02]">
+              <img
+                src="https://images.unsplash.com/photo-1470229722913-7c090be5c520?q=80&w=1000&auto=format&fit=crop"
+                alt="Supporting Event 1"
+                className="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-overlay dark:mix-blend-normal dark:opacity-50 transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-100/90 via-zinc-100/20 to-transparent dark:from-black/90 dark:via-black/20" />
+              <div className="relative z-10">
+                <h3 className="text-3xl md:text-4xl font-black tracking-tighter uppercase text-zinc-900 dark:text-white">Midnight Synth</h3>
+                <div className="mt-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                  <span className="text-xs font-bold tracking-widest uppercase text-zinc-700 dark:text-zinc-400">Nov 12, 2026</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Show #3 */}
+            <div className="shrink-0 snap-center w-[85vw] md:w-auto group relative h-[450px] md:h-[400px] rounded-[2rem] overflow-hidden flex flex-col justify-end p-8 cursor-pointer bg-white/60 dark:bg-zinc-900/40 backdrop-blur-3xl border border-black/5 dark:border-white/10 shadow-xl transition-transform duration-500 hover:scale-[1.02]">
+              <img
+                src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1000&auto=format&fit=crop"
+                alt="Supporting Event 2"
+                className="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-overlay dark:mix-blend-normal dark:opacity-50 transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-100/90 via-zinc-100/20 to-transparent dark:from-black/90 dark:via-black/20" />
+              <div className="relative z-10">
+                <h3 className="text-3xl md:text-4xl font-black tracking-tighter uppercase text-zinc-900 dark:text-white">Echoes Live</h3>
+                <div className="mt-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                  <span className="text-xs font-bold tracking-widest uppercase text-zinc-700 dark:text-zinc-400">Dec 05, 2026</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Invisible Mobile Spacer to ensure the last card can be scrolled cleanly into view with right padding */}
+            <div className="md:hidden shrink-0 w-1" />
+
+          </div>
         </div>
       </section>
 
       {/* Modern Upcoming Shows Carousel */}
-      <section className="relative py-24 md:py-32 w-full max-w-[120rem] mx-auto overflow-hidden bg-zinc-50 dark:bg-zinc-950">
+      {features.showLegacyUpcomingCarousel && (
+        <section className="relative py-24 md:py-32 w-full max-w-[120rem] mx-auto overflow-hidden bg-zinc-50 dark:bg-zinc-950">
 
-        {/* Immersive Club Background Elements */}
-        {/* Structural Grid to completely eliminate "blank" empty space */}
-        <div className="absolute inset-0 z-0 opacity-[0.15] dark:opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+          {/* Immersive Club Background Elements */}
+          {/* Structural Grid to completely eliminate "blank" empty space */}
+          <div className="absolute inset-0 z-0 opacity-[0.15] dark:opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)', backgroundSize: '40px 40px' }} />
 
-        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-          {/* Enhanced Stage Lighting Blurs (Pulled much closer to the center) */}
-          <div className="absolute top-[10%] left-[10%] md:left-[20%] w-[70vw] md:w-[60vw] h-[40vw] bg-fuchsia-500/20 dark:bg-fuchsia-500/10 blur-[100px] md:blur-[140px] mix-blend-multiply dark:mix-blend-screen rounded-full animate-pulse" style={{ animationDuration: '6s' }} />
-          <div className="absolute top-[20%] right-[5%] md:right-[15%] w-[80vw] md:w-[50vw] h-[50vw] bg-cyan-500/20 dark:bg-cyan-500/10 blur-[100px] md:blur-[160px] mix-blend-multiply dark:mix-blend-screen rounded-full animate-pulse" style={{ animationDuration: '8s' }} />
-          <div className="absolute bottom-[0%] left-1/2 w-[100vw] md:w-[80vw] h-[30vw] -translate-x-1/2 bg-emerald-500/15 dark:bg-emerald-500/10 blur-[120px] mix-blend-multiply dark:mix-blend-screen rounded-full animate-pulse" style={{ animationDuration: '7s' }} />
+          <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+            {/* Enhanced Stage Lighting Blurs (Pulled much closer to the center) */}
+            <div className="absolute top-[10%] left-[10%] md:left-[20%] w-[70vw] md:w-[60vw] h-[40vw] bg-fuchsia-500/20 dark:bg-fuchsia-500/10 blur-[100px] md:blur-[140px] mix-blend-multiply dark:mix-blend-screen rounded-full animate-pulse" style={{ animationDuration: '6s' }} />
+            <div className="absolute top-[20%] right-[5%] md:right-[15%] w-[80vw] md:w-[50vw] h-[50vw] bg-cyan-500/20 dark:bg-cyan-500/10 blur-[100px] md:blur-[160px] mix-blend-multiply dark:mix-blend-screen rounded-full animate-pulse" style={{ animationDuration: '8s' }} />
+            <div className="absolute bottom-[0%] left-1/2 w-[100vw] md:w-[80vw] h-[30vw] -translate-x-1/2 bg-emerald-500/15 dark:bg-emerald-500/10 blur-[120px] mix-blend-multiply dark:mix-blend-screen rounded-full animate-pulse" style={{ animationDuration: '7s' }} />
 
 
-          {/* Minimal Disco Star Background Graphics */}
-          <div className="absolute top-0 right-[-10%] w-[50vw] max-w-[800px] aspect-square opacity-[0.03] dark:opacity-[0.02] text-zinc-900 dark:text-zinc-50" style={{ animation: 'spin 90s linear infinite' }}>
-            <svg viewBox="0 0 100 100" fill="currentColor">
-              <path d="M50 0 C50 40 60 50 100 50 C60 50 50 60 50 100 C50 60 40 50 0 50 C40 50 50 40 50 0 Z" />
-            </svg>
+            {/* Minimal Disco Star Background Graphics */}
+            <div className="absolute top-0 right-[-10%] w-[50vw] max-w-[800px] aspect-square opacity-[0.03] dark:opacity-[0.02] text-zinc-900 dark:text-zinc-50" style={{ animation: 'spin 90s linear infinite' }}>
+              <svg viewBox="0 0 100 100" fill="currentColor">
+                <path d="M50 0 C50 40 60 50 100 50 C60 50 50 60 50 100 C50 60 40 50 0 50 C40 50 50 40 50 0 Z" />
+              </svg>
+            </div>
+            <div className="absolute bottom-[-20%] left-[-10%] w-[40vw] max-w-[600px] aspect-square opacity-[0.03] dark:opacity-[0.02] text-zinc-900 dark:text-zinc-50" style={{ animation: 'spin 60s linear infinite reverse' }}>
+              <svg viewBox="0 0 100 100" fill="currentColor">
+                <path d="M50 0 C50 40 60 50 100 50 C60 50 50 60 50 100 C50 60 40 50 0 50 C40 50 50 40 50 0 Z" />
+              </svg>
+            </div>
+
+
           </div>
-          <div className="absolute bottom-[-20%] left-[-10%] w-[40vw] max-w-[600px] aspect-square opacity-[0.03] dark:opacity-[0.02] text-zinc-900 dark:text-zinc-50" style={{ animation: 'spin 60s linear infinite reverse' }}>
-            <svg viewBox="0 0 100 100" fill="currentColor">
-              <path d="M50 0 C50 40 60 50 100 50 C60 50 50 60 50 100 C50 60 40 50 0 50 C40 50 50 40 50 0 Z" />
-            </svg>
+
+          {/* Section Content */}
+          <div className="relative z-10 flex flex-col md:flex-row items-baseline justify-between px-6 md:px-16 xl:px-24 mb-16 gap-6">
+            <h2 className="text-5xl md:text-7xl xl:text-8xl font-black tracking-tighter uppercase text-zinc-900 dark:text-zinc-50">
+              Upcoming <br className="hidden md:block" /> Shows
+            </h2>
+
+            <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12 w-full md:w-auto justify-between md:justify-end">
+              <button className="group flex items-center gap-2 text-sm md:text-base font-bold uppercase tracking-widest text-zinc-900 dark:text-zinc-100 hover:text-emerald-500 transition-colors">
+                View Complete Roster
+                <span className="block transition-transform duration-300 group-hover:translate-x-2">&rarr;</span>
+              </button>
+            </div>
           </div>
 
-
-        </div>
-
-        {/* Section Content */}
-        <div className="relative z-10 flex flex-col md:flex-row items-baseline justify-between px-6 md:px-16 xl:px-24 mb-16 gap-6">
-          <h2 className="text-5xl md:text-7xl xl:text-8xl font-black tracking-tighter uppercase text-zinc-900 dark:text-zinc-50">
-            Upcoming <br className="hidden md:block" /> Shows
-          </h2>
-
-          <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12 w-full md:w-auto justify-between md:justify-end">
-            <button className="group flex items-center gap-2 text-sm md:text-base font-bold uppercase tracking-widest text-zinc-900 dark:text-zinc-100 hover:text-emerald-500 transition-colors">
-              View Complete Roster
-              <span className="block transition-transform duration-300 group-hover:translate-x-2">&rarr;</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Navigation & Carousel Wrapper */}
-        <div
-          className="relative z-10 w-full group/carousel"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          {/* Floating Left Arrow */}
-          <button
-            onClick={scrollLeft}
-            aria-label="Scroll Left"
-            className="hidden md:flex absolute left-4 xl:left-8 top-[40%] -translate-y-1/2 z-10 h-16 w-16 rounded-full items-center justify-center bg-white/95 dark:bg-black/90 backdrop-blur-md shadow-2xl border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white hover:scale-110 active:scale-95 transition-all opacity-0 group-hover/carousel:opacity-100"
-          >
-            <ChevronLeft className="w-8 h-8 ml-[-2px]" />
-          </button>
-
-          {/* Floating Right Arrow */}
-          <button
-            onClick={scrollRight}
-            aria-label="Scroll Right"
-            className="hidden md:flex absolute right-4 xl:right-8 top-[40%] -translate-y-1/2 z-10 h-16 w-16 rounded-full items-center justify-center bg-white/95 dark:bg-black/90 backdrop-blur-md shadow-2xl border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white hover:scale-110 active:scale-95 transition-all opacity-0 group-hover/carousel:opacity-100"
-          >
-            <ChevronRight className="w-8 h-8 mr-[-2px]" />
-          </button>
-
-          {/* Editorial Snap Carousel */}
+          {/* Navigation & Carousel Wrapper */}
           <div
-            ref={carouselRef}
-            className="flex gap-6 md:gap-12 overflow-x-auto px-6 md:px-16 xl:px-24 pb-12 snap-x snap-mandatory scroll-smooth"
-            style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
+            className="relative z-10 w-full group/carousel"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
           >
-            {/* Workaround for global hidden scrollbars in Webkit */}
-            <style dangerouslySetInnerHTML={{ __html: `::-webkit-scrollbar { display: none; }` }} />
+            {/* Floating Left Arrow */}
+            <button
+              onClick={scrollLeft}
+              aria-label="Scroll Left"
+              className="hidden md:flex absolute left-4 xl:left-8 top-[40%] -translate-y-1/2 z-10 h-16 w-16 rounded-full items-center justify-center bg-white/95 dark:bg-black/90 backdrop-blur-md shadow-2xl border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white hover:scale-110 active:scale-95 transition-all opacity-0 group-hover/carousel:opacity-100"
+            >
+              <ChevronLeft className="w-8 h-8 ml-[-2px]" />
+            </button>
 
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div
-                key={i}
-                className="w-[85vw] min-w-[280px] md:w-[380px] lg:w-[420px] shrink-0 snap-center group cursor-pointer"
-              >
-                {/* Minimal Image Frame */}
-                <div className="relative aspect-[4/5] bg-zinc-200 dark:bg-zinc-900 overflow-hidden mb-5 filter grayscale-[20%] group-hover:grayscale-0 transition-all duration-700 ease-out">
-                  <img
-                    src={`https://images.pexels.com/photos/${1190298 + i}/pexels-photo-${1190298 + i}.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load`}
-                    alt="Event"
-                    className="absolute inset-0 w-full h-full object-cover scale-[1.02] group-hover:scale-105 transition-transform duration-1000 ease-[cubic-bezier(0.19,1,0.22,1)]"
-                    onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1620121692029-d088224ddc74?q=80&w=2832&auto=format&fit=crop'; }}
-                  />
+            {/* Floating Right Arrow */}
+            <button
+              onClick={scrollRight}
+              aria-label="Scroll Right"
+              className="hidden md:flex absolute right-4 xl:right-8 top-[40%] -translate-y-1/2 z-10 h-16 w-16 rounded-full items-center justify-center bg-white/95 dark:bg-black/90 backdrop-blur-md shadow-2xl border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white hover:scale-110 active:scale-95 transition-all opacity-0 group-hover/carousel:opacity-100"
+            >
+              <ChevronRight className="w-8 h-8 mr-[-2px]" />
+            </button>
 
-                  {/* Minimalist Floating Badge */}
-                  <div className="absolute top-4 left-4 md:top-6 md:left-6 bg-white/95 dark:bg-black/90 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 text-[10px] md:text-xs font-extrabold uppercase tracking-[0.2em] text-zinc-900 dark:text-white">
-                    Limited Tickets
+            {/* Editorial Snap Carousel */}
+            <div
+              ref={carouselRef}
+              className="flex gap-6 md:gap-12 overflow-x-auto px-6 md:px-16 xl:px-24 pb-12 snap-x snap-mandatory scroll-smooth"
+              style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
+            >
+              {/* Workaround for global hidden scrollbars in Webkit */}
+              <style dangerouslySetInnerHTML={{ __html: `::-webkit-scrollbar { display: none; }` }} />
+
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div
+                  key={i}
+                  className="w-[85vw] min-w-[280px] md:w-[380px] lg:w-[420px] shrink-0 snap-center group cursor-pointer"
+                >
+                  {/* Minimal Image Frame */}
+                  <div className="relative aspect-[4/5] bg-zinc-200 dark:bg-zinc-900 overflow-hidden mb-5 filter grayscale-[20%] group-hover:grayscale-0 transition-all duration-700 ease-out">
+                    <img
+                      src={`https://images.pexels.com/photos/${1190298 + i}/pexels-photo-${1190298 + i}.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load`}
+                      alt="Event"
+                      className="absolute inset-0 w-full h-full object-cover scale-[1.02] group-hover:scale-105 transition-transform duration-1000 ease-[cubic-bezier(0.19,1,0.22,1)]"
+                      onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1620121692029-d088224ddc74?q=80&w=2832&auto=format&fit=crop'; }}
+                    />
+
+                    {/* Minimalist Floating Badge */}
+                    <div className="absolute top-4 left-4 md:top-6 md:left-6 bg-white/95 dark:bg-black/90 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 text-[10px] md:text-xs font-extrabold uppercase tracking-[0.2em] text-zinc-900 dark:text-white">
+                      Limited Tickets
+                    </div>
+                  </div>
+
+                  {/* Stark Typography */}
+                  <div className="flex flex-row items-start justify-between gap-4 mt-1">
+                    <div>
+                      <p className="text-xs md:text-sm uppercase tracking-widest text-zinc-500 font-semibold mb-3 flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        Oct {20 + i} • 8:00 PM
+                      </p>
+                      <h3 className="text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-emerald-400 group-hover:to-cyan-400 transition-all duration-300">
+                        Oasis Festival {i}
+                      </h3>
+                      <p className="text-zinc-500 dark:text-zinc-400 text-sm md:text-base font-medium mt-3">
+                        Metropolis Warehouse • Miami, FL
+                      </p>
+                    </div>
+
+                    <div className="shrink-0 pt-0">
+                      <span className="text-2xl md:text-3xl font-black font-mono text-zinc-900 dark:text-white block text-right mt-1">
+                        $45
+                      </span>
+                    </div>
                   </div>
                 </div>
-
-                {/* Stark Typography */}
-                <div className="flex flex-row items-start justify-between gap-4 mt-1">
-                  <div>
-                    <p className="text-xs md:text-sm uppercase tracking-widest text-zinc-500 font-semibold mb-3 flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                      Oct {20 + i} • 8:00 PM
-                    </p>
-                    <h3 className="text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-emerald-400 group-hover:to-cyan-400 transition-all duration-300">
-                      Oasis Festival {i}
-                    </h3>
-                    <p className="text-zinc-500 dark:text-zinc-400 text-sm md:text-base font-medium mt-3">
-                      Metropolis Warehouse • Miami, FL
-                    </p>
-                  </div>
-
-                  <div className="shrink-0 pt-0">
-                    <span className="text-2xl md:text-3xl font-black font-mono text-zinc-900 dark:text-white block text-right mt-1">
-                      $45
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* 
         ========================================================
@@ -197,10 +311,10 @@ export default function Home() {
       */}
       <section className="relative w-full py-24 md:py-32 bg-zinc-50 dark:bg-zinc-950 border-t border-zinc-200 dark:border-white/5">
         <div className="w-full max-w-[120rem] mx-auto px-6 md:px-16 xl:px-24">
-          
+
           <div className="flex flex-col md:flex-row justify-between items-baseline mb-16 gap-8">
             <h2 className="text-5xl md:text-7xl xl:text-8xl font-black tracking-tighter uppercase text-zinc-900 dark:text-white drop-shadow-sm dark:drop-shadow-2xl">
-              Curated <br className="hidden md:block"/> Experiences
+              Curated <br className="hidden md:block" /> Experiences
             </h2>
             <p className="text-zinc-500 dark:text-zinc-400 md:text-right max-w-sm font-medium tracking-widest uppercase text-xs md:text-sm">
               Discover unique sub-cultures, hidden venues, and VIP access across our exclusive underground network.
@@ -212,11 +326,11 @@ export default function Home() {
             Mobile: 2-Column Interlocking Mosaic -> Desktop: 4 Columns
           */}
           <div className="grid grid-cols-2 lg:grid-cols-4 grid-rows-auto lg:grid-rows-[400px_400px] gap-3 md:gap-6 w-full">
-            
+
             {/* Feature 1: The Massive Monolith (Spans 2 cols on mobile, 2 cols 2 rows on desktop) */}
             <div className="group relative col-span-2 lg:row-span-2 overflow-hidden rounded-2xl md:rounded-[2rem] bg-zinc-200 dark:bg-zinc-900 cursor-pointer h-[350px] lg:h-full">
-              <img 
-                src="https://images.unsplash.com/photo-1574391855214-41d8e13f4124?q=80&w=2835&auto=format&fit=crop" 
+              <img
+                src="https://images.unsplash.com/photo-1574391855214-41d8e13f4124?q=80&w=2835&auto=format&fit=crop"
                 alt="Underground Rave"
                 className="absolute inset-0 w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 scale-100 group-hover:scale-105 transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)]"
                 onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1620121692029-d088224ddc74?q=80&w=2832&auto=format&fit=crop'; }}
@@ -224,15 +338,15 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-6 md:p-12">
                 <span className="inline-block px-3 md:px-4 py-1 border border-white/30 text-white text-[10px] md:text-xs font-bold uppercase tracking-widest rounded-full mb-3 md:mb-4 group-hover:bg-white group-hover:text-black transition-colors">Featured</span>
-                <h3 className="text-3xl md:text-6xl font-black uppercase text-white tracking-tighter leading-none mb-2 md:mb-4">Underground <br className="hidden md:block"/> Sessions</h3>
+                <h3 className="text-3xl md:text-6xl font-black uppercase text-white tracking-tighter leading-none mb-2 md:mb-4">Underground <br className="hidden md:block" /> Sessions</h3>
                 <p className="text-zinc-300 font-medium text-xs md:text-sm max-w-md line-clamp-2 md:line-clamp-none">Access the most exclusive, hidden locations with our secret lineup of global DJs.</p>
               </div>
             </div>
 
             {/* Feature 2: High VIP Cell (Spans 1 col on both) */}
             <div className="group relative col-span-1 overflow-hidden rounded-2xl md:rounded-[2rem] bg-zinc-900 cursor-pointer h-[200px] md:h-[400px]">
-              <img 
-                src="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?q=80&w=2940&auto=format&fit=crop" 
+              <img
+                src="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?q=80&w=2940&auto=format&fit=crop"
                 alt="VIP Experience"
                 className="absolute inset-0 w-full h-full object-cover grayscale-[50%] group-hover:grayscale-0 scale-100 group-hover:scale-110 transition-all duration-1000"
                 onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1620121692029-d088224ddc74?q=80&w=2832&auto=format&fit=crop'; }}
@@ -246,15 +360,15 @@ export default function Home() {
 
             {/* Feature 3: Tall Cell (Spans 1 col on both, 2 rows on desktop) */}
             <div className="group relative col-span-1 lg:row-span-2 overflow-hidden rounded-2xl md:rounded-[2rem] bg-zinc-900 cursor-pointer h-[200px] lg:h-full">
-              <img 
-                src="https://images.unsplash.com/photo-1545128678-299f05ee4c96?q=80&w=2819&auto=format&fit=crop" 
+              <img
+                src="https://images.unsplash.com/photo-1545128678-299f05ee4c96?q=80&w=2819&auto=format&fit=crop"
                 alt="Afterparty"
                 className="absolute inset-0 w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 scale-100 group-hover:scale-105 transition-all duration-1000"
                 onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1620121692029-d088224ddc74?q=80&w=2832&auto=format&fit=crop'; }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/90 via-black/40 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-4 md:p-8">
-                <h3 className="text-xl md:text-3xl lg:text-5xl font-black uppercase text-white tracking-tighter mb-3 leading-none">The <br/> After <br/> Party</h3>
+                <h3 className="text-xl md:text-3xl lg:text-5xl font-black uppercase text-white tracking-tighter mb-3 leading-none">The <br /> After <br /> Party</h3>
                 <button className="w-8 h-8 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-emerald-500 transition-colors text-xs md:text-base">
                   &rarr;
                 </button>
@@ -266,7 +380,7 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 to-purple-900" />
               <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '20px 20px' }} />
               <div className="absolute inset-0 flex flex-col items-center justify-center p-4 md:p-8 text-center">
-                <h3 className="text-xl md:text-2xl font-black uppercase text-white tracking-widest mb-2 md:mb-4">View All <br className="hidden md:block"/> Categories</h3>
+                <h3 className="text-xl md:text-2xl font-black uppercase text-white tracking-widest mb-2 md:mb-4">View All <br className="hidden md:block" /> Categories</h3>
                 <button className="px-4 py-2 md:px-6 md:py-3 bg-white text-black text-[10px] md:text-sm font-bold uppercase rounded-full group-hover:scale-110 transition-transform">
                   Explore
                 </button>
@@ -284,34 +398,34 @@ export default function Home() {
         ========================================================
       */}
       <section className="relative w-full py-32 md:py-48 bg-black overflow-hidden flex flex-col items-center justify-center border-t border-white/10 z-0">
-        
+
         {/* Flashy Disco Background 
             Creates an intense, moving, vibrant neon dance-floor aesthetic 
         */}
         <div className="absolute inset-0 pointer-events-none opacity-90 z-0">
-           {/* Crazy moving neon blurred blobs for the Strobe light effect */}
-           <div className="absolute top-[-10%] left-[-10%] w-[70vw] md:w-[50vw] h-[50vw] bg-fuchsia-600 blur-[100px] md:blur-[120px] rounded-full mix-blend-screen animate-pulse" style={{ animationDuration: '2s' }} />
-           <div className="absolute top-[20%] right-[-10%] w-[80vw] md:w-[60vw] h-[60vw] bg-cyan-500 blur-[120px] md:blur-[140px] rounded-full mix-blend-screen animate-pulse" style={{ animationDuration: '3s', animationDelay: '0.5s' }} />
-           <div className="absolute bottom-[-20%] left-[10%] w-[90vw] md:w-[70vw] h-[50vw] bg-yellow-500 blur-[100px] md:blur-[130px] rounded-full mix-blend-screen animate-pulse" style={{ animationDuration: '2.5s', animationDelay: '1s' }} />
-           
-           {/* Geometric Laser Grid (Synthwave/Disco Floor) */}
-           <div className="absolute inset-0 z-10 opacity-[0.15]" style={{ backgroundImage: 'linear-gradient(rgba(255, 255, 255, 1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 1) 1px, transparent 1px)', backgroundSize: '60px 60px', transform: 'perspective(1000px) rotateX(60deg) scale(2.5) translateY(-100px)', transformOrigin: 'top center' }} />
+          {/* Crazy moving neon blurred blobs for the Strobe light effect */}
+          <div className="absolute top-[-10%] left-[-10%] w-[70vw] md:w-[50vw] h-[50vw] bg-fuchsia-600 blur-[100px] md:blur-[120px] rounded-full mix-blend-screen animate-pulse" style={{ animationDuration: '2s' }} />
+          <div className="absolute top-[20%] right-[-10%] w-[80vw] md:w-[60vw] h-[60vw] bg-cyan-500 blur-[120px] md:blur-[140px] rounded-full mix-blend-screen animate-pulse" style={{ animationDuration: '3s', animationDelay: '0.5s' }} />
+          <div className="absolute bottom-[-20%] left-[10%] w-[90vw] md:w-[70vw] h-[50vw] bg-yellow-500 blur-[100px] md:blur-[130px] rounded-full mix-blend-screen animate-pulse" style={{ animationDuration: '2.5s', animationDelay: '1s' }} />
+
+          {/* Geometric Laser Grid (Synthwave/Disco Floor) */}
+          <div className="absolute inset-0 z-10 opacity-[0.15]" style={{ backgroundImage: 'linear-gradient(rgba(255, 255, 255, 1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 1) 1px, transparent 1px)', backgroundSize: '60px 60px', transform: 'perspective(1000px) rotateX(60deg) scale(2.5) translateY(-100px)', transformOrigin: 'top center' }} />
         </div>
 
         {/* Content Container */}
         <div className="relative w-full max-w-[120rem] mx-auto px-6 md:px-16 xl:px-24 z-20 flex flex-col items-center text-center">
-          
+
           <span className="px-6 py-2 border border-white/40 rounded-full font-black uppercase tracking-[0.3em] text-white backdrop-blur-md bg-white/10 mb-8 shadow-[0_0_20px_rgba(255,255,255,0.3)]">
             The Explive Legacy
           </span>
 
           <h2 className="text-6xl md:text-8xl xl:text-[140px] font-black uppercase tracking-tighter text-white drop-shadow-[0_0_40px_rgba(255,255,255,0.4)] mb-20 leading-[0.85] mix-blend-overlay">
-            Create <br/> Elevate <br/> Celebrate
+            Create <br /> Elevate <br /> Celebrate
           </h2>
 
           {/* Architectural Typography Stats (No bounding boxes) */}
           <div className="w-full flex flex-col md:flex-row justify-between items-center md:items-start gap-16 lg:gap-8 pt-16 md:pt-24 border-t border-white/20">
-            
+
             <div className="flex flex-col items-center md:items-start group cursor-default w-full md:w-1/3">
               <div className="flex items-center gap-3 mb-4 md:mb-6">
                 <span className="w-2.5 h-2.5 bg-fuchsia-500 rounded-full shadow-[0_0_10px_rgba(217,70,239,0.8)] animate-pulse" />
