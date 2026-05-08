@@ -1,6 +1,7 @@
 import { features } from "@/config/features";
 import { homepageData } from "@/config/homepageData";
 import { EventCategories } from "@/components/EventCategories";
+import { AboutUs } from "@/components/AboutUs";
 import { Hero } from "@/components/Hero";
 import { UpcomingShows } from "@/components/UpcomingShows";
 
@@ -11,8 +12,11 @@ export default function Home() {
       <Hero />
 
       {/* Dynamic Event Types Grid (Bento Box) */}
-      {/* Modular Event Categories Component */}
+      {/* Modular Event Categories Section */}
       <EventCategories />
+
+      {/* Modular About Us Section */}
+      <AboutUs />
 
       {/* Featured Spotlight Section (Glassmorphism Hierarchy) */}
       {features.showFeaturedSpotlight && (

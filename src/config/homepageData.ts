@@ -59,5 +59,19 @@ export const homepageData = {
       titleLine2: "Spotlight",
     },
     buttonText: "View More Upcoming",
+  },
+
+  about: {
+    kicker: "The Agency",
+    title: "We don't just host events. We architect culture.",
+    description1: "Founded on the belief that live entertainment should be an immersive, visceral experience. Explive has spent the last decade curating the world's most exclusive and breathtaking shows.",
+    description2: "From hidden underground bunkers to massive stadium festivals, our production value is unmatched. We handle the talent, the venue, the lighting, and the aesthetic. You just show up and experience it.",
+    image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=2070&auto=format&fit=crop",
+    stats: [
+      { value: "10+", label: "Years Experience" },
+      { value: "500+", label: "Events Hosted" },
+      { value: "2M+", label: "Tickets Sold" }
+    ],
+    buttonText: "Read Our Story"
   }
 };
