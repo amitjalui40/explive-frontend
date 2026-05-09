@@ -73,5 +73,40 @@ export const homepageData = {
       { value: "2M+", label: "Tickets Sold" }
     ],
     buttonText: "Read Our Story"
+  },
+
+  footer: {
+    ctaHeading: "Ready to create",
+    ctaHighlight: "history?",
+    ctaButton: "Start a Project",
+    brandText: "EXP.LIVE",
+    description: "The premier global agency for immersive live entertainment and cultural architecture.",
+    socials: [
+      { name: "Instagram", url: "#" },
+      { name: "Twitter", url: "#" },
+      { name: "YouTube", url: "#" },
+      { name: "LinkedIn", url: "#" }
+    ],
+    links: [
+      {
+        title: "Company",
+        items: [
+          { name: "About Us", url: "#" },
+          { name: "Careers", url: "#" },
+          { name: "Press", url: "#" },
+          { name: "Contact", url: "#" }
+        ]
+      },
+      {
+        title: "Services",
+        items: [
+          { name: "Event Production", url: "#" },
+          { name: "Talent Booking", url: "#" },
+          { name: "Venue Management", url: "#" },
+          { name: "Brand Activations", url: "#" }
+        ]
+      }
+    ],
+    copyright: "© 2026 Explive Entertainment. All rights reserved."
   }
 };
