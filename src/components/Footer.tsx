@@ -3,6 +3,20 @@ import { homepageData } from '@/config/homepageData';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
+const InstagramIcon = (props: React.SVGProps<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>;
+const FacebookIcon = (props: React.SVGProps<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>;
+const TwitterIcon = (props: React.SVGProps<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>;
+const YoutubeIcon = (props: React.SVGProps<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M2.5 7.1C2.5 7.1 2 9.5 2 12s.5 4.9.5 4.9c.3 1.1 1.2 2 2.3 2.3C7.1 19.5 12 19.5 12 19.5s4.9 0 7.2-.3c1.1-.3 2-1.2 2.3-2.3.5-1.7.5-4.9.5-4.9s-.5-4.9-.5-4.9c-.3-1.1-1.2-2-2.3-2.3C16.9 4.5 12 4.5 12 4.5s-4.9 0-7.2.3c-1.1.3-2 1.2-2.3 2.3z"/><path d="M9.7 15.5l6.5-3.5-6.5-3.5v7z"/></svg>;
+const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>;
+
+const IconMap: Record<string, React.ElementType> = {
+  Instagram: InstagramIcon,
+  Facebook: FacebookIcon,
+  Twitter: TwitterIcon,
+  YouTube: YoutubeIcon,
+  LinkedIn: LinkedinIcon,
+};
+
 export const Footer = () => {
   const { footer } = homepageData;
 
@@ -41,16 +55,20 @@ export const Footer = () => {
             <p className="text-sm md:text-base text-zinc-600 dark:text-zinc-400 font-medium leading-relaxed max-w-sm">
               {footer.description}
             </p>
-            <div className="flex flex-wrap items-center gap-4 mt-2">
-              {footer.socials.map((social) => (
-                <Link 
-                  key={social.name} 
-                  href={social.url}
-                  className="text-xs font-bold tracking-wider uppercase text-zinc-500 hover:text-emerald-500 transition-colors"
-                >
-                  {social.name}
-                </Link>
-              ))}
+            <div className="flex flex-wrap items-center gap-4 mt-4">
+              {footer.socials.map((social) => {
+                const Icon = IconMap[social.name];
+                return (
+                  <Link 
+                    key={social.name} 
+                    href={social.url}
+                    className="w-10 h-10 flex items-center justify-center rounded-full bg-zinc-200/80 dark:bg-zinc-800/50 text-zinc-600 dark:text-zinc-400 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-500 dark:hover:text-white transition-all duration-300 shadow-sm hover:shadow-[0_0_15px_rgba(16,185,129,0.5)] group"
+                    aria-label={social.name}
+                  >
+                    {Icon ? <Icon className="w-5 h-5 group-hover:scale-110 transition-transform" /> : social.name}
+                  </Link>
+                );
+              })}
             </div>
           </div>
 
