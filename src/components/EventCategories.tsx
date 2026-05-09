@@ -1,129 +1,154 @@
-import React from 'react';
+"use client";
+
+import React, { useState, useEffect, useRef } from 'react';
 import { homepageData } from '@/config/homepageData';
+import { ArrowRight } from 'lucide-react';
 
 export const EventCategories = () => {
+  const [hoveredIndex, setHoveredIndex] = useState<number>(0);
+  const [isPaused, setIsPaused] = useState<boolean>(false);
+  const resumeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    // If autoplay is disabled in config, or if the user paused it by interacting, don't run the interval.
+    if (!homepageData.eventCategories.settings?.autoPlay || isPaused) return;
+
+    const intervalId = setInterval(() => {
+      setHoveredIndex((prevIndex) => 
+        (prevIndex + 1) % homepageData.eventCategories.cards.length
+      );
+    }, homepageData.eventCategories.settings.autoPlayIntervalMs || 6000);
+
+    // Cleanup interval on unmount or when dependencies change
+    return () => clearInterval(intervalId);
+  }, [isPaused]);
+
+  // Cleanup resume timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (resumeTimeoutRef.current) {
+        clearTimeout(resumeTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  // Handler to pause the autoplay loop when user interacts
+  const handleUserInteraction = (index: number) => {
+    setHoveredIndex(index);
+    setIsPaused(true);
+
+    // Clear any existing resume countdown
+    if (resumeTimeoutRef.current) {
+      clearTimeout(resumeTimeoutRef.current);
+    }
+
+    // Automatically resume the loop after 10 seconds of no interaction
+    resumeTimeoutRef.current = setTimeout(() => {
+      setIsPaused(false);
+    }, 10000);
+  };
+
   return (
-    <section id="event-types" className="relative py-24 md:py-20 w-full max-w-[120rem] mx-auto overflow-hidden bg-zinc-50 dark:bg-zinc-950 px-6 lg:px-12 md:h-screen md:min-h-[700px] flex flex-col justify-center">
+    <section id="event-types" className="relative py-24 md:py-32 w-full min-h-screen flex items-center bg-zinc-950 overflow-hidden">
       
-      {/* Immersive Cinematic Party Background Elements */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        
-        {/* SVG Noise for Premium Film Grain (Apple-like) */}
-        <div className="absolute inset-0 z-0 mix-blend-overlay opacity-30 dark:opacity-20">
-          <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-            <filter id="noiseFilter">
-              <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
-            </filter>
-            <rect width="100%" height="100%" filter="url(#noiseFilter)" />
-          </svg>
+      {/* Dynamic Crossfading Backgrounds */}
+      {homepageData.eventCategories.cards.map((event, index) => (
+        <div 
+          key={`bg-${event.id}`}
+          className={`absolute inset-0 transition-opacity duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] ${index === hoveredIndex ? 'opacity-100 z-0' : 'opacity-0 -z-10'}`}
+        >
+          <img 
+            src={event.image} 
+            alt={event.title} 
+            className="w-full h-full object-cover scale-105 transition-transform duration-[20s] ease-out hover:scale-110" 
+          />
         </div>
+      ))}
 
-        {/* Custom roaming keyframes for true fluid motion */}
-        <style dangerouslySetInnerHTML={{ __html: `
-          @keyframes roam1 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(25vw, -15vh) scale(1.2); }
-            66% { transform: translate(-15vw, 20vh) scale(0.8); }
-          }
-          @keyframes roam2 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-20vw, 25vh) scale(1.3); }
-            66% { transform: translate(15vw, -20vh) scale(0.9); }
-          }
-          @keyframes roam3 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(15vw, 20vh) scale(0.9); }
-            66% { transform: translate(-25vw, -15vh) scale(1.4); }
-          }
-        `}} />
-        
-        {/* Volumetric Stage Lighting Beams (Intensified) */}
-        <div className="absolute top-[-20%] left-[10%] w-[30vw] h-[150vh] bg-gradient-to-b from-fuchsia-500/40 dark:from-fuchsia-500/30 to-transparent blur-[60px] rotate-[25deg] origin-top animate-pulse mix-blend-multiply dark:mix-blend-screen" style={{ animationDuration: '4s' }} />
-        <div className="absolute top-[-20%] right-[10%] w-[40vw] h-[150vh] bg-gradient-to-b from-cyan-500/40 dark:from-cyan-500/30 to-transparent blur-[80px] -rotate-[35deg] origin-top animate-pulse mix-blend-multiply dark:mix-blend-screen" style={{ animationDuration: '6s', animationDelay: '1s' }} />
-        <div className="absolute top-[-10%] left-[50%] w-[20vw] h-[120vh] bg-gradient-to-b from-emerald-500/30 dark:from-emerald-500/20 to-transparent blur-[50px] rotate-[5deg] origin-top animate-pulse mix-blend-multiply dark:mix-blend-screen" style={{ animationDuration: '5s', animationDelay: '2s' }} />
+      {/* Persistent Dark Gradient Overlay for readability */}
+      {/* Darkened across the entire screen so the white text always pops against bright backgrounds */}
+      <div className="absolute inset-0 bg-black/60 z-0 pointer-events-none" />
 
-        {/* Morphing Liquid Orbs (Aurora Effect) - Now extremely vibrant and roaming */}
-        {/* Note: we use inline style to combine the custom roam animations with a slow spin for maximum fluidity */}
-        <div 
-          className="absolute top-[-10%] right-[-5%] w-[50vw] max-w-[600px] aspect-square bg-fuchsia-500/60 dark:bg-fuchsia-500/40 blur-[100px] mix-blend-multiply dark:mix-blend-screen rounded-[40%_60%_70%_30%]" 
-          style={{ animation: 'roam1 25s ease-in-out infinite alternate, spin 20s linear infinite' }} 
-        />
-        <div 
-          className="absolute bottom-[-10%] left-[-5%] w-[60vw] max-w-[700px] aspect-square bg-emerald-500/60 dark:bg-emerald-500/40 blur-[100px] mix-blend-multiply dark:mix-blend-screen rounded-[70%_30%_50%_50%]" 
-          style={{ animation: 'roam2 30s ease-in-out infinite alternate, spin 25s linear infinite reverse' }} 
-        />
-        <div 
-          className="absolute top-[30%] left-[30%] w-[40vw] max-w-[500px] aspect-square bg-cyan-500/60 dark:bg-cyan-500/40 blur-[90px] mix-blend-multiply dark:mix-blend-screen rounded-[50%_50%_60%_40%]" 
-          style={{ animation: 'roam3 20s ease-in-out infinite alternate, spin 18s linear infinite' }} 
-        />
+      {/* Cinematic Lighting/Noise overlay */}
+      <div className="absolute inset-0 z-0 mix-blend-overlay opacity-30 pointer-events-none">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <filter id="noiseFilter2">
+            <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
+          </filter>
+          <rect width="100%" height="100%" filter="url(#noiseFilter2)" />
+        </svg>
       </div>
 
-      {/* Section Header */}
-      <div className="relative z-10 flex flex-col md:flex-row items-baseline justify-between gap-6 w-full mb-10 md:mb-12 shrink-0">
-        <div className="flex flex-col gap-2">
-          <span className="text-sm md:text-base font-bold tracking-widest uppercase text-emerald-500">{homepageData.eventCategories.header.kicker}</span>
-          <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase text-zinc-900 dark:text-zinc-50 leading-[0.9]">
-            {homepageData.eventCategories.header.titleLine1} <br className="hidden md:block" /> {homepageData.eventCategories.header.titleLine2}
-          </h2>
+      {/* Content Container */}
+      <div className="relative z-10 w-full max-w-[120rem] mx-auto px-6 lg:px-12 xl:px-24 flex flex-col lg:flex-row gap-16 lg:gap-12 justify-between h-full py-12">
+        
+        {/* Left Column: Headers & Active Description */}
+        <div className="lg:w-1/3 flex flex-col justify-center gap-8 lg:sticky lg:top-1/4 h-max">
+          <div className="flex flex-col gap-2">
+            {homepageData.eventCategories.header.kicker && (
+              <span className="text-sm md:text-base font-bold tracking-widest uppercase text-emerald-500">
+                {homepageData.eventCategories.header.kicker}
+              </span>
+            )}
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter uppercase text-white leading-[0.9] drop-shadow-lg">
+              {homepageData.eventCategories.header.titleLine1} <br className="hidden lg:block" /> {homepageData.eventCategories.header.titleLine2}
+            </h2>
+          </div>
+          
+          <p className="text-zinc-300 font-medium text-sm md:text-base max-w-sm drop-shadow-md">
+            {homepageData.eventCategories.header.description}
+          </p>
+
+          {/* Dynamic Glass Description Box mapping to the active hovered item (Hidden on mobile, uses inline accordion instead) */}
+          <div className="hidden lg:block mt-4 lg:mt-8 bg-white/10 dark:bg-black/40 backdrop-blur-2xl border border-white/20 dark:border-white/10 p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] shadow-2xl transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]">
+             <div className="flex items-center justify-between mb-6">
+                <span className="flex items-center justify-center shrink-0 w-10 h-10 rounded-full bg-white/20 text-white text-sm font-bold shadow-inner">
+                  0{hoveredIndex + 1}
+                </span>
+                <ArrowRight className="text-white/50 w-5 h-5" />
+             </div>
+             <div className="min-h-[100px] flex items-start">
+               <p key={hoveredIndex} className="text-white text-base md:text-lg font-medium leading-relaxed drop-shadow-md">
+                 {homepageData.eventCategories.cards[hoveredIndex].description}
+               </p>
+             </div>
+          </div>
         </div>
-        <p className="max-w-md text-zinc-600 dark:text-zinc-400 font-medium md:text-right text-sm md:text-base">
-          {homepageData.eventCategories.header.description}
-        </p>
-      </div>
 
-      {/* Expanding Cinematic Accordion */}
-      <div className="relative z-10 flex flex-col md:flex-row gap-3 md:gap-5 w-full flex-1 min-h-[500px] md:min-h-0">
-        {homepageData.eventCategories.cards.map((event, index) => (
-          <div 
-            key={event.id}
-            className="group relative flex-1 hover:flex-[3] md:hover:flex-[4] transition-[flex] duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] overflow-hidden rounded-[2rem] md:rounded-[2.5rem] cursor-pointer bg-black shadow-2xl"
-          >
-            {/* Background Image */}
-            <img
-              src={event.image}
-              alt={event.title}
-              className="absolute inset-0 w-full h-full object-cover opacity-50 md:opacity-40 group-hover:opacity-100 transition-all duration-[1.5s] ease-out group-hover:scale-105"
-            />
-            
-            {/* Dark Overlay for collapsed state */}
-            <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-1000" />
-            
-            {/* Subtle bottom gradient always present for text contrast */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-80" />
-            
-            {/* Collapsed State: Elegant Number & Horizontal Text (Hidden on Hover) */}
-            <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8 opacity-100 group-hover:opacity-0 transition-opacity duration-500 overflow-hidden">
-              <div className="flex items-center gap-4">
-                <span className="text-white/50 font-bold tracking-[0.2em] text-sm shrink-0">0{index + 1}</span>
-                <h3 className="text-white font-semibold tracking-wide uppercase text-lg md:text-xl whitespace-nowrap truncate drop-shadow-md">
-                  {event.title}
-                </h3>
-              </div>
-            </div>
-
-            {/* Expanded State: Apple-like Glass Content Box */}
-            <div className="absolute inset-0 p-4 md:p-8 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100 pointer-events-none group-hover:pointer-events-auto">
-              <div className="bg-white/10 dark:bg-black/40 backdrop-blur-2xl border border-white/20 dark:border-white/10 p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] transform translate-y-8 group-hover:translate-y-0 transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
-                <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-4">
-                  <span className="flex items-center justify-center shrink-0 w-10 h-10 rounded-full bg-white/20 text-white text-sm font-bold shadow-inner">
-                    0{index + 1}
-                  </span>
-                  <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-white drop-shadow-sm whitespace-nowrap">
+        {/* Right Column: Massive Typography Hover List */}
+        <div className="lg:w-2/3 flex flex-col justify-center lg:pl-16 py-8">
+          {homepageData.eventCategories.cards.map((event, index) => {
+            const isActive = index === hoveredIndex;
+            return (
+              <div 
+                key={event.id}
+                onMouseEnter={() => handleUserInteraction(index)}
+                onClick={() => handleUserInteraction(index)}
+                className="group flex flex-row items-start lg:items-center gap-3 md:gap-6 cursor-pointer py-4 md:py-5 border-b border-white/5 last:border-none transition-colors duration-300"
+              >
+                <span className={`text-sm md:text-xl font-mono font-bold transition-colors duration-500 mt-2 lg:mt-0 ${isActive ? 'text-emerald-400' : 'text-white/20 group-hover:text-white/40'}`}>
+                  0{index + 1}
+                </span>
+                
+                <div className="flex flex-col w-full">
+                  <h3 
+                    className={`text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] font-black tracking-tighter uppercase leading-[0.95] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${isActive ? 'text-white translate-x-1 md:translate-x-6 drop-shadow-2xl' : 'text-white/20 group-hover:text-white/40 group-hover:translate-x-2'}`}
+                  >
                     {event.title}
                   </h3>
-                </div>
-                
-                <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)]">
-                  <div className="overflow-hidden">
-                    <p className="mt-2 text-sm md:text-lg text-zinc-100/90 font-medium max-w-xl leading-relaxed">
+                  
+                  {/* Mobile-only inline description (Accordion style) */}
+                  <div className={`lg:hidden overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${isActive ? 'max-h-40 opacity-100 mt-4 mb-2' : 'max-h-0 opacity-0 mt-0 mb-0'}`}>
+                    <p className="text-zinc-300 text-sm font-medium leading-relaxed pl-3 md:pl-6 border-l-2 border-emerald-500/50">
                       {event.description}
                     </p>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        ))}
+            );
+          })}
+        </div>
+
       </div>
     </section>
   );
