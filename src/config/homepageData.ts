@@ -9,7 +9,7 @@ export const homepageData = {
       line1: "Experience",
       line2: "it live.",
     },
-    description: "Events curated for the underground.",
+    description: "",
     button: {
       visible: false,
       text: "Explore Our Capabilities",
@@ -83,6 +83,7 @@ export const homepageData = {
     description: "The premier global agency for immersive live entertainment and cultural architecture.",
     socials: [
       { name: "Instagram", url: "#" },
+      { name: "Facebook", url: "#" },
       { name: "Twitter", url: "#" },
       { name: "YouTube", url: "#" },
       { name: "LinkedIn", url: "#" }
