@@ -5,12 +5,17 @@ import { AboutUs } from "@/components/AboutUs";
 import { Hero } from "@/components/Hero";
 import { UpcomingShows } from "@/components/UpcomingShows";
 import { Footer } from "@/components/Footer";
+import { UpcomingShowsGrid } from "@/components/UpcomingShowsGrid";
+import { UpcomingShowsStack } from "@/components/UpcomingShowsStack";
 
 export default function Home() {
   return (
     <main className="w-full">
       {/* Modular Hero Section Component */}
       <Hero />
+
+      {features.showUpcomingShowsGrid && <UpcomingShowsGrid />}
+      <UpcomingShowsStack />
 
       {/* Dynamic Event Types Grid (Bento Box) */}
       {/* Modular Event Categories Section */}
@@ -121,92 +126,9 @@ export default function Home() {
       )}
 
       {/* Modular Upcoming Shows Component */}
-      <UpcomingShows />
+      {/* <UpcomingShows /> */}
 
-      {/* 
-        ========================================================
-        NEW SECTION: ASYMMETRICAL BENTO GRID EXPERIENCE PORTAL
-        Extremely modern, futuristic, and fully responsive
-        ========================================================
-      */}
-      <section className="relative w-full py-24 md:py-32 bg-zinc-50 dark:bg-zinc-950 border-t border-zinc-200 dark:border-white/5">
-        <div className="w-full max-w-[120rem] mx-auto px-6 md:px-16 xl:px-24">
 
-          <div className="flex flex-col md:flex-row justify-between items-baseline mb-16 gap-8">
-            <h2 className="text-5xl md:text-7xl xl:text-8xl font-black tracking-tighter uppercase text-zinc-900 dark:text-white drop-shadow-sm dark:drop-shadow-2xl">
-              Curated <br className="hidden md:block" /> Experiences
-            </h2>
-            <p className="text-zinc-500 dark:text-zinc-400 md:text-right max-w-sm font-medium tracking-widest uppercase text-xs md:text-sm">
-              Discover unique sub-cultures, hidden venues, and VIP access across our exclusive underground network.
-            </p>
-          </div>
-
-          {/* 
-            Bento Grid Layout 
-            Mobile: 2-Column Interlocking Mosaic -> Desktop: 4 Columns
-          */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 grid-rows-auto lg:grid-rows-[400px_400px] gap-3 md:gap-6 w-full">
-
-            {/* Feature 1: The Massive Monolith (Spans 2 cols on mobile, 2 cols 2 rows on desktop) */}
-            <div className="group relative col-span-2 lg:row-span-2 overflow-hidden rounded-2xl md:rounded-[2rem] bg-zinc-200 dark:bg-zinc-900 cursor-pointer h-[350px] lg:h-full">
-              <img
-                src="https://images.unsplash.com/photo-1574391855214-41d8e13f4124?q=80&w=2835&auto=format&fit=crop"
-                alt="Underground Rave"
-                className="absolute inset-0 w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 scale-100 group-hover:scale-105 transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)]"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-6 md:p-12">
-                <span className="inline-block px-3 md:px-4 py-1 border border-white/30 text-white text-[10px] md:text-xs font-bold uppercase tracking-widest rounded-full mb-3 md:mb-4 group-hover:bg-white group-hover:text-black transition-colors">Featured</span>
-                <h3 className="text-3xl md:text-6xl font-black uppercase text-white tracking-tighter leading-none mb-2 md:mb-4">Underground <br className="hidden md:block" /> Sessions</h3>
-                <p className="text-zinc-300 font-medium text-xs md:text-sm max-w-md line-clamp-2 md:line-clamp-none">Access the most exclusive, hidden locations with our secret lineup of global DJs.</p>
-              </div>
-            </div>
-
-            {/* Feature 2: High VIP Cell (Spans 1 col on both) */}
-            <div className="group relative col-span-1 overflow-hidden rounded-2xl md:rounded-[2rem] bg-zinc-900 cursor-pointer h-[200px] md:h-[400px]">
-              <img
-                src="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?q=80&w=2940&auto=format&fit=crop"
-                alt="VIP Experience"
-                className="absolute inset-0 w-full h-full object-cover grayscale-[50%] group-hover:grayscale-0 scale-100 group-hover:scale-110 transition-all duration-1000"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-4 md:p-8">
-                <h3 className="text-lg md:text-2xl font-black uppercase text-white tracking-tighter mb-1 md:mb-2 group-hover:text-amber-400 transition-colors">VIP Tables & Space</h3>
-                <p className="text-zinc-400 text-[10px] md:text-sm hidden md:block">Ultra-premium table service.</p>
-              </div>
-            </div>
-
-            {/* Feature 3: Tall Cell (Spans 1 col on both, 2 rows on desktop) */}
-            <div className="group relative col-span-1 lg:row-span-2 overflow-hidden rounded-2xl md:rounded-[2rem] bg-zinc-900 cursor-pointer h-[200px] lg:h-full">
-              <img
-                src="https://images.unsplash.com/photo-1545128678-299f05ee4c96?q=80&w=2819&auto=format&fit=crop"
-                alt="Afterparty"
-                className="absolute inset-0 w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 scale-100 group-hover:scale-105 transition-all duration-1000"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/90 via-black/40 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-4 md:p-8">
-                <h3 className="text-xl md:text-3xl lg:text-5xl font-black uppercase text-white tracking-tighter mb-3 leading-none">The <br /> After <br /> Party</h3>
-                <button className="w-8 h-8 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-emerald-500 transition-colors text-xs md:text-base">
-                  &rarr;
-                </button>
-              </div>
-            </div>
-
-            {/* Feature 4: Small Cell (Spans 2 cols on mobile, 1 col on desktop) */}
-            <div className="group relative col-span-2 lg:col-span-1 overflow-hidden rounded-2xl md:rounded-[2rem] bg-zinc-900 cursor-pointer h-[120px] md:h-[400px]">
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 to-purple-900" />
-              <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '20px 20px' }} />
-              <div className="absolute inset-0 flex flex-col items-center justify-center p-4 md:p-8 text-center">
-                <h3 className="text-xl md:text-2xl font-black uppercase text-white tracking-widest mb-2 md:mb-4">View All <br className="hidden md:block" /> Categories</h3>
-                <button className="px-4 py-2 md:px-6 md:py-3 bg-white text-black text-[10px] md:text-sm font-bold uppercase rounded-full group-hover:scale-110 transition-transform">
-                  Explore
-                </button>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
 
       {/* 
         ========================================================
