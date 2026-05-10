@@ -1,76 +1,74 @@
 import React from 'react';
 import { homepageData } from '@/config/homepageData';
-import { ArrowRight } from 'lucide-react';
 
 export const AboutUs = () => {
-  const { about } = homepageData;
+  const { aboutSummary: about } = homepageData;
 
   return (
-    <section className="relative w-full py-24 md:py-0 min-h-[800px] md:min-h-screen bg-white dark:bg-black overflow-hidden border-t border-zinc-200 dark:border-white/5 flex flex-col justify-center">
-      <div className="w-full max-w-[120rem] mx-auto px-6 md:px-16 xl:px-24">
+    <section className="relative w-full py-32 md:py-48 bg-zinc-50 dark:bg-zinc-950 overflow-hidden border-t border-zinc-200 dark:border-white/5 flex flex-col justify-center">
+      
+      {/* Background Ambient Organic Glows (Apple-like mesh gradients) */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center">
+        <div className="absolute top-[10%] left-[10%] w-[50vw] h-[50vw] max-w-[800px] max-h-[800px] bg-emerald-400/30 dark:bg-emerald-600/20 blur-[120px] rounded-full mix-blend-multiply dark:mix-blend-screen animate-[pulse_8s_ease-in-out_infinite]" />
+        <div className="absolute bottom-[10%] right-[10%] w-[60vw] h-[60vw] max-w-[900px] max-h-[900px] bg-cyan-400/30 dark:bg-cyan-600/20 blur-[140px] rounded-full mix-blend-multiply dark:mix-blend-screen animate-[pulse_12s_ease-in-out_infinite_alternate]" />
+        <div className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] bg-purple-400/20 dark:bg-fuchsia-600/10 blur-[100px] rounded-full mix-blend-multiply dark:mix-blend-screen animate-[pulse_10s_ease-in-out_infinite]" />
+      </div>
+
+      <div className="relative z-10 w-full max-w-[80rem] mx-auto px-6 md:px-12 lg:px-16">
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mt-12 md:mt-0">
+        {/* Apple-style Glassmorphic Container */}
+        {/* Uses high blur, saturation boost, and very subtle border/shadow styling */}
+        <div className="relative w-full bg-white/40 dark:bg-black/40 backdrop-blur-3xl backdrop-saturate-150 border border-white/50 dark:border-white/10 shadow-[0_8px_40px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_40px_rgba(0,0,0,0.4)] rounded-[3rem] p-10 md:p-16 lg:p-24 overflow-hidden transition-transform duration-700 hover:scale-[1.01]">
           
-          {/* Left: Text & Story */}
-          <div className="flex flex-col gap-8 md:gap-10 order-1">
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <span className="w-8 h-[2px] bg-emerald-500 rounded-full" />
-                <span className="text-sm md:text-base font-bold tracking-widest uppercase text-emerald-500">
+          {/* Inner reflection highlight simulating polished glass edges */}
+          <div className="absolute inset-0 rounded-[3rem] border-2 border-white/40 dark:border-white/5 pointer-events-none mix-blend-overlay" />
+          
+          {/* Ultra-subtle noise texture for psychological realism */}
+          <div className="absolute inset-0 z-0 opacity-[0.02] dark:opacity-[0.04]" style={{ backgroundImage: 'linear-gradient(currentColor 1px, transparent 1px), linear-gradient(90deg, currentColor 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+
+          <div className="relative z-10 flex flex-col gap-16 md:gap-20">
+            
+            {/* Header Area */}
+            <div className="flex flex-col items-center text-center space-y-6">
+              <div className="flex items-center justify-center gap-4">
+                <span className="w-10 h-[1px] bg-zinc-400 dark:bg-zinc-600" />
+                <span className="text-xs md:text-sm font-semibold tracking-[0.3em] uppercase text-zinc-500 dark:text-zinc-400">
                   {about.kicker}
                 </span>
+                <span className="w-10 h-[1px] bg-zinc-400 dark:bg-zinc-600" />
               </div>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-zinc-900 dark:text-zinc-50 leading-[1.05]">
+              <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tighter text-zinc-900 dark:text-white leading-[1.05] max-w-4xl mx-auto">
                 {about.title}
               </h2>
             </div>
 
-            <div className="space-y-6 text-base md:text-lg text-zinc-600 dark:text-zinc-400 font-medium leading-relaxed max-w-xl">
-              <p>{about.description1}</p>
-              <p>{about.description2}</p>
-            </div>
+            {/* Editorial Content Area */}
+            <div className="flex flex-col items-center w-full">
+              
+              {/* Hook Paragraph (Large, Centered) */}
+              {about.descriptions[0] && (
+                <p className="text-2xl md:text-3xl lg:text-4xl text-zinc-800 dark:text-zinc-100 font-medium leading-snug tracking-tight text-center max-w-5xl mb-16 md:mb-24">
+                  {about.descriptions[0]}
+                </p>
+              )}
 
-            <div className="pt-4">
-              <button className="group flex items-center gap-3 bg-zinc-900 hover:bg-zinc-800 dark:bg-white dark:hover:bg-zinc-200 text-white dark:text-zinc-900 px-8 py-4 rounded-full text-sm font-bold uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-xl">
-                {about.buttonText}
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </button>
-            </div>
-          </div>
+              {/* Editorial 2-Column Layout for remaining text (Psychologically appealing, reduces reading fatigue) */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 lg:gap-24 text-base md:text-lg text-zinc-600 dark:text-zinc-400 font-normal leading-relaxed max-w-5xl mx-auto text-left">
+                
+                {/* Column 1 */}
+                <div className="space-y-8">
+                  {about.descriptions[1] && <p>{about.descriptions[1]}</p>}
+                </div>
+                
+                {/* Column 2 */}
+                <div className="space-y-8">
+                  {about.descriptions[2] && <p>{about.descriptions[2]}</p>}
+                </div>
 
-          {/* Right: Image & Stats */}
-          <div className="relative order-2 mt-8 lg:mt-0">
-            
-            {/* Main Image Frame */}
-            <div className="relative aspect-[4/5] md:aspect-video lg:aspect-[4/5] lg:max-h-[65vh] mx-auto w-full max-w-[500px] lg:max-w-none rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-zinc-200 dark:bg-zinc-900 shadow-2xl">
-              <img 
-                src={about.image} 
-                alt="Event Crowd" 
-                className="absolute inset-0 w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-1000 hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
-            </div>
-
-            {/* Floating Glassmorphism Stats Panel */}
-            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 md:translate-x-0 md:-bottom-8 md:-left-8 lg:-bottom-10 lg:-left-12 bg-white/90 dark:bg-black/60 backdrop-blur-2xl border border-white/20 dark:border-white/10 px-3 py-4 sm:p-5 md:p-8 rounded-[1.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-10 w-[95%] md:w-auto">
-              <div className="flex justify-around md:justify-between items-center gap-1 sm:gap-4 md:gap-10">
-                {about.stats.map((stat, index) => (
-                  <div key={index} className="flex flex-col gap-0.5 md:gap-1 text-center md:text-left shrink-0">
-                    <span className="text-lg sm:text-2xl md:text-4xl font-black font-mono text-zinc-900 dark:text-white drop-shadow-sm leading-none">
-                      {stat.value}
-                    </span>
-                    <span className="text-[8px] sm:text-[10px] md:text-xs font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400 max-w-[70px] sm:max-w-none mx-auto leading-tight">
-                      {stat.label}
-                    </span>
-                  </div>
-                ))}
               </div>
             </div>
 
-            {/* Decorative Ambient Glow behind image */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-emerald-500/10 dark:bg-emerald-500/20 blur-[100px] -z-10 rounded-full mix-blend-multiply dark:mix-blend-screen" />
           </div>
-
         </div>
       </div>
     </section>

@@ -89,19 +89,29 @@ export const homepageData = {
     buttonText: "View More Upcoming",
   },
 
-  about: {
-    kicker: "The Agency",
-    title: "We don't just host events. We architect culture.",
-    description1: "Founded on the belief that live entertainment should be an immersive, visceral experience. Explive has spent the last decade curating the world's most exclusive and breathtaking shows.",
-    description2: "From hidden underground bunkers to massive stadium festivals, our production value is unmatched. We handle the talent, the venue, the lighting, and the aesthetic. You just show up and experience it.",
-    image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=2070&auto=format&fit=crop",
-    stats: [
-      { value: "10+", label: "Years Experience" },
-      { value: "500+", label: "Events Hosted" },
-      { value: "2M+", label: "Tickets Sold" }
-    ],
-    buttonText: "Read Our Story"
+  aboutSummary: {
+    kicker: "About us",
+    title: "At Exp Live Entertainment, we turn events into powerful live experiences.",
+    descriptions: [
+      "Built on a strong background in events, we are focused on delivering high quality shows that connect with audiences.",
+      "We work across music concerts, festivals, IP events, and curated shows. Whether it’s a large festival or a more personal performance, our aim is to create experiences that people enjoy and remember.",
+      "Driven by creativity and the evolving energy of live entertainment, Exp Live Entertainment is focused on shaping the future of India’s festivals and live entertainment culture."
+    ]
   },
+
+  aboutFull: {
+    kicker: "About us",
+    title: "At Exp Live Entertainment, we turn events into powerful live experiences.",
+    descriptions: [
+      "Built on a strong background in events, we are focused on delivering high quality shows that connect with audiences.",
+      "We work across music concerts, festivals, IP events, and curated shows. Whether it’s a large festival or a more personal performance, our aim is to create experiences that people enjoy and remember.",
+      "We take care of everything, from planning ideas to production, logistics, hospitality, and artist management. Every detail is handled with care to make sure the event runs smoothly and gives the audience a complete and memorable experience.",
+      "We also work closely with artists, helping manage and present them in the right way for every show. With a strong network across the industry, we bring together the right talent and teams to deliver impactful events.",
+      "Alongside live concerts and touring, our aim is to build unique music festivals and immersive experiences across genres, communities, and artistic formats.",
+      "Driven by creativity and the evolving energy of live entertainment, Exp Live Entertainment is focused on shaping the future of India’s festivals and live entertainment culture."
+    ]
+  },
+
 
   footer: {
     ctaHeading: "Ready to create",
@@ -110,11 +120,11 @@ export const homepageData = {
     brandText: "EXP.LIVE",
     description: "The premier global agency for immersive live entertainment and cultural architecture.",
     socials: [
-      { name: "Instagram", url: "#" },
-      { name: "Facebook", url: "#" },
-      { name: "Twitter", url: "#" },
-      { name: "YouTube", url: "#" },
-      { name: "LinkedIn", url: "#" }
+      { name: "Instagram", url: "https://www.instagram.com/expliveent/" },
+      { name: "Facebook", url: "https://www.facebook.com/profile.php?id=61579060607829" },
+      { name: "Twitter", url: "https://x.com/expliveent" },
+      { name: "YouTube", url: "https://www.youtube.com/@expliveent" },
+      { name: "LinkedIn", url: "https://www.linkedin.com/company/exp-live-entertainment/" }
     ],
     links: [
       {
