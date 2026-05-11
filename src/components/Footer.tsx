@@ -110,11 +110,11 @@ export const Footer = () => {
       </div>
 
       {/* Massive Brand Watermark (Bottom Edge) */}
-      {/* Uses text-clip and massive viewport units to span perfectly across the bottom */}
-      <div className="w-full select-none pointer-events-none flex justify-center overflow-hidden">
-        <span className="text-[18vw] md:text-[20vw] leading-[0.79] font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-zinc-200 to-zinc-100 dark:from-white/10 dark:to-white/0 translate-y-[0.04em]">
+      {/* Block-level with text-center ensures true horizontal centering */}
+      <div className="w-full select-none pointer-events-none overflow-hidden">
+        <div className="w-full text-center text-[18vw] md:text-[20vw] leading-[0.79] font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-zinc-200 to-zinc-100 dark:from-white/10 dark:to-white/0 translate-y-[0.04em]">
           {footer.brandText}
-        </span>
+        </div>
       </div>
 
     </footer>
