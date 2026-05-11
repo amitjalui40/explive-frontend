@@ -164,7 +164,7 @@ export const EventCategories = () => {
 
                 <div className="flex flex-col w-full">
                   <h3
-                    className={`text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] font-black tracking-tighter uppercase leading-[0.95] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${isActive ? 'text-white translate-x-1 md:translate-x-6 drop-shadow-2xl' : 'text-white/20 group-hover:text-white/40 group-hover:translate-x-2'}`}
+                    className={`text-2xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-[4.4rem] font-black tracking-tighter uppercase leading-[0.95] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${isActive ? 'text-white translate-x-1 md:translate-x-6 drop-shadow-2xl' : 'text-white/20 group-hover:text-white/40 group-hover:translate-x-2'}`}
                   >
                     {event.title}
                   </h3>
