@@ -147,7 +147,7 @@ export const EventCategories = () => {
                 )}
 
                 {/* Arrow indicator */}
-                <span className="flex items-center shrink-0 w-8 mt-2 lg:mt-0">
+                <span className={`flex items-center shrink-0 w-8 lg:mt-0 ${isActive ? 'mt-0' : 'mt-1'}`}>
                   <ChevronRight
                     strokeWidth={3}
                     className={`transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
