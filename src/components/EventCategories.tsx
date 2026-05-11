@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { homepageData } from '@/config/homepageData';
-import { ArrowRight, ChevronRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
 export const EventCategories = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number>(0);
@@ -106,15 +106,18 @@ export const EventCategories = () => {
 
           {/* Dynamic Glass Description Box */}
           <div className="hidden lg:block mt-4 lg:mt-8 bg-white/10 dark:bg-black/40 backdrop-blur-2xl border border-white/20 dark:border-white/10 p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] shadow-2xl transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]">
-            <div className="flex items-center justify-between mb-6">
-              {/* Pulsing dot indicator */}
-              <span className="relative flex items-center justify-center w-7 h-7">
-                <span className="absolute w-5 h-5 rounded-full bg-emerald-400/20 animate-ping" />
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_2px_rgba(52,211,153,0.6)]" />
-              </span>
-              <ArrowRight className="text-white/50 w-5 h-5" />
+            {/* Tags */}
+            <div key={`tags-${hoveredIndex}`} className="flex flex-wrap gap-2 mb-5">
+              {homepageData.eventCategories.cards[hoveredIndex].tags?.map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase bg-white/10 text-white/70 border border-white/10"
+                >
+                  {tag}
+                </span>
+              ))}
             </div>
-            <div className="min-h-[100px] flex items-start">
+            <div className="min-h-25 flex items-start">
               <p key={hoveredIndex} className="text-white text-base md:text-lg font-medium leading-relaxed drop-shadow-md">
                 {homepageData.eventCategories.cards[hoveredIndex].description}
               </p>
@@ -131,7 +134,7 @@ export const EventCategories = () => {
                 key={event.id}
                 onMouseEnter={() => handleUserInteraction(index)}
                 onClick={() => handleUserInteraction(index)}
-                className={`group relative flex flex-row items-start lg:items-center gap-3 md:gap-6 cursor-pointer py-4 md:py-5 border-b border-white/5 last:border-none transition-all duration-500 px-2 rounded-sm ${isActive ? 'bg-white/[0.04]' : 'hover:bg-white/[0.02]'}`}
+                className={`group relative flex flex-row items-start lg:items-center gap-3 md:gap-6 cursor-pointer py-4 md:py-5 border-b border-white/5 last:border-none transition-all duration-500 px-2 rounded-sm ${isActive ? 'bg-white/4' : 'hover:bg-white/2'}`}
               >
                 {/* Autoplay progress bar — runs along the bottom of the active row */}
                 {isActive && (
