@@ -170,10 +170,19 @@ export const EventCategories = () => {
                   </h3>
 
                   {/* Mobile-only inline description */}
-                  <div className={`lg:hidden overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${isActive ? 'max-h-40 opacity-100 mt-4 mb-2' : 'max-h-0 opacity-0 mt-0 mb-0'}`}>
-                    <p className="text-zinc-300 text-sm font-medium leading-relaxed pl-3 md:pl-6 border-l-2 border-emerald-500/50">
-                      {event.description}
-                    </p>
+                  <div className={`lg:hidden overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${isActive ? 'max-h-56 opacity-100 mt-4 mb-2' : 'max-h-0 opacity-0 mt-0 mb-0'}`}>
+                    <div className="pl-3 md:pl-6 border-l-2 border-emerald-500/50 flex flex-col gap-3">
+                      <div className="flex flex-wrap gap-1.5">
+                        {event.tags?.map((tag) => (
+                          <span key={tag} className="px-2.5 py-0.5 rounded-full text-xs font-bold tracking-wide uppercase bg-white/10 text-white/60 border border-white/10">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <p className="text-zinc-300 text-sm font-medium leading-relaxed">
+                        {event.description}
+                      </p>
+                    </div>
                   </div>
                 </div>
 
