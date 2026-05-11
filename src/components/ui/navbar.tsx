@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import expliveLogo from '@/assets/logo/Exp Live logo - white.png';
 
@@ -29,6 +30,10 @@ export function Navbar() {
     }
   }, [isOpen]);
 
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
+  const forceWhite = isHomePage && !isScrolled;
+
   const closeSidebar = () => setIsOpen(false);
 
   return (
@@ -38,18 +43,26 @@ export function Navbar() {
         ? 'bg-white/70 dark:bg-zinc-950/70 backdrop-blur-2xl shadow-sm border-black/5 dark:border-white/5'
         : 'bg-transparent border-transparent'
         }`}>
-        <div className={`w-full px-6 md:px-12 flex items-center justify-between max-w-[120rem] mx-auto pointer-events-auto transition-all duration-500 ${isScrolled ? 'py-4 text-zinc-900 dark:text-white' : 'py-8 text-white'
-          }`}>
+        <style>{`
+          @keyframes eq1 { 0%,100%{height:3px} 50%{height:18px} }
+          @keyframes eq2 { 0%,100%{height:12px} 40%{height:4px} }
+          @keyframes eq3 { 0%,100%{height:5px} 60%{height:20px} }
+          @keyframes eq4 { 0%,100%{height:16px} 50%{height:4px} }
+          @keyframes eq5 { 0%,100%{height:7px} 45%{height:14px} }
+        `}</style>
+
+        <div className={`w-full px-6 md:px-12 flex items-center max-w-480 mx-auto pointer-events-auto transition-all duration-500 ${isScrolled ? 'py-4' : 'py-8'} ${forceWhite ? 'text-white' : 'text-zinc-900 dark:text-white'}`}>
 
           {/* Left - Logo */}
-          <Link href="/" onClick={closeSidebar} className="flex items-center hover:opacity-80 transition-opacity">
-            <img
-              src={expliveLogo.src}
-              alt="Explive"
-              className={`h-8 md:h-10 object-contain scale-[1.8] md:scale-[2.5] origin-left transition-all duration-500 ${isScrolled ? 'invert dark:invert-0' : ''
-                }`}
-            />
-          </Link>
+          <div className="flex-1">
+            <Link href="/" onClick={closeSidebar} className="inline-flex items-center hover:opacity-80 transition-opacity">
+              <img
+                src={expliveLogo.src}
+                alt="Explive"
+                className={`h-8 md:h-10 object-contain scale-[1.8] md:scale-[2.1] origin-left transition-all duration-500 ${forceWhite ? '' : 'invert dark:invert-0'}`}
+              />
+            </Link>
+          </div>
 
           {/* Center - Links (Hidden on mobile) */}
           <div className="hidden md:flex items-center gap-10 text-sm font-bold uppercase tracking-widest">
@@ -58,21 +71,38 @@ export function Navbar() {
             <Link href="/contact" className="hover:opacity-50 transition-opacity">Contact</Link>
           </div>
 
-          {/* Right - Actions */}
-          <div className="flex items-center gap-6">
+          {/* Right - Equalizer + Mobile Hamburger */}
+          <div className="flex-1 flex items-center justify-end gap-6">
 
+            {/* Equalizer bars */}
+            <div className="hidden md:flex items-end gap-0.75 h-5">
+              {[
+                { anim: 'eq1 1.2s ease-in-out infinite' },
+                { anim: 'eq2 0.9s ease-in-out infinite 0.15s' },
+                { anim: 'eq3 1.4s ease-in-out infinite 0.3s' },
+                { anim: 'eq4 1.0s ease-in-out infinite 0.1s' },
+                { anim: 'eq5 1.3s ease-in-out infinite 0.2s' },
+              ].map((bar, i) => (
+                <span
+                  key={i}
+                  className="w-0.75 rounded-full bg-emerald-400"
+                  style={{ animation: bar.anim }}
+                />
+              ))}
+            </div>
 
             {/* Hamburger Button */}
             <button onClick={() => setIsOpen(true)} className="md:hidden p-2 -mr-2 hover:opacity-50 transition-opacity cursor-pointer">
               <Menu className="w-8 h-8" />
             </button>
           </div>
+
         </div>
       </nav>
 
       {/* Full Screen Smart Sidebar Overlay */}
       <div
-        className={`fixed inset-0 z-[100] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+        className={`fixed inset-0 z-100 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
       >
         {/* Abstract Backdrop Frost Effect */}
         <div
@@ -82,7 +112,7 @@ export function Navbar() {
 
         {/* Sidebar Content Sliding Panel */}
         <div
-          className={`absolute top-0 right-0 h-full w-full sm:w-[500px] flex flex-col p-8 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] delay-75 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+          className={`absolute top-0 right-0 h-full w-full sm:w-125 flex flex-col p-8 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] delay-75 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
         >
           {/* Header */}
           <div className="flex justify-between items-center w-full mb-16 px-4">
