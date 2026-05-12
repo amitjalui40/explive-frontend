@@ -147,6 +147,28 @@ export const homepageData = {
     ]
   },
 
+  contact: {
+    title: "CONTACT US",
+    email: {
+      label: "Email",
+      value: "info@explive.in"
+    },
+    location: {
+      label: "Location",
+      value: "Crystal Plaza, A - 605 / 608, opp. Infiniti Mall, Phase D, Shastri Nagar, Andheri West, Mumbai, Maharashtra 400053"
+    },
+    form: {
+      tagline: "Reach out through the form below, and let us help you plan an incredible event.",
+      placeholders: {
+        firstName: "First Name*",
+        lastName: "Last Name*",
+        email: "Your Email*",
+        phone: "Your Number*",
+        message: "Message Here"
+      },
+      submitText: "Contact Us"
+    }
+  },
 
   footer: {
     ctaHeading: "Ready to create",
