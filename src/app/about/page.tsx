@@ -20,7 +20,7 @@ export default function AboutPage() {
             <span className="hidden sm:inline text-zinc-300 dark:text-zinc-700 text-xs select-none">—</span>
             <span className="text-sm font-bold text-zinc-900 dark:text-white tracking-tight">Exp Live Entertainment</span>
           </div>
-          <span className="text-xs font-bold tracking-[0.2em] uppercase text-zinc-400 dark:text-zinc-600 shrink-0">Mumbai · 2025</span>
+          <span className="text-xs font-bold tracking-[0.2em] uppercase text-zinc-400 dark:text-zinc-600 shrink-0">Mumbai · 2026</span>
         </div>
       </div>
 
