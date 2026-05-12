@@ -110,8 +110,8 @@ export const Footer = () => {
       </div>
 
       {/* Edge-to-Edge Brand Watermark (Bottom Edge) */}
-      <div className="w-full select-none pointer-events-none overflow-hidden">
-        <div className="flex flex-nowrap justify-between items-baseline text-[18vw] md:text-[20vw] leading-[0.85] font-black bg-clip-text text-transparent bg-linear-to-b from-zinc-200 to-zinc-100 dark:from-white/10 dark:to-white/0 translate-y-[0.04em]">
+      <div className="w-full select-none pointer-events-none overflow-hidden pb-2">
+        <div className="flex flex-nowrap justify-between items-baseline -mx-[0.06em] text-[20vw] md:text-[20vw] leading-[0.9] font-black bg-clip-text text-transparent bg-linear-to-b from-zinc-200 to-zinc-100 dark:from-white/10 dark:to-white/0 translate-y-[0.20em] md:translate-y-[0.13em]">
           {footer.brandText.split('').map((char, i) => (
             <span key={i}>{char}</span>
           ))}
