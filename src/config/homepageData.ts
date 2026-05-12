@@ -95,15 +95,6 @@ export const homepageData = {
         rowSpan: "row-span-1",
       },
       {
-        id: "festival-curation",
-        title: "Festival Curation",
-        description: "Concept-driven festival experiences designed around unique themes, communities and immersive experiences.",
-        tags: ["Themed", "Community", "Concept-Driven"],
-        image: "https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        colSpan: "col-span-1",
-        rowSpan: "row-span-1",
-      },
-      {
         id: "artist-management",
         title: "Artist Management",
         description: "From live bookings to strategic collaborations, we connect artists and clients through curated entertainment experiences.",
@@ -114,8 +105,8 @@ export const homepageData = {
       },
       {
         id: "cultural-ip-experiences",
-        title: "Cultural & IP Experiences",
-        description: "Innovative live IPs and cultural experiences inspired by tradition, creativity, and artistic performances.",
+        title: "IP Experiences",
+        description: "Innovative live IPs experiences inspired by tradition, creativity, and artistic performances.",
         tags: ["Cultural", "Tradition", "Creative IP"],
         image: "https://images.pexels.com/photos/2085998/pexels-photo-2085998.jpeg?auto=compress&cs=tinysrgb&w=1600",
         colSpan: "col-span-1",
@@ -174,10 +165,10 @@ export const homepageData = {
       {
         title: "Company",
         items: [
-          { name: "About Us", url: "#" },
+          { name: "Experiences We Curate", url: "#event-types" },
+          { name: "About Us", url: "/about" },
           { name: "Careers", url: "#" },
-          { name: "Press", url: "#" },
-          { name: "Contact", url: "#" }
+          { name: "Contact Us", url: "/contact" }
         ]
       },
       {

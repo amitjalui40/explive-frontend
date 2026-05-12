@@ -109,11 +109,12 @@ export const Footer = () => {
 
       </div>
 
-      {/* Massive Brand Watermark (Bottom Edge) */}
-      {/* Block-level with text-center ensures true horizontal centering */}
+      {/* Edge-to-Edge Brand Watermark (Bottom Edge) */}
       <div className="w-full select-none pointer-events-none overflow-hidden">
-        <div className="w-full text-center text-[18vw] md:text-[20vw] leading-[0.79] font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-zinc-200 to-zinc-100 dark:from-white/10 dark:to-white/0 translate-y-[0.04em]">
-          {footer.brandText}
+        <div className="flex flex-nowrap justify-between items-baseline text-[18vw] md:text-[20vw] leading-[0.85] font-black bg-clip-text text-transparent bg-linear-to-b from-zinc-200 to-zinc-100 dark:from-white/10 dark:to-white/0 translate-y-[0.04em]">
+          {footer.brandText.split('').map((char, i) => (
+            <span key={i}>{char}</span>
+          ))}
         </div>
       </div>
 
