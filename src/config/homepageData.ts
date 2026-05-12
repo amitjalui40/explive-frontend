@@ -126,12 +126,13 @@ export const homepageData = {
 
   aboutSummary: {
     kicker: "About us",
-    title: "At Exp Live Entertainment, we turn events into powerful live experiences.",
+    title: "We turn events into powerful live experiences.",
     descriptions: [
       "Built on a strong background in events, we are focused on delivering high quality shows that connect with audiences.",
       "We work across music concerts, festivals, IP events, and curated shows. Whether it’s a large festival or a more personal performance, our aim is to create experiences that people enjoy and remember.",
       "Driven by creativity and the evolving energy of live entertainment, Exp Live Entertainment is focused on shaping the future of India’s festivals and live entertainment culture."
-    ]
+    ],
+    mission: "Shaping the future of India's festivals and live entertainment culture."
   },
 
   aboutFull: {

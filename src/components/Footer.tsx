@@ -1,6 +1,5 @@
 import React from 'react';
 import { homepageData } from '@/config/homepageData';
-import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 const InstagramIcon = (props: React.SVGProps<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><rect width="20" height="20" x="2" y="2" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" x2="17.51" y1="6.5" y2="6.5" /></svg>;
@@ -21,28 +20,9 @@ export const Footer = () => {
   const { footer } = homepageData;
 
   return (
-    <footer className="relative w-full bg-zinc-50 dark:bg-zinc-950 overflow-hidden pt-24 md:pt-32 border-t border-zinc-200 dark:border-white/5">
-
-      {/* Background Ambient Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[400px] bg-emerald-500/10 dark:bg-emerald-500/20 blur-[120px] rounded-full pointer-events-none -z-10" />
+    <footer className="relative w-full bg-zinc-50 dark:bg-zinc-950 overflow-hidden pt-16 md:pt-20 border-t border-zinc-200 dark:border-white/5">
 
       <div className="w-full max-w-[120rem] mx-auto px-6 md:px-16 xl:px-24">
-
-        {/* CTA Section */}
-        <div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-24 md:mb-32 relative z-10">
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-zinc-900 dark:text-white leading-[1.1] mb-8">
-            {footer.ctaHeading} <br />
-            <span className="text-emerald-500 dark:text-emerald-400">{footer.ctaHighlight}</span>
-          </h2>
-          <button className="group relative inline-flex items-center justify-center gap-3 bg-zinc-900 hover:bg-zinc-800 dark:bg-white dark:hover:bg-zinc-200 text-white dark:text-zinc-900 px-8 py-5 rounded-full text-sm font-bold uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-xl overflow-hidden">
-            <span className="relative z-10 flex items-center gap-3">
-              {footer.ctaButton}
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </span>
-            {/* Hover Glare Effect */}
-            <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-white/20 dark:via-black/10 to-transparent group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out" />
-          </button>
-        </div>
 
         {/* Links Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 pb-16 md:pb-24 border-b border-zinc-200 dark:border-white/10 relative z-10">
