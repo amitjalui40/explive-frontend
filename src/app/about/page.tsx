@@ -1,86 +1,95 @@
 import React from 'react';
 import { homepageData } from '@/config/homepageData';
 import { Footer } from '@/components/Footer';
+import Link from 'next/link';
 
 export default function AboutPage() {
-  const { aboutFull } = homepageData;
+  const { aboutFull, eventCategories } = homepageData;
 
   return (
-    <main className="w-full bg-zinc-50 dark:bg-zinc-950 overflow-hidden flex flex-col min-h-screen">
-      
-      {/* Spacer to account for fixed navbar */}
+    <main className="w-full bg-zinc-50 dark:bg-zinc-950 overflow-hidden">
+
+      {/* Navbar spacer */}
       <div className="h-24 md:h-32" />
 
-      <section className="relative w-full pb-32 md:pb-48 flex-grow flex flex-col items-center justify-center">
-        
-        {/* Background Ambient Organic Glows (Apple-like mesh gradients) matching Homepage */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center">
-          <div className="absolute top-[10%] left-[10%] w-[50vw] h-[50vw] max-w-[800px] max-h-[800px] bg-emerald-400/30 dark:bg-emerald-600/20 blur-[120px] rounded-full mix-blend-multiply dark:mix-blend-screen animate-[pulse_8s_ease-in-out_infinite]" />
-          <div className="absolute bottom-[10%] right-[10%] w-[60vw] h-[60vw] max-w-[900px] max-h-[900px] bg-cyan-400/30 dark:bg-cyan-600/20 blur-[140px] rounded-full mix-blend-multiply dark:mix-blend-screen animate-[pulse_12s_ease-in-out_infinite_alternate]" />
-          <div className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] bg-purple-400/20 dark:bg-fuchsia-600/10 blur-[100px] rounded-full mix-blend-multiply dark:mix-blend-screen animate-[pulse_10s_ease-in-out_infinite]" />
+      {/* ── HEADER ── single line, minimal ── */}
+      <div className="w-full max-w-480 mx-auto px-6 md:px-12 xl:px-24">
+        <div className="flex items-start justify-between pb-6 border-b border-zinc-200 dark:border-white/5">
+          <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3">
+            <span className="text-xs font-bold tracking-[0.3em] uppercase text-emerald-500">About</span>
+            <span className="hidden sm:inline text-zinc-300 dark:text-zinc-700 text-xs select-none">—</span>
+            <span className="text-sm font-bold text-zinc-900 dark:text-white tracking-tight">Exp Live Entertainment</span>
+          </div>
+          <span className="text-xs font-bold tracking-[0.2em] uppercase text-zinc-400 dark:text-zinc-600 shrink-0">Mumbai · 2025</span>
         </div>
+      </div>
 
-        <div className="relative z-10 w-full max-w-[80rem] mx-auto px-6 md:px-12 lg:px-16 flex-grow flex items-center justify-center">
-          
-          {/* Apple-style Glassmorphic Container matching Homepage */}
-          <div className="relative w-full bg-white/40 dark:bg-black/40 backdrop-blur-3xl backdrop-saturate-150 border border-white/50 dark:border-white/10 shadow-[0_8px_40px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_40px_rgba(0,0,0,0.4)] rounded-[3rem] p-10 md:p-16 lg:p-24 overflow-hidden transition-transform duration-700 hover:scale-[1.01]">
-            
-            {/* Inner reflection highlight simulating polished glass edges */}
-            <div className="absolute inset-0 rounded-[3rem] border-2 border-white/40 dark:border-white/5 pointer-events-none mix-blend-overlay" />
-            
-            {/* Ultra-subtle noise texture for psychological realism */}
-            <div className="absolute inset-0 z-0 opacity-[0.02] dark:opacity-[0.04]" style={{ backgroundImage: 'linear-gradient(currentColor 1px, transparent 1px), linear-gradient(90deg, currentColor 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+      {/* ── BIG OPENING — no label, just weight ── */}
+      <section className="w-full max-w-480 mx-auto px-6 md:px-12 xl:px-24 pt-16 md:pt-24 pb-12 md:pb-20">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-zinc-900 dark:text-white leading-tight tracking-tight">
+          We turn events into powerful{' '}
+          <span className="text-emerald-500 dark:text-emerald-400">live</span> experiences.
+        </h1>
+      </section>
 
-            <div className="relative z-10 flex flex-col gap-16 md:gap-20">
-              
-              {/* Header Area matching Homepage */}
-              <div className="flex flex-col items-center text-center space-y-6">
-                <div className="flex items-center justify-center gap-4">
-                  <span className="w-10 h-[1px] bg-zinc-400 dark:bg-zinc-600" />
-                  <span className="text-xs md:text-sm font-semibold tracking-[0.3em] uppercase text-zinc-500 dark:text-zinc-400">
-                    {aboutFull.kicker}
-                  </span>
-                  <span className="w-10 h-[1px] bg-zinc-400 dark:bg-zinc-600" />
-                </div>
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-zinc-900 dark:text-white leading-[1.05] max-w-4xl mx-auto">
-                  {aboutFull.title}
-                </h1>
-              </div>
-
-              {/* Editorial Content Area */}
-              <div className="flex flex-col items-center w-full">
-                
-                {/* Hook Paragraph (Large, Centered) matching Homepage */}
-                {aboutFull.descriptions[0] && (
-                  <p className="text-2xl sm:text-3xl lg:text-4xl text-zinc-800 dark:text-zinc-100 font-medium leading-snug tracking-tight text-center max-w-5xl mb-16 md:mb-24">
-                    {aboutFull.descriptions[0]}
-                  </p>
-                )}
-
-                {/* Editorial 2-Column Layout for remaining text */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 lg:gap-24 text-base md:text-lg text-zinc-600 dark:text-zinc-400 font-normal leading-relaxed max-w-5xl mx-auto text-left">
-                  
-                  {/* Column 1 */}
-                  <div className="space-y-8">
-                    {aboutFull.descriptions[1] && <p>{aboutFull.descriptions[1]}</p>}
-                    {aboutFull.descriptions[2] && <p>{aboutFull.descriptions[2]}</p>}
-                    {aboutFull.descriptions[3] && <p>{aboutFull.descriptions[3]}</p>}
-                  </div>
-                  
-                  {/* Column 2 */}
-                  <div className="space-y-8">
-                    {aboutFull.descriptions[4] && <p>{aboutFull.descriptions[4]}</p>}
-                    {aboutFull.descriptions[5] && <p>{aboutFull.descriptions[5]}</p>}
-                  </div>
-
-                </div>
-              </div>
-
-            </div>
+      {/* ── BODY — 2 equal columns, no header label ── */}
+      <section className="w-full max-w-480 mx-auto px-6 md:px-12 xl:px-24 pb-16 md:pb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 lg:gap-20 text-base md:text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed font-medium">
+          <div className="flex flex-col gap-7">
+            <p>{aboutFull.descriptions[0]}</p>
+            <p>{aboutFull.descriptions[1]}</p>
+          </div>
+          <div className="flex flex-col gap-7">
+            <p>{aboutFull.descriptions[2]}</p>
+            <p>{aboutFull.descriptions[3]}</p>
           </div>
         </div>
       </section>
-      
+
+      {/* ── MISSION CALLOUT — subtle bg shift, no label ── */}
+      <section className="w-full bg-zinc-100 dark:bg-zinc-900 py-16 md:py-24">
+        <div className="w-full max-w-480 mx-auto px-6 md:px-12 xl:px-24">
+          <p className="text-2xl md:text-3xl lg:text-4xl font-semibold text-zinc-900 dark:text-white leading-snug tracking-tight max-w-4xl">
+            {aboutFull.descriptions[5]}
+          </p>
+        </div>
+      </section>
+
+      {/* ── SERVICES — horizontal type, diamond separators ── */}
+      <section className="w-full max-w-480 mx-auto px-6 md:px-12 xl:px-24 py-16 md:py-24">
+        <p className="text-xs font-bold tracking-[0.3em] uppercase text-zinc-400 dark:text-zinc-600 mb-8">
+          Experiences We Curate
+        </p>
+        <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-y-3">
+          {eventCategories.cards.map((card, i) => (
+            <React.Fragment key={card.id}>
+              <span className="text-2xl md:text-3xl lg:text-4xl font-black tracking-tighter text-zinc-900 dark:text-white hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors duration-300 cursor-default">
+                {card.title}
+              </span>
+              {i < eventCategories.cards.length - 1 && (
+                <span className="hidden sm:inline text-emerald-500 text-sm mx-4 md:mx-6 select-none">◆</span>
+              )}
+            </React.Fragment>
+          ))}
+        </div>
+      </section>
+
+      {/* ── CLOSING — dark, no kicker label ── */}
+      <section className="w-full py-24 md:py-36 bg-zinc-950 dark:bg-zinc-900">
+        <div className="w-full max-w-480 mx-auto px-6 md:px-12 xl:px-24">
+          <p className="text-3xl sm:text-4xl md:text-5xl font-semibold text-white leading-snug tracking-tight max-w-2xl mb-10 md:mb-12">
+            Ready to create something people will remember?
+          </p>
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-3 text-sm font-bold tracking-widest uppercase text-white border border-white/25 px-8 py-4 rounded-full hover:bg-emerald-500 hover:border-emerald-500 transition-all duration-300 group"
+          >
+            Get In Touch
+            <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+          </Link>
+        </div>
+      </section>
+
       <Footer />
     </main>
   );
