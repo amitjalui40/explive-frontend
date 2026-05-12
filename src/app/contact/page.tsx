@@ -71,11 +71,11 @@ export default function ContactPage() {
         </div>
       </div>
 
-      {/* ── FULL-BLEED SPLIT ── */}
-      <div className="flex flex-col lg:flex-row flex-1">
+      {/* ── SPLIT ── contained to match header */}
+      <div className="w-full max-w-480 mx-auto flex flex-col lg:flex-row flex-1">
 
         {/* LEFT — heading + contact info */}
-        <div className="lg:w-[45%] px-6 md:px-12 xl:px-20 pt-14 md:pt-20 pb-14 lg:pb-20 flex flex-col gap-10 md:gap-12">
+        <div className="lg:w-[45%] px-6 md:px-12 xl:px-24 pt-14 md:pt-20 pb-14 lg:pb-20 flex flex-col gap-10 md:gap-12">
 
           {/* Heading + subtitle */}
           <div>
