@@ -6,6 +6,7 @@ import { Footer } from '@/components/Footer';
 
 export default function ContactPage() {
   const { contact } = homepageData;
+  const { placeholders } = contact.form;
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -116,22 +117,22 @@ export default function ContactPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div>
                 <label className={labelClass}>First Name <span className="text-emerald-500">*</span></label>
-                <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder="Arjun" required className={inputClass} />
+                <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder={placeholders.firstName} required className={inputClass} />
               </div>
               <div>
                 <label className={labelClass}>Last Name <span className="text-emerald-500">*</span></label>
-                <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Sharma" required className={inputClass} />
+                <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder={placeholders.lastName} required className={inputClass} />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div>
                 <label className={labelClass}>Email <span className="text-emerald-500">*</span></label>
-                <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="arjun@email.com" required className={inputClass} />
+                <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder={placeholders.email} required className={inputClass} />
               </div>
               <div>
                 <label className={labelClass}>Phone</label>
-                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+91 98765 43210" className={inputClass} />
+                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder={placeholders.phone} className={inputClass} />
               </div>
             </div>
 
@@ -141,7 +142,7 @@ export default function ContactPage() {
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                placeholder="Tell us how we can help..."
+                placeholder={placeholders.message}
                 required
                 rows={6}
                 className={`${inputClass} resize-none`}

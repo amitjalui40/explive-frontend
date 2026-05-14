@@ -161,11 +161,11 @@ export const homepageData = {
     form: {
       tagline: "Reach out through the form below, and let us help you plan an incredible event.",
       placeholders: {
-        firstName: "First Name*",
-        lastName: "Last Name*",
-        email: "Your Email*",
-        phone: "Your Number*",
-        message: "Message Here"
+        firstName: "First Name",
+        lastName: "Last Name",
+        email: "Your Email",
+        phone: "Your Number",
+        message: "Tell us how we can help..."
       },
       submitText: "Contact Us"
     }
@@ -194,16 +194,16 @@ export const homepageData = {
           { name: "Contact Us", url: "/contact" }
         ]
       },
-      {
-        title: "Services",
-        items: [
-          { name: "Event Production", url: "#" },
-          { name: "Talent Booking", url: "#" },
-          { name: "Venue Management", url: "#" },
-          { name: "Brand Activations", url: "#" }
-        ]
-      }
+      // {
+      //   title: "Services",
+      //   items: [
+      //     { name: "Event Production", url: "#" },
+      //     { name: "Talent Booking", url: "#" },
+      //     { name: "Venue Management", url: "#" },
+      //     { name: "Brand Activations", url: "#" }
+      //   ]
+      // }
     ],
-    copyright: "© 2026 Explive Entertainment. All rights reserved."
+    copyright: "© 2026 Exp live Entertainment LLP. All rights reserved."
   }
 };
