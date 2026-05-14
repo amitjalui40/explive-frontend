@@ -7,12 +7,15 @@ import { UpcomingShows } from "@/components/UpcomingShows";
 import { Footer } from "@/components/Footer";
 import { UpcomingShowsGrid } from "@/components/UpcomingShowsGrid";
 import { UpcomingShowsStack } from "@/components/UpcomingShowsStack";
+import { UpcomingShowsVerticalCard } from "@/components/UpcomingShowsVerticalCard";
 
 export default function Home() {
   return (
     <main className="w-full">
       {/* Modular Hero Section Component */}
       <Hero />
+
+      <UpcomingShowsVerticalCard />
 
       {features.showUpcomingShowsGrid && <UpcomingShowsGrid />}
       <UpcomingShowsStack />
