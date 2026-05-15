@@ -4,5 +4,7 @@ export const features = {
   // Toggle this flag to true to unhide the new Featured Spotlight section
   showFeaturedSpotlight: false,
   // Toggle this flag to true to show the new Upcoming Shows Grid
-  showUpcomingShowsGrid: true,
+  showUpcomingShowsGrid: false,
+  // Toggle this flag to true to show the Upcoming Shows Stack
+  showUpcomingShowsStack: false,
 };

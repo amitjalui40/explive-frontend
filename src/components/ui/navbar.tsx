@@ -40,7 +40,7 @@ export function Navbar() {
     <>
       {/* Top Navbar */}
       <nav className={`fixed top-0 left-0 w-full z-50 pointer-events-none transition-all duration-500 border-b ${isScrolled
-        ? 'bg-white/70 dark:bg-zinc-950/70 backdrop-blur-2xl shadow-sm border-black/5 dark:border-white/5'
+        ? 'bg-white/95 dark:bg-zinc-950/90 backdrop-blur-3xl shadow-sm border-black/5 dark:border-white/5'
         : 'bg-transparent border-transparent'
         }`}>
         <style>{`
@@ -51,7 +51,7 @@ export function Navbar() {
           @keyframes eq5 { 0%,100%{height:7px} 45%{height:14px} }
         `}</style>
 
-        <div className={`w-full px-6 md:px-12 flex items-center max-w-480 mx-auto pointer-events-auto transition-all duration-500 ${isScrolled ? 'py-4' : 'py-8'} ${forceWhite ? 'text-white' : 'text-zinc-900 dark:text-white'}`}>
+        <div className={`w-full px-6 md:px-12 flex items-center max-w-[120rem] mx-auto pointer-events-auto transition-all duration-500 ${isScrolled ? 'py-4' : 'py-8'} ${forceWhite ? 'text-white' : 'text-zinc-900 dark:text-white'}`}>
 
           {/* Left - Logo */}
           <div className="flex-1">

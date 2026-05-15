@@ -18,7 +18,7 @@ export default function Home() {
       <UpcomingShowsVerticalCard />
 
       {features.showUpcomingShowsGrid && <UpcomingShowsGrid />}
-      <UpcomingShowsStack />
+      {features.showUpcomingShowsStack && <UpcomingShowsStack />}
 
       {/* Dynamic Event Types Grid (Bento Box) */}
       {/* Modular Event Categories Section */}

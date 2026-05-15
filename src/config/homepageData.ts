@@ -26,14 +26,33 @@ export const homepageData = {
       titleLine2: "Shows",
       description: "Discover our upcoming live experiences.",
     },
+    heading: {
+      kicker: "Live Events",
+      line1: "Upcoming",
+      line2: "Shows",
+      description: "Discover unforgettable live experiences. Don't miss what's coming next.",
+    },
+    stats: [
+      { icon: "MapPin", value: "Dombivli", label: "Location" },
+      { icon: "Zap",    value: "Live",     label: "Experiences" },
+    ],
+    featureBar: [
+      { icon: "Star",        iconColor: "#B6FF3B", bgColor: "rgba(182, 255, 59, 0.10)",  title: "Curated Events",   desc: "Handpicked experiences\njust for you." },
+      { icon: "ShieldCheck", iconColor: "#FF9A00", bgColor: "rgba(255, 154, 0, 0.10)",   title: "Secure Booking",   desc: "100% safe & hassle\nfree payments." },
+      { icon: "Headphones",  iconColor: "#FF3C7D", bgColor: "rgba(255, 60, 125, 0.10)",  title: "24/7 Support",     desc: "We're here to help\nanytime." },
+      { icon: "Ticket",      iconColor: "#4DA3FF", bgColor: "rgba(77, 163, 255, 0.10)",  title: "Exclusive Access", desc: "Early bird & member\nonly deals." },
+      { icon: "Globe",       iconColor: "#B6FF3B", bgColor: "rgba(182, 255, 59, 0.10)",  title: "Multiple Cities",  desc: "Experience events\nacross India." },
+    ],
     items: [
       {
         id: "seasona-festival",
         title: "Seasona Festival 2026",
         date: "23rd May 2026",
         location: "Summer Edition",
+        venue: "Bandra Fort, Mumbai",
+        badge: "Live Soon",
         image: seasonaFestivalImg.src,
-        glowColor: "rgba(251, 146, 60, 0.4)", // Bright orange glow
+        glowColor: "rgba(251, 146, 60, 0.4)",
         buttonText: "Get Tickets",
         buttonLink: "#"
       },
@@ -42,9 +61,11 @@ export const homepageData = {
         title: "Ehsaas e Shaam",
         date: "10th July 2026",
         location: "Ek shaam, kahi ehsaas",
+        venue: "Dome at NSCI, Mumbai",
+        badge: "Coming Soon",
         image: ehsaasEShaamImg.src,
-        glowColor: "rgba(159, 18, 57, 0.4)", // Deep ruby/burgundy glow
-        buttonText: "Notify Me",
+        glowColor: "rgba(159, 18, 57, 0.4)",
+        buttonText: "Get Tickets",
         buttonLink: "#"
       }
     ],

@@ -53,11 +53,10 @@ export const Footer = () => {
           </div>
 
           {/* Spacer — grows to push columns right when fewer link groups exist */}
-          <div className={`hidden lg:block ${
-            footer.links.length === 0 ? 'lg:col-span-8' :
-            footer.links.length === 1 ? 'lg:col-span-6' :
-            'lg:col-span-4'
-          }`} />
+          <div className={`hidden lg:block ${footer.links.length === 0 ? 'lg:col-span-8' :
+              footer.links.length === 1 ? 'lg:col-span-6' :
+                'lg:col-span-4'
+            }`} />
 
           {/* Links Columns (Right) */}
           {footer.links.map((column) => (
