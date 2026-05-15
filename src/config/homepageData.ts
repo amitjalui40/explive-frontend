@@ -26,6 +26,23 @@ export const homepageData = {
       titleLine2: "Shows",
       description: "Discover our upcoming live experiences.",
     },
+    heading: {
+      kicker: "Live Events",
+      line1: "Upcoming",
+      line2: "Shows",
+      description: "Discover unforgettable live experiences. Don't miss what's coming next.",
+    },
+    stats: [
+      { icon: "MapPin", value: "Dombivli", label: "Location" },
+      { icon: "Zap",    value: "Live",     label: "Experiences" },
+    ],
+    featureBar: [
+      { icon: "Star",        iconColor: "#B6FF3B", bgColor: "rgba(182, 255, 59, 0.10)",  title: "Curated Events",   desc: "Handpicked experiences\njust for you." },
+      { icon: "ShieldCheck", iconColor: "#FF9A00", bgColor: "rgba(255, 154, 0, 0.10)",   title: "Secure Booking",   desc: "100% safe & hassle\nfree payments." },
+      { icon: "Headphones",  iconColor: "#FF3C7D", bgColor: "rgba(255, 60, 125, 0.10)",  title: "24/7 Support",     desc: "We're here to help\nanytime." },
+      { icon: "Ticket",      iconColor: "#4DA3FF", bgColor: "rgba(77, 163, 255, 0.10)",  title: "Exclusive Access", desc: "Early bird & member\nonly deals." },
+      { icon: "Globe",       iconColor: "#B6FF3B", bgColor: "rgba(182, 255, 59, 0.10)",  title: "Multiple Cities",  desc: "Experience events\nacross India." },
+    ],
     items: [
       {
         id: "seasona-festival",

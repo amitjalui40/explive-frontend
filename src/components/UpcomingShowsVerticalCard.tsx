@@ -9,13 +9,9 @@ import {
 import { features } from '@/config/features';
 import { homepageData } from '@/config/homepageData';
 
-const FEATURES = [
-    { icon: Star,        iconColor: '#B6FF3B', bgColor: 'rgba(182, 255, 59, 0.10)',   title: 'Curated Events',   desc: 'Handpicked experiences\njust for you.' },
-    { icon: ShieldCheck, iconColor: '#FF9A00', bgColor: 'rgba(255, 154, 0, 0.10)',    title: 'Secure Booking',   desc: '100% safe & hassle\nfree payments.' },
-    { icon: Headphones,  iconColor: '#FF3C7D', bgColor: 'rgba(255, 60, 125, 0.10)',   title: '24/7 Support',     desc: "We're here to help\nanytime." },
-    { icon: Ticket,      iconColor: '#4DA3FF', bgColor: 'rgba(77, 163, 255, 0.10)',   title: 'Exclusive Access', desc: 'Early bird & member\nonly deals.' },
-    { icon: Globe,       iconColor: '#B6FF3B', bgColor: 'rgba(182, 255, 59, 0.10)',   title: 'Multiple Cities',  desc: 'Experience events\nacross India.' },
-];
+const ICON_MAP: Record<string, React.ElementType> = {
+    MapPin, Zap, Star, ShieldCheck, Headphones, Ticket, Globe, Bell,
+};
 
 const solidColor = (glowColor: string) => glowColor.replace(/[\d.]+\)$/, '1)');
 
@@ -23,8 +19,55 @@ export const UpcomingShowsVerticalCard = () => {
     const carouselRef = useRef<HTMLDivElement>(null);
     const [isHovered, setIsHovered] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
+    const tickerRef = useRef<HTMLDivElement>(null);
+    const tickerAnimRef = useRef<number>(0);
+    const tickerPausedRef = useRef(false);
+    const tickerTimerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+    const lastTimestampRef = useRef<number>(0);
+    const exactScrollLeftRef = useRef<number>(0);
 
-    const items = homepageData.upcomingShowsGrid.items;
+    const animateTicker = useCallback((timestamp: number) => {
+        const el = tickerRef.current;
+        if (el && !tickerPausedRef.current) {
+            const delta = lastTimestampRef.current ? timestamp - lastTimestampRef.current : 0;
+            const safeDelta = Math.min(delta, 50); // cap delta to avoid jump on tab switch
+            
+            exactScrollLeftRef.current += (35 * safeDelta) / 1000; // 35px/s
+            
+            const firstHalf = el.firstElementChild as HTMLElement;
+            if (firstHalf) {
+                const loopWidth = firstHalf.scrollWidth;
+                if (exactScrollLeftRef.current >= loopWidth) {
+                    exactScrollLeftRef.current -= loopWidth;
+                }
+            } else {
+                if (exactScrollLeftRef.current >= el.scrollWidth / 2) {
+                    exactScrollLeftRef.current -= el.scrollWidth / 2;
+                }
+            }
+            
+            el.scrollLeft = exactScrollLeftRef.current;
+        } else if (el && tickerPausedRef.current) {
+            exactScrollLeftRef.current = el.scrollLeft;
+        }
+        lastTimestampRef.current = timestamp;
+        tickerAnimRef.current = requestAnimationFrame(animateTicker);
+    }, []);
+
+    useEffect(() => {
+        tickerAnimRef.current = requestAnimationFrame(animateTicker);
+        return () => cancelAnimationFrame(tickerAnimRef.current);
+    }, [animateTicker]);
+
+    const handleTickerInteraction = () => {
+        tickerPausedRef.current = true;
+        clearTimeout(tickerTimerRef.current);
+        tickerTimerRef.current = setTimeout(() => {
+            tickerPausedRef.current = false;
+        }, 3000);
+    };
+
+    const { items, heading, stats, featureBar } = homepageData.upcomingShowsGrid;
     const totalCards = items.length + 1;
 
     const scrollToIndex = useCallback((index: number) => {
@@ -75,44 +118,44 @@ export const UpcomingShowsVerticalCard = () => {
                     {/* Kicker */}
                     <div className="flex items-center gap-2">
                         <span className="w-2.5 h-2.5 rounded-full bg-lime-400" />
-                        <p className="text-xs font-bold tracking-[0.3em] uppercase text-lime-400">Live Events</p>
+                        <p className="text-xs font-bold tracking-[0.3em] uppercase text-lime-400">{heading.kicker}</p>
                     </div>
 
                     {/* Heading */}
                     <div className="-mt-1">
                         <h2 className="text-6xl md:text-7xl xl:text-8xl font-black tracking-tight leading-none text-zinc-900 dark:text-white">
-                            Upcoming
+                            {heading.line1}
                         </h2>
                         <h2
                             className="text-6xl md:text-7xl xl:text-8xl font-bold leading-none text-lime-400"
                             style={{ fontFamily: 'var(--font-dancing-script, cursive)', fontStyle: 'italic' }}
                         >
-                            Shows
+                            {heading.line2}
                         </h2>
                     </div>
 
                     {/* Description */}
                     <p className="text-zinc-500 dark:text-zinc-400 text-base leading-relaxed max-w-xs">
-                        Discover unforgettable live experiences. Don&apos;t miss what&apos;s coming next.
+                        {heading.description}
                     </p>
 
                     {/* Stats box */}
                     <div className="flex border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden">
-                        <div className="flex items-center gap-3 flex-1 px-5 py-4">
-                            <MapPin className="w-5 h-5 text-lime-400 shrink-0" />
-                            <div>
-                                <p className="text-zinc-900 dark:text-white font-bold text-sm leading-none">Dombivli</p>
-                                <p className="text-zinc-400 text-[10px] font-bold tracking-widest uppercase mt-1">Location</p>
-                            </div>
-                        </div>
-                        <div className="w-px bg-zinc-200 dark:bg-zinc-800" />
-                        <div className="flex items-center gap-3 flex-1 px-5 py-4">
-                            <Zap className="w-5 h-5 text-lime-400 shrink-0" />
-                            <div>
-                                <p className="text-zinc-900 dark:text-white font-bold text-sm leading-none">Live</p>
-                                <p className="text-zinc-400 text-[10px] font-bold tracking-widest uppercase mt-1">Experiences</p>
-                            </div>
-                        </div>
+                        {stats.map((stat, i) => {
+                            const StatIcon = ICON_MAP[stat.icon];
+                            return (
+                                <React.Fragment key={stat.label}>
+                                    {i !== 0 && <div className="w-px bg-zinc-200 dark:bg-zinc-800" />}
+                                    <div className="flex items-center gap-3 flex-1 px-5 py-4">
+                                        {StatIcon && <StatIcon className="w-5 h-5 text-lime-400 shrink-0" />}
+                                        <div>
+                                            <p className="text-zinc-900 dark:text-white font-bold text-sm leading-none">{stat.value}</p>
+                                            <p className="text-zinc-400 text-[10px] font-bold tracking-widest uppercase mt-1">{stat.label}</p>
+                                        </div>
+                                    </div>
+                                </React.Fragment>
+                            );
+                        })}
                     </div>
 
                 </div>
@@ -268,42 +311,91 @@ export const UpcomingShowsVerticalCard = () => {
             </div>
 
             {/* ── FEATURES BAR ── */}
-            <div className="w-full px-6 md:px-10 xl:px-14 pb-10 mt-6 lg:mt-0">
-                <div className="w-full overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                    <div 
-                        className="w-max lg:w-full min-w-[1100px] max-w-[1320px] h-[88px] mx-auto px-8 flex items-center justify-between rounded-[20px] backdrop-blur-md"
-                        style={{
-                            background: 'rgba(255, 255, 255, 0.04)',
-                            border: '1px solid rgba(255, 255, 255, 0.06)'
-                        }}
-                    >
-                        {FEATURES.map(({ icon: Icon, iconColor, bgColor, title, desc }, index) => (
-                            <div 
-                                key={title} 
-                                className="flex items-center gap-4 flex-1 h-full"
-                                style={{
-                                    paddingRight: index !== FEATURES.length - 1 ? '24px' : '0',
-                                    paddingLeft: index !== 0 ? '24px' : '0',
-                                    borderRight: index !== FEATURES.length - 1 ? '1px solid rgba(255, 255, 255, 0.08)' : 'none'
-                                }}
-                            >
-                                {/* Icon Circle */}
-                                <div 
+
+            {/* Mobile: infinite ticker — rAF auto-scroll + native touch manual scroll */}
+            <div className="lg:hidden py-6">
+                <div
+                    ref={tickerRef}
+                    className="flex overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+                    onTouchStart={handleTickerInteraction}
+                    onTouchEnd={handleTickerInteraction}
+                >
+                    <div className="flex shrink-0">
+                        {featureBar.map(({ icon, iconColor, bgColor, title, desc }, index) => {
+                            const Icon = ICON_MAP[icon];
+                            return (
+                            <div key={`set1-${index}`} className="flex items-center gap-3 px-8 shrink-0">
+                                <div
+                                    className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
+                                    style={{ backgroundColor: bgColor }}
+                                >
+                                    {Icon && <Icon className="w-4 h-4" style={{ color: iconColor }} strokeWidth={1.5} />}
+                                </div>
+                                <div>
+                                    <p className="text-white text-sm font-semibold whitespace-nowrap" style={{ fontFamily: "'Poppins', sans-serif" }}>{title}</p>
+                                    <p className="text-[#A1A1AA] text-xs whitespace-nowrap" style={{ fontFamily: "'Poppins', sans-serif" }}>{desc.replace('\n', ' ')}</p>
+                                </div>
+                                {/* Dot separator */}
+                                <span className="ml-6 w-1 h-1 rounded-full shrink-0" style={{ background: 'rgba(255,255,255,0.2)' }} />
+                            </div>
+                            );
+                        })}
+                    </div>
+                    <div className="flex shrink-0">
+                        {featureBar.map(({ icon, iconColor, bgColor, title, desc }, index) => {
+                            const Icon = ICON_MAP[icon];
+                            return (
+                            <div key={`set2-${index}`} className="flex items-center gap-3 px-8 shrink-0">
+                                <div
+                                    className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
+                                    style={{ backgroundColor: bgColor }}
+                                >
+                                    {Icon && <Icon className="w-4 h-4" style={{ color: iconColor }} strokeWidth={1.5} />}
+                                </div>
+                                <div>
+                                    <p className="text-white text-sm font-semibold whitespace-nowrap" style={{ fontFamily: "'Poppins', sans-serif" }}>{title}</p>
+                                    <p className="text-[#A1A1AA] text-xs whitespace-nowrap" style={{ fontFamily: "'Poppins', sans-serif" }}>{desc.replace('\n', ' ')}</p>
+                                </div>
+                                {/* Dot separator */}
+                                <span className="ml-6 w-1 h-1 rounded-full shrink-0" style={{ background: 'rgba(255,255,255,0.2)' }} />
+                            </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>
+
+            {/* Desktop: static glass bar */}
+            <div className="hidden lg:block px-12 pb-8">
+                <div
+                    className="w-full h-28 px-8 flex items-center rounded-[20px] backdrop-blur-md"
+                    style={{
+                        background: 'linear-gradient(to right, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.07) 50%, rgba(255,255,255,0.02) 100%)',
+                        border: '1px solid rgba(255, 255, 255, 0.08)'
+                    }}
+                >
+                    {featureBar.map(({ icon, iconColor, bgColor, title, desc }, index) => {
+                        const Icon = ICON_MAP[icon];
+                        return (
+                        <React.Fragment key={title}>
+                            {index !== 0 && (
+                                <div className="h-14 w-px shrink-0" style={{ background: 'rgba(255,255,255,0.08)' }} />
+                            )}
+                            <div className="flex items-center justify-center gap-4 flex-1 px-6">
+                                <div
                                     className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
                                     style={{ backgroundColor: bgColor }}
                                 >
-                                    <Icon className="w-5 h-5" style={{ color: iconColor }} strokeWidth={1.5} />
+                                    {Icon && <Icon className="w-5 h-5" style={{ color: iconColor }} strokeWidth={1.5} />}
                                 </div>
-
-                                {/* Text Content */}
                                 <div className="flex flex-col justify-center">
-                                    <h4 
+                                    <h4
                                         className="text-white text-[16px] font-semibold leading-[1.4] whitespace-nowrap"
                                         style={{ fontFamily: "'Poppins', sans-serif" }}
                                     >
                                         {title}
                                     </h4>
-                                    <p 
+                                    <p
                                         className="text-[#A1A1AA] text-[13px] font-normal leading-[1.6] whitespace-nowrap"
                                         style={{ fontFamily: "'Poppins', sans-serif" }}
                                     >
@@ -316,8 +408,9 @@ export const UpcomingShowsVerticalCard = () => {
                                     </p>
                                 </div>
                             </div>
-                        ))}
-                    </div>
+                        </React.Fragment>
+                        );
+                    })}
                 </div>
             </div>
 
