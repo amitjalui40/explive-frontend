@@ -32,8 +32,10 @@ export const homepageData = {
         title: "Seasona Festival 2026",
         date: "23rd May 2026",
         location: "Summer Edition",
+        venue: "Bandra Fort, Mumbai",
+        badge: "Live Soon",
         image: seasonaFestivalImg.src,
-        glowColor: "rgba(251, 146, 60, 0.4)", // Bright orange glow
+        glowColor: "rgba(251, 146, 60, 0.4)",
         buttonText: "Get Tickets",
         buttonLink: "#"
       },
@@ -42,9 +44,11 @@ export const homepageData = {
         title: "Ehsaas e Shaam",
         date: "10th July 2026",
         location: "Ek shaam, kahi ehsaas",
+        venue: "Dome at NSCI, Mumbai",
+        badge: "Coming Soon",
         image: ehsaasEShaamImg.src,
-        glowColor: "rgba(159, 18, 57, 0.4)", // Deep ruby/burgundy glow
-        buttonText: "Notify Me",
+        glowColor: "rgba(159, 18, 57, 0.4)",
+        buttonText: "Get Tickets",
         buttonLink: "#"
       }
     ],
