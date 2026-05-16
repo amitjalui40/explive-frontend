@@ -143,7 +143,7 @@ export const UpcomingShowsVerticalCard = () => {
     if (!features.showLegacyUpcomingCarousel) return null;
 
     return (
-        <section className="relative w-full bg-[#111111] overflow-hidden z-0 lg:h-screen lg:flex lg:flex-col">
+        <section className="relative w-full bg-[#111111] overflow-hidden z-0 lg:h-[calc(100vh-72px)] lg:flex lg:flex-col">
 
             {/* Dynamic blurred background images */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
