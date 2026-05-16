@@ -339,9 +339,9 @@ export const UpcomingShowsVerticalCard = () => {
                         {/* Ghost card — Coming Soon */}
                         <div className={`w-[78vw] min-w-60 md:w-72 lg:w-80 shrink-0 snap-center self-stretch transition-all duration-500 ease-out ${activeIndex === items.length ? 'scale-100 opacity-100' : 'scale-[0.9] opacity-50'}`}>
                             <div
-                                className={`rounded-[1.25rem] overflow-hidden border bg-zinc-900 h-full min-h-104 flex flex-col items-center justify-center gap-5 px-8 text-center transition-all duration-500 ${activeIndex === items.length ? 'border-lime-400' : 'border-zinc-700'}`}
+                                className={`rounded-[1.25rem] overflow-hidden border bg-zinc-900 h-full min-h-104 flex flex-col items-center justify-center gap-5 px-8 text-center transition-all duration-500 ${activeIndex === items.length ? 'border-lime-400' : 'border-transparent'}`}
                                 style={{
-                                    boxShadow: activeIndex === items.length ? `0 20px 40px -10px rgba(163, 230, 53, 0.4)` : 'none'
+                                    boxShadow: activeIndex === items.length ? `inset 0 0 50px rgba(163, 230, 53, 0.1)` : 'none'
                                 }}
                             >
                                 <div className="w-14 h-14 rounded-full border border-zinc-700 flex items-center justify-center">
