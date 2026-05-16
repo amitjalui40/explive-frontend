@@ -15,7 +15,7 @@ export default function Home() {
       {/* Modular Hero Section Component */}
       <Hero />
 
-      <UpcomingShowsVerticalCard />
+      {features.showUpcomingShowsVerticalCard && <UpcomingShowsVerticalCard />}
 
       {features.showUpcomingShowsGrid && <UpcomingShowsGrid />}
       {features.showUpcomingShowsStack && <UpcomingShowsStack />}
