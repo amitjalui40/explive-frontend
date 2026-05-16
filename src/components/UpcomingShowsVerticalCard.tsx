@@ -25,6 +25,8 @@ export const UpcomingShowsVerticalCard = () => {
     const tickerTimerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
     const lastTimestampRef = useRef<number>(0);
     const exactScrollLeftRef = useRef<number>(0);
+    const userPauseTimerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+    const [userPaused, setUserPaused] = useState(false);
 
     const animateTicker = useCallback((timestamp: number) => {
         const el = tickerRef.current;
@@ -109,6 +111,15 @@ export const UpcomingShowsVerticalCard = () => {
         setActiveIndex(index);
     }, []);
 
+    const handleCardInteraction = useCallback((index: number) => {
+        scrollToIndex(index);
+        setUserPaused(true);
+        clearTimeout(userPauseTimerRef.current);
+        userPauseTimerRef.current = setTimeout(() => setUserPaused(false), 5000);
+    }, [scrollToIndex]);
+
+    useEffect(() => () => clearTimeout(userPauseTimerRef.current), []);
+
     const handlePrev = useCallback(() => {
         scrollToIndex(Math.max(0, activeIndex - 1));
     }, [activeIndex, scrollToIndex]);
@@ -118,10 +129,10 @@ export const UpcomingShowsVerticalCard = () => {
     }, [activeIndex, totalCards, scrollToIndex]);
 
     useEffect(() => {
-        if (isHovered) return;
+        if (isHovered || userPaused) return;
         const interval = setInterval(handleNext, 4000);
         return () => clearInterval(interval);
-    }, [isHovered, handleNext]);
+    }, [isHovered, userPaused, handleNext]);
 
     useEffect(() => {
         const timer = setTimeout(() => scrollToIndex(0), 80);
@@ -269,6 +280,8 @@ export const UpcomingShowsVerticalCard = () => {
                                 <div
                                     key={item.id}
                                     className={`w-[78vw] min-w-60 md:w-72 lg:w-80 shrink-0 snap-center transition-all duration-500 ease-out ${isActive ? 'scale-100 opacity-100' : 'scale-[0.9] opacity-50'}`}
+                                    onMouseEnter={() => handleCardInteraction(i)}
+                                    onClick={() => handleCardInteraction(i)}
                                 >
                                     <div
                                         className="rounded-[1.25rem] overflow-hidden cursor-pointer transition-all duration-500 hover:scale-[1.02]"
@@ -343,7 +356,11 @@ export const UpcomingShowsVerticalCard = () => {
                         })}
 
                         {/* Ghost card — Coming Soon */}
-                        <div className={`w-[78vw] min-w-60 md:w-72 lg:w-80 shrink-0 snap-center self-stretch transition-all duration-500 ease-out ${activeIndex === items.length ? 'scale-100 opacity-100' : 'scale-[0.9] opacity-50'}`}>
+                        <div
+                            className={`w-[78vw] min-w-60 md:w-72 lg:w-80 shrink-0 snap-center self-stretch transition-all duration-500 ease-out ${activeIndex === items.length ? 'scale-100 opacity-100' : 'scale-[0.9] opacity-50'}`}
+                            onMouseEnter={() => handleCardInteraction(items.length)}
+                            onClick={() => handleCardInteraction(items.length)}
+                        >
                             <div
                                 className={`rounded-[1.25rem] overflow-hidden border bg-zinc-900 h-full min-h-104 flex flex-col items-center justify-center gap-5 px-8 text-center transition-all duration-500 ${activeIndex === items.length ? 'border-lime-400' : 'border-transparent'}`}
                                 style={{
