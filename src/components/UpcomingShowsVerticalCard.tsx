@@ -27,6 +27,8 @@ export const UpcomingShowsVerticalCard = () => {
     const exactScrollLeftRef = useRef<number>(0);
     const userPauseTimerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
     const [userPaused, setUserPaused] = useState(false);
+    const isProgrammaticScrollRef = useRef(false);
+    const programmaticScrollTimerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
     const animateTicker = useCallback((timestamp: number) => {
         const el = tickerRef.current;
@@ -73,6 +75,7 @@ export const UpcomingShowsVerticalCard = () => {
     const totalCards = items.length + 1;
 
     const handleScroll = useCallback(() => {
+        if (isProgrammaticScrollRef.current) return;
         const container = carouselRef.current;
         if (!container) return;
 
@@ -104,6 +107,13 @@ export const UpcomingShowsVerticalCard = () => {
         if (!card) return;
         const containerWidth = container.clientWidth;
         const cardWidth = card.offsetWidth;
+
+        isProgrammaticScrollRef.current = true;
+        clearTimeout(programmaticScrollTimerRef.current);
+        programmaticScrollTimerRef.current = setTimeout(() => {
+            isProgrammaticScrollRef.current = false;
+        }, 500);
+
         container.scrollTo({
             left: card.offsetLeft - (containerWidth - cardWidth) / 2,
             behavior: 'smooth',
