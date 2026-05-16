@@ -204,8 +204,14 @@ export const UpcomingShowsVerticalCard = () => {
                                     {i !== 0 && <div className="w-px bg-zinc-800" />}
                                     <div className="flex items-center gap-3 flex-1 px-5 py-4">
                                         {StatIcon && <StatIcon className="w-5 h-5 text-lime-400 shrink-0" />}
-                                        <div>
-                                            <p className="text-white font-bold text-sm leading-none">{stat.value}</p>
+                                        <div className="min-w-0">
+                                            <p className="text-white font-bold text-sm leading-none truncate">
+                                                {stat.icon === 'MapPin'
+                                                    ? activeIndex < items.length
+                                                        ? items[activeIndex].venue
+                                                        : 'India'
+                                                    : stat.value}
+                                            </p>
                                             <p className="text-zinc-400 text-[10px] font-bold tracking-widest uppercase mt-1">{stat.label}</p>
                                         </div>
                                     </div>
@@ -253,7 +259,7 @@ export const UpcomingShowsVerticalCard = () => {
                     <div
                         ref={carouselRef}
                         onScroll={handleScroll}
-                        className="flex gap-4 overflow-x-auto pl-12 pr-12 pb-2 snap-x snap-mandatory scroll-smooth"
+                        className="flex gap-4 overflow-x-auto pl-12 pr-12 lg:px-6 lg:justify-center pb-2 snap-x snap-mandatory scroll-smooth"
                     >
                         {/* Real event cards */}
                         {items.map((item, i) => {
@@ -262,7 +268,7 @@ export const UpcomingShowsVerticalCard = () => {
                             return (
                                 <div
                                     key={item.id}
-                                    className={`w-[78vw] min-w-60 md:w-72 lg:w-80 shrink-0 snap-center transition-all duration-500 ease-out ${isActive ? 'scale-100 opacity-100' : 'scale-[0.9] opacity-50'}`}
+                                    className={`w-[78vw] min-w-60 md:w-72 lg:w-72 shrink-0 snap-center transition-all duration-500 ease-out ${isActive ? 'scale-100 opacity-100' : 'scale-[0.9] opacity-50'}`}
                                 >
                                     <div
                                         className="rounded-[1.25rem] overflow-hidden cursor-pointer transition-all duration-500 hover:scale-[1.02]"
@@ -272,7 +278,7 @@ export const UpcomingShowsVerticalCard = () => {
                                         }}
                                     >
                                         {/* Image area */}
-                                        <div className="relative h-64 md:h-72 lg:h-80">
+                                        <div className="relative h-64 md:h-72 lg:h-72">
                                             <Image
                                                 src={item.image}
                                                 alt={item.title}
@@ -337,7 +343,7 @@ export const UpcomingShowsVerticalCard = () => {
                         })}
 
                         {/* Ghost card — Coming Soon */}
-                        <div className={`w-[78vw] min-w-60 md:w-72 lg:w-80 shrink-0 snap-center self-stretch transition-all duration-500 ease-out ${activeIndex === items.length ? 'scale-100 opacity-100' : 'scale-[0.9] opacity-50'}`}>
+                        <div className={`w-[78vw] min-w-60 md:w-72 lg:w-72 shrink-0 snap-center self-stretch transition-all duration-500 ease-out ${activeIndex === items.length ? 'scale-100 opacity-100' : 'scale-[0.9] opacity-50'}`}>
                             <div
                                 className={`rounded-[1.25rem] overflow-hidden border bg-zinc-900 h-full min-h-104 flex flex-col items-center justify-center gap-5 px-8 text-center transition-all duration-500 ${activeIndex === items.length ? 'border-lime-400' : 'border-transparent'}`}
                                 style={{
