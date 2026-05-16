@@ -164,6 +164,7 @@ export const UpcomingShowsVerticalCard = () => {
                         src={item.image}
                         alt="Background Blur"
                         fill
+                        loading="eager"
                         className={`object-cover blur-2xl md:blur-[40px] scale-110 transition-opacity duration-1000 ease-out ${i === activeIndex ? 'opacity-100 dark:opacity-100' : 'opacity-0'
                             }`}
                     />
@@ -293,10 +294,10 @@ export const UpcomingShowsVerticalCard = () => {
                                     onClick={() => handleCardInteraction(i)}
                                 >
                                     <div
-                                        className="rounded-[1.25rem] overflow-hidden cursor-pointer transition-all duration-500 hover:scale-[1.02]"
+                                        className="rounded-[1.25rem] overflow-hidden cursor-pointer transition-all duration-500 lg:hover:scale-[1.02]"
                                         style={{
                                             border: `2px solid ${isActive ? accent : 'transparent'}`,
-                                            boxShadow: isActive ? `0 20px 40px -10px ${accent}60` : 'none'
+                                            boxShadow: isActive ? `0 20px 40px -10px ${accent}60` : `0 0px 0px 0px ${accent}00`
                                         }}
                                     >
                                         {/* Image area */}
@@ -305,6 +306,7 @@ export const UpcomingShowsVerticalCard = () => {
                                                 src={item.image}
                                                 alt={item.title}
                                                 fill
+                                                loading="eager"
                                                 className="object-cover object-top"
                                             />
                                             {/* Status badge */}
