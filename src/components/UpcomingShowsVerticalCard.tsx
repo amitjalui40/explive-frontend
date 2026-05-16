@@ -165,14 +165,13 @@ export const UpcomingShowsVerticalCard = () => {
                         alt="Background Blur"
                         fill
                         loading="eager"
-                        className={`object-cover blur-2xl md:blur-[40px] scale-110 transition-opacity duration-1000 ease-out ${i === activeIndex ? 'opacity-100 dark:opacity-100' : 'opacity-0'
-                            }`}
+                        className={`object-cover blur-2xl md:blur-[40px] scale-110 ${i === activeIndex ? 'opacity-100 transition-opacity duration-1000 ease-out' : 'opacity-0'}`}
                     />
                 ))}
 
                 {/* Fallback for Coming Soon card */}
                 <div
-                    className={`absolute inset-0 transition-opacity duration-1000 ease-out ${activeIndex === items.length ? 'opacity-70' : 'opacity-0'}`}
+                    className={`absolute inset-0 ${activeIndex === items.length ? 'opacity-70 transition-opacity duration-1000 ease-out' : 'opacity-0'}`}
                     style={{ backgroundColor: '#a3e635' }}
                 />
 
