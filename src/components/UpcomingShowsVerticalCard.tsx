@@ -161,13 +161,12 @@ export const UpcomingShowsVerticalCard = () => {
 
                 {/* Fallback for Coming Soon card */}
                 <div
-                    className={`absolute inset-0 blur-2xl md:blur-[40px] scale-110 transition-opacity duration-1000 ease-out ${activeIndex === items.length ? 'opacity-70' : 'opacity-0'
-                        }`}
+                    className={`absolute inset-0 transition-opacity duration-1000 ease-out ${activeIndex === items.length ? 'opacity-70' : 'opacity-0'}`}
                     style={{ backgroundColor: '#a3e635' }}
                 />
 
                 {/* 2. Contrast overlay so the text remains readable */}
-                <div className="absolute inset-0 bg-gradient-to-b lg:bg-gradient-to-r from-[#111111]/95 via-[#111111]/70 to-[#111111]/10" />
+                <div className="absolute inset-0 bg-linear-to-b lg:bg-linear-to-r from-[#111111]/95 via-[#111111]/70 to-[#111111]/10" />
 
                 {/* 3. Very subtle theme tint */}
                 <div
