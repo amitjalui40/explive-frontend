@@ -28,7 +28,8 @@ export default function ContactPage() {
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwFjjXkmN3FQK8NOAdNljfkonQJ5j4bVvhmsSTyRI1JeheRAbUdMMFGAd5_J-LZi9h4/exec';
+    // IMPORTANT: Replace this URL with your deployed Google Apps Script Web App URL
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzbLodytMftJLx4j52dRi83Qg5LA-X1oK8RBXtvYEjm8Jd53J32YCSnMVjZ28RndnHRrg/exec';
 
     try {
       const data = new FormData();
