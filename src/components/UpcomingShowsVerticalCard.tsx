@@ -289,8 +289,8 @@ export const UpcomingShowsVerticalCard = () => {
                             return (
                                 <div
                                     key={item.id}
-                                    className={`w-[78vw] min-w-60 md:w-72 lg:w-80 shrink-0 snap-center transition-all duration-500 ease-out ${isActive ? 'scale-100 opacity-100' : 'scale-[0.9] opacity-50'}`}
-                                    onMouseEnter={() => handleCardInteraction(i)}
+                                    className={`w-[78vw] min-w-60 md:w-72 lg:w-80 shrink-0 snap-center transition-all duration-500 ease-out backface-hidden ${isActive ? 'scale-100 opacity-100' : 'scale-[0.9] opacity-50'}`}
+                                    onPointerEnter={(e) => { if (e.pointerType === 'mouse') handleCardInteraction(i); }}
                                     onClick={() => handleCardInteraction(i)}
                                 >
                                     <div
@@ -368,8 +368,8 @@ export const UpcomingShowsVerticalCard = () => {
 
                         {/* Ghost card — Coming Soon */}
                         <div
-                            className={`w-[78vw] min-w-60 md:w-72 lg:w-80 shrink-0 snap-center self-stretch transition-all duration-500 ease-out ${activeIndex === items.length ? 'scale-100 opacity-100' : 'scale-[0.9] opacity-50'}`}
-                            onMouseEnter={() => handleCardInteraction(items.length)}
+                            className={`w-[78vw] min-w-60 md:w-72 lg:w-80 shrink-0 snap-center self-stretch transition-all duration-500 ease-out backface-hidden ${activeIndex === items.length ? 'scale-100 opacity-100' : 'scale-[0.9] opacity-50'}`}
+                            onPointerEnter={(e) => { if (e.pointerType === 'mouse') handleCardInteraction(items.length); }}
                             onClick={() => handleCardInteraction(items.length)}
                         >
                             <div
