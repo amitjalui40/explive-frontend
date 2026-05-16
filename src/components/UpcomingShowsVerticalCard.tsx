@@ -132,7 +132,7 @@ export const UpcomingShowsVerticalCard = () => {
     if (!features.showLegacyUpcomingCarousel) return null;
 
     return (
-        <section className="relative w-full bg-[#111111] overflow-hidden z-0">
+        <section className="relative w-full bg-[#111111] overflow-hidden z-0 lg:h-screen lg:flex lg:flex-col">
 
             {/* Dynamic blurred background images */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
@@ -166,10 +166,10 @@ export const UpcomingShowsVerticalCard = () => {
             </div>
 
             {/* ── MAIN BODY ── */}
-            <div className="relative z-10 flex flex-col lg:flex-row">
+            <div className="relative z-10 flex flex-col lg:flex-row lg:flex-1 lg:min-h-0">
 
                 {/* LEFT — heading + info */}
-                <div className="lg:w-[34%] shrink-0 flex flex-col gap-7 px-6 md:px-10 xl:px-14 pt-14 pb-8 lg:py-16">
+                <div className="lg:w-[34%] shrink-0 flex flex-col gap-7 px-6 md:px-10 xl:px-14 pt-14 pb-8 lg:py-16 lg:justify-center">
 
                     {/* Kicker */}
                     <div className="flex items-center gap-2">
@@ -224,7 +224,7 @@ export const UpcomingShowsVerticalCard = () => {
 
                 {/* RIGHT — carousel */}
                 <div
-                    className="flex-1 min-w-0 relative py-10 lg:py-14"
+                    className="flex-1 min-w-0 relative py-10 lg:py-0 lg:flex lg:flex-col lg:justify-center"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                 >
@@ -350,8 +350,13 @@ export const UpcomingShowsVerticalCard = () => {
                                     boxShadow: activeIndex === items.length ? `inset 0 0 50px rgba(163, 230, 53, 0.1)` : 'none'
                                 }}
                             >
-                                <div className="w-14 h-14 rounded-full border border-zinc-700 flex items-center justify-center">
-                                    <Bell className="w-6 h-6 text-lime-400" />
+                                <div className="relative flex items-center justify-center">
+                                    <div className="absolute w-20 h-20 rounded-full border border-lime-400/40 animate-ping" style={{ animationDuration: '1.8s' }} />
+                                    <div className="absolute w-28 h-28 rounded-full border border-lime-400/20 animate-ping" style={{ animationDuration: '1.8s', animationDelay: '0.15s' }} />
+                                    <div className="absolute w-36 h-36 rounded-full border border-lime-400/10 animate-ping" style={{ animationDuration: '1.8s', animationDelay: '0.3s' }} />
+                                    <div className="relative w-14 h-14 rounded-full border border-zinc-700 bg-zinc-900 flex items-center justify-center">
+                                        <Bell className="w-6 h-6 text-lime-400" />
+                                    </div>
                                 </div>
                                 <div className="space-y-2.5">
                                     <p className="text-zinc-500 text-[10px] font-bold tracking-[0.35em] uppercase">More Shows</p>
@@ -440,7 +445,7 @@ export const UpcomingShowsVerticalCard = () => {
             {/* Desktop: static glass bar */}
             <div className="relative z-10 hidden lg:block px-12 pb-8">
                 <div
-                    className="w-full h-28 px-8 flex items-center rounded-[20px] backdrop-blur-md bg-transparent border border-white/10 bg-gradient-to-r from-white/[0.02] via-white/[0.07] to-white/[0.02]"
+                    className="w-full h-28 px-8 flex items-center rounded-[20px] backdrop-blur-md bg-transparent border border-white/10 bg-linear-to-r from-white/2 via-white/[0.07] to-white/2"
                 >
                     {featureBar.map(({ icon, iconColor, bgColor, title, desc }, index) => {
                         const Icon = ICON_MAP[icon];
