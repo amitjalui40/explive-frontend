@@ -1,6 +1,13 @@
 import seasonaFestivalImg from '@/assets/images/seasona_festival.jpeg';
 import ehsaasEShaamImg from '@/assets/images/ehsaas_e_shaam.jpeg';
 
+export const siteConfig = {
+  theme: {
+    default: "dark" as "light" | "dark" | "system",
+    enableSystem: false,
+  },
+};
+
 export const homepageData = {
   hero: {
     video: {
@@ -177,7 +184,7 @@ export const homepageData = {
     },
     location: {
       label: "Location",
-      value: "Crystal Plaza, A - 605 / 608, opp. Infiniti Mall, Phase D, Shastri Nagar, Andheri West, Mumbai, Maharashtra 400053"
+      value: "Shop 2 Bldg 46 Deep Jyoti, CHS Vartak Nagar, Jekegram, Vartak Nagar Police Station, Thane, Thane- 400606, Maharashtra, India"
     },
     form: {
       tagline: "Reach out through the form below, and let us help you plan an incredible event.",

@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Navbar } from "@/components/ui/navbar";
+import { siteConfig } from "@/config/homepageData";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,7 +39,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme={siteConfig.theme.default} enableSystem={siteConfig.theme.enableSystem} disableTransitionOnChange>
           <Navbar />
           {children}
           <ThemeToggle />
