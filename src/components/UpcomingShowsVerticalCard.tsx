@@ -244,16 +244,18 @@ export const UpcomingShowsVerticalCard = () => {
 
                 {/* RIGHT — carousel */}
                 <div
-                    className="flex-1 min-w-0 relative py-10 lg:py-0 lg:flex lg:flex-col lg:justify-center"
+                    className="flex-1 min-w-0 py-10 lg:py-0 lg:flex lg:flex-col lg:justify-center"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                 >
+                    {/* Arrows + track — always an inline flex row */}
+                    <div className="flex items-center justify-center gap-5 lg:gap-14 px-2 lg:px-4 w-full">
 
                     {/* Left arrow */}
                     <button
                         onClick={handlePrev}
                         aria-label="Previous"
-                        className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full
+                        className="shrink-0 w-9 h-9 rounded-full
                             bg-zinc-800/90 border border-zinc-700
                             text-white
                             flex items-center justify-center
@@ -262,24 +264,11 @@ export const UpcomingShowsVerticalCard = () => {
                         <ChevronLeft className="w-4 h-4" />
                     </button>
 
-                    {/* Right arrow */}
-                    <button
-                        onClick={handleNext}
-                        aria-label="Next"
-                        className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full
-                            bg-zinc-800/90 border border-zinc-700
-                            text-white
-                            flex items-center justify-center
-                            hover:border-lime-400 hover:text-lime-400 transition-all duration-200"
-                    >
-                        <ChevronRight className="w-4 h-4" />
-                    </button>
-
                     {/* Cards track */}
                     <div
                         ref={carouselRef}
                         onScroll={handleScroll}
-                        className="flex gap-4 lg:gap-3 overflow-x-auto pl-12 pr-12 lg:px-6 lg:justify-center pb-2 snap-x snap-mandatory scroll-smooth"
+                        className="min-w-0 flex gap-4 lg:gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
                     >
                         {/* Real event cards */}
                         {items.map((item, i) => {
@@ -396,6 +385,21 @@ export const UpcomingShowsVerticalCard = () => {
                         </div>
 
                     </div>
+
+                    {/* Right arrow */}
+                    <button
+                        onClick={handleNext}
+                        aria-label="Next"
+                        className="shrink-0 w-9 h-9 rounded-full
+                            bg-zinc-800/90 border border-zinc-700
+                            text-white
+                            flex items-center justify-center
+                            hover:border-lime-400 hover:text-lime-400 transition-all duration-200"
+                    >
+                        <ChevronRight className="w-4 h-4" />
+                    </button>
+
+                    </div>{/* end arrows+track row */}
 
                     {/* Pagination dots */}
                     <div className="flex items-center justify-center gap-2 mt-5">
