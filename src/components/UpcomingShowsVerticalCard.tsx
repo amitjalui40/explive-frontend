@@ -162,10 +162,12 @@ export const UpcomingShowsVerticalCard = () => {
                     <Image
                         key={`bg-${item.id}`}
                         src={item.image}
-                        alt="Background Blur"
+                        alt=""
+                        aria-hidden
                         fill
                         loading="eager"
-                        className={`object-cover blur-2xl md:blur-[40px] scale-110 ${i === activeIndex ? 'opacity-100 transition-opacity duration-1000 ease-out' : 'opacity-0'}`}
+                        draggable={false}
+                        className={`object-cover blur-2xl md:blur-[40px] scale-110 pointer-events-none select-none ${i === activeIndex ? 'opacity-100 transition-opacity duration-1000 ease-out' : 'opacity-0'}`}
                     />
                 ))}
 
@@ -300,21 +302,28 @@ export const UpcomingShowsVerticalCard = () => {
                                         }}
                                     >
                                         {/* Image area */}
-                                        <div className="relative h-[19rem] md:h-72 lg:h-80">
+                                        <div
+                                            className="relative h-[19rem] md:h-72 lg:h-80 select-none"
+                                            onContextMenu={(e) => e.preventDefault()}
+                                            style={{ WebkitTouchCallout: 'none' } as React.CSSProperties}
+                                        >
                                             <Image
                                                 src={item.image}
                                                 alt={item.title}
                                                 fill
                                                 loading="eager"
-                                                className="object-cover object-top"
+                                                draggable={false}
+                                                className="object-cover object-top pointer-events-none"
                                             />
+                                            {/* Transparent overlay — blocks right-click / long-press on the image itself */}
+                                            <div className="absolute inset-0 z-[1]" onContextMenu={(e) => e.preventDefault()} />
                                             {/* Status badge */}
-                                            <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-black/55 backdrop-blur-sm rounded-full px-3 py-1.5">
+                                            <div className="absolute top-3 left-3 z-[2] flex items-center gap-1.5 bg-black/55 backdrop-blur-sm rounded-full px-3 py-1.5">
                                                 <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: accent }} />
                                                 <span className="text-white text-[9px] font-bold tracking-[0.22em] uppercase">{item.badge}</span>
                                             </div>
                                             {/* Heart */}
-                                            <button className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center hover:bg-black/50 transition-colors">
+                                            <button className="absolute top-3 right-3 z-[2] w-8 h-8 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center hover:bg-black/50 transition-colors">
                                                 <Heart className="w-3.5 h-3.5 text-white" />
                                             </button>
                                         </div>
