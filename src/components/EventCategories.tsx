@@ -74,8 +74,8 @@ export const EventCategories = () => {
       {/* Persistent Dark Gradient Overlay */}
       <div className="absolute inset-0 bg-black/60 z-0 pointer-events-none" />
 
-      {/* Cinematic Noise overlay */}
-      <div className="absolute inset-0 z-0 mix-blend-overlay opacity-30 pointer-events-none">
+      {/* Cinematic Noise overlay — hidden on mobile, too expensive during animations */}
+      <div className="absolute inset-0 z-0 mix-blend-overlay opacity-30 pointer-events-none hidden md:block">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <filter id="noiseFilter2">
             <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
@@ -170,18 +170,23 @@ export const EventCategories = () => {
                   </h3>
 
                   {/* Mobile-only inline description */}
-                  <div className={`lg:hidden overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${isActive ? 'max-h-56 opacity-100 mt-4 mb-2' : 'max-h-0 opacity-0 mt-0 mb-0'}`}>
-                    <div className="pl-3 md:pl-6 border-l-2 border-emerald-500/50 flex flex-col gap-3">
-                      <div className="flex flex-wrap gap-1.5">
-                        {event.tags?.map((tag) => (
-                          <span key={tag} className="px-2.5 py-0.5 rounded-full text-xs font-bold tracking-wide uppercase bg-white/10 text-white/60 border border-white/10">
-                            {tag}
-                          </span>
-                        ))}
+                  {/* Outer: grid-rows animation (browser-optimised, avoids per-frame reflow) */}
+                  <div className={`lg:hidden grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isActive ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+                    {/* Clip layer — must have overflow-hidden for 0fr to collapse */}
+                    <div className="overflow-hidden">
+                      {/* Inner: GPU-only opacity + translate, no layout properties */}
+                      <div className={`pl-3 md:pl-6 pt-4 pb-2 border-l-2 border-emerald-500/50 flex flex-col gap-3 transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'}`}>
+                        <div className="flex flex-wrap gap-1.5">
+                          {event.tags?.map((tag) => (
+                            <span key={tag} className="px-2.5 py-0.5 rounded-full text-xs font-bold tracking-wide uppercase bg-white/10 text-white/60 border border-white/10">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        <p className="text-zinc-300 text-sm font-medium leading-relaxed">
+                          {event.description}
+                        </p>
                       </div>
-                      <p className="text-zinc-300 text-sm font-medium leading-relaxed">
-                        {event.description}
-                      </p>
                     </div>
                   </div>
                 </div>
