@@ -44,7 +44,7 @@ export const EventCategories = () => {
   };
 
   return (
-    <section id="event-types" className="relative py-24 md:py-32 w-full min-h-screen flex items-center bg-zinc-950 overflow-hidden">
+    <section id="event-types" className="relative py-24 md:py-32 w-full min-h-screen flex items-center bg-zinc-950 overflow-hidden" data-navbar-theme="dark">
 
       <style>{`
         @keyframes progressFill {

@@ -9,17 +9,38 @@ import expliveLogo from '@/assets/logo/Exp Live logo - white.png';
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isOverDarkSection, setIsOverDarkSection] = useState(false);
+  const pathname = usePathname();
 
   // Track scroll position for Apple glass effect
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+
+      // Section-Aware Navbar Logic
+      const sections = document.querySelectorAll('[data-navbar-theme]');
+      let currentTheme = 'light';
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        // Check if the section is currently underneath the navbar (approx y=60)
+        if (rect.top <= 60 && rect.bottom >= 60) {
+          currentTheme = section.getAttribute('data-navbar-theme') || 'light';
+        }
+      });
+      setIsOverDarkSection(currentTheme === 'dark');
     };
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Check on mount
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Check on mount and after route changes
+    // A tiny timeout ensures the new page DOM has rendered before we check for sections
+    const timeoutId = setTimeout(handleScroll, 50);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timeoutId);
+    };
+  }, [pathname]);
 
   // Prevent scrolling on the main page when the sidebar is open
   useEffect(() => {
@@ -30,9 +51,9 @@ export function Navbar() {
     }
   }, [isOpen]);
 
-  const pathname = usePathname();
   const isHomePage = pathname === '/';
-  const forceWhite = isHomePage && !isScrolled;
+  const forceWhiteTop = isHomePage && !isScrolled;
+  const isDarkBackground = forceWhiteTop || isOverDarkSection;
 
   const closeSidebar = () => setIsOpen(false);
 
@@ -40,7 +61,9 @@ export function Navbar() {
     <>
       {/* Top Navbar */}
       <nav className={`fixed top-0 left-0 w-full z-50 pointer-events-none transition-all duration-500 border-b ${isScrolled
-        ? 'bg-white/95 dark:bg-zinc-950/90 backdrop-blur-3xl shadow-sm border-black/5 dark:border-white/5'
+        ? isOverDarkSection
+          ? 'bg-zinc-950/80 backdrop-blur-3xl shadow-sm border-white/5'
+          : 'bg-white/40 dark:bg-zinc-950/60 backdrop-blur-3xl shadow-sm border-black/5 dark:border-white/5'
         : 'bg-transparent border-transparent'
         }`}>
         <style>{`
@@ -51,7 +74,7 @@ export function Navbar() {
           @keyframes eq5 { 0%,100%{height:7px} 45%{height:14px} }
         `}</style>
 
-        <div className={`w-full px-6 md:px-12 flex items-center max-w-[120rem] mx-auto pointer-events-auto transition-all duration-500 ${isScrolled ? 'py-4' : 'py-8'} ${forceWhite ? 'text-white' : 'text-zinc-900 dark:text-white'}`}>
+        <div className={`w-full px-6 md:px-12 flex items-center max-w-[120rem] mx-auto pointer-events-auto transition-all duration-500 ${isScrolled ? 'py-4' : 'py-8'} ${isDarkBackground ? 'text-white' : 'text-zinc-900 dark:text-white'}`}>
 
           {/* Left - Logo */}
           <div className="flex-1">
@@ -59,7 +82,7 @@ export function Navbar() {
               <img
                 src={expliveLogo.src}
                 alt="Explive"
-                className={`h-8 md:h-10 object-contain scale-[1.8] md:scale-[2.1] origin-left transition-all duration-500 ${forceWhite ? '' : 'invert dark:invert-0'}`}
+                className={`h-8 md:h-10 object-contain scale-[1.8] md:scale-[2.1] origin-left transition-all duration-500 ${isDarkBackground ? '' : 'invert dark:invert-0'}`}
               />
             </Link>
           </div>

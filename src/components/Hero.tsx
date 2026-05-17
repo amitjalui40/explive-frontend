@@ -5,7 +5,7 @@ import { homepageData } from '@/config/homepageData';
 
 export const Hero = () => {
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section className="relative h-screen w-full overflow-hidden" data-navbar-theme="dark">
       {/* Cloudinary Extremely Optimized Background Video */}
       <video
         autoPlay
