@@ -293,7 +293,7 @@ export const UpcomingShowsVerticalCard = () => {
                                     onClick={() => handleCardInteraction(i)}
                                 >
                                     <div
-                                        className="rounded-[1.25rem] overflow-hidden cursor-pointer transition-all duration-500 lg:hover:scale-[1.02]"
+                                        className="rounded-[1.25rem] overflow-hidden cursor-pointer transition-all duration-500"
                                         style={{
                                             border: `2px solid ${isActive ? accent : 'transparent'}`,
                                             boxShadow: isActive ? `0 20px 40px -10px ${accent}60` : `0 0px 0px 0px ${accent}00`
