@@ -193,7 +193,14 @@ export const UpcomingShowsVerticalCard = () => {
 
                     {/* Kicker */}
                     <div className="flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-lime-400" />
+                        <style>{`
+                            @keyframes rgbBlink {
+                                0%, 100% { background-color: #ef4444; box-shadow: 0 0 8px #ef4444; }
+                                33% { background-color: #22c55e; box-shadow: 0 0 8px #22c55e; }
+                                66% { background-color: #eab308; box-shadow: 0 0 8px #eab308; }
+                            }
+                        `}</style>
+                        <span className="w-2.5 h-2.5 rounded-full" style={{ animation: 'rgbBlink 1.5s infinite' }} />
                         <p className="text-xs font-bold tracking-[0.3em] uppercase text-lime-400">{heading.kicker}</p>
                     </div>
 
@@ -290,7 +297,7 @@ export const UpcomingShowsVerticalCard = () => {
                                         }}
                                     >
                                         {/* Image area */}
-                                        <div className="relative h-64 md:h-72 lg:h-80">
+                                        <div className="relative h-[19rem] md:h-72 lg:h-80">
                                             <Image
                                                 src={item.image}
                                                 alt={item.title}
