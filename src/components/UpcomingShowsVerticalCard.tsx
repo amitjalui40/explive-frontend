@@ -178,6 +178,9 @@ export const UpcomingShowsVerticalCard = () => {
                 {/* 2. Contrast overlay so the text remains readable */}
                 <div className="absolute inset-0 bg-linear-to-b lg:bg-linear-to-r from-[#111111]/95 via-[#111111]/70 to-[#111111]/10" />
 
+                {/* Mobile bottom gradient to ensure features bar text is readable against bright backgrounds */}
+                <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-[#111111] via-[#111111]/80 to-transparent lg:hidden" />
+
                 {/* 3. Very subtle theme tint */}
                 <div
                     className="absolute inset-0 opacity-20 mix-blend-color transition-colors duration-1000 ease-out"
