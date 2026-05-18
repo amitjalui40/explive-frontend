@@ -16,7 +16,10 @@ export default function ContactPage() {
     message: ''
   });
 
+  const [pageLoadTime] = useState(() => Date.now());
   const [honeypot, setHoneypot] = useState('');
+  const [phoneError, setPhoneError] = useState('');
+  const [cooldown, setCooldown] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
@@ -24,8 +27,19 @@ export default function ContactPage() {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value.replace(/\D/g, '').slice(0, 10);
+    setFormData(prev => ({ ...prev, phone: val }));
+    if (val.length > 0 && val.length < 10) {
+      setPhoneError('Phone number must be 10 digits');
+    } else {
+      setPhoneError('');
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (formData.phone && formData.phone.length !== 10) return;
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
@@ -33,7 +47,7 @@ export default function ContactPage() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, _hp: honeypot }),
+        body: JSON.stringify({ ...formData, _hp: honeypot, _t: pageLoadTime }),
       });
 
       const contentType = res.headers.get('content-type') ?? '';
@@ -48,6 +62,14 @@ export default function ContactPage() {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
+      // 60-second cooldown between submissions
+      setCooldown(60);
+      const timer = setInterval(() => {
+        setCooldown(prev => {
+          if (prev <= 1) { clearInterval(timer); return 0; }
+          return prev - 1;
+        });
+      }, 1000);
     }
   };
 
@@ -144,7 +166,8 @@ export default function ContactPage() {
               </div>
               <div>
                 <label className={labelClass}>Phone</label>
-                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder={placeholders.phone} maxLength={20} className={inputClass} />
+                <input type="tel" name="phone" value={formData.phone} onChange={handlePhoneChange} placeholder={placeholders.phone} maxLength={10} inputMode="numeric" className={`${inputClass} ${phoneError ? 'border-red-500' : ''}`} />
+                {phoneError && <p className="mt-1.5 text-xs text-red-400 font-medium">{phoneError}</p>}
               </div>
             </div>
 
@@ -165,11 +188,11 @@ export default function ContactPage() {
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 pt-2">
               <button
                 type="submit"
-                disabled={isSubmitting || submitStatus === 'success'}
+                disabled={isSubmitting || submitStatus === 'success' || cooldown > 0}
                 className="group inline-flex items-center gap-3 bg-emerald-500 hover:bg-emerald-400 text-white px-10 py-4 text-sm font-bold tracking-widest uppercase transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed w-fit"
               >
-                {isSubmitting ? 'Sending...' : submitStatus === 'success' ? 'Message Sent ✓' : 'Send Message'}
-                {!isSubmitting && submitStatus !== 'success' && (
+                {isSubmitting ? 'Sending...' : submitStatus === 'success' ? 'Message Sent ✓' : cooldown > 0 ? `Wait ${cooldown}s` : 'Send Message'}
+                {!isSubmitting && submitStatus !== 'success' && cooldown === 0 && (
                   <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                 )}
               </button>
