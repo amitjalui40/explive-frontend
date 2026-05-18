@@ -22,8 +22,9 @@ export async function POST(req: NextRequest) {
   }
 
   const GOOGLE_SCRIPT_URL = process.env.GOOGLE_SCRIPT_URL;
-  if (!GOOGLE_SCRIPT_URL) {
-    console.error('GOOGLE_SCRIPT_URL env var is not set');
+  const GOOGLE_SCRIPT_SECRET = process.env.GOOGLE_SCRIPT_SECRET;
+  if (!GOOGLE_SCRIPT_URL || !GOOGLE_SCRIPT_SECRET) {
+    console.error('GOOGLE_SCRIPT_URL or GOOGLE_SCRIPT_SECRET env var is not set');
     return NextResponse.json({ error: 'Server misconfigured' }, { status: 500 });
   }
 
@@ -70,6 +71,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const params = new URLSearchParams();
+    params.append('_secret', GOOGLE_SCRIPT_SECRET);
     params.append('firstName', firstName.trim());
     params.append('lastName', lastName.trim());
     params.append('email', email.trim());
