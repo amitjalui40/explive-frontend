@@ -1,8 +1,11 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import Script from 'next/script';
 import { homepageData } from '@/config/homepageData';
 import { Footer } from '@/components/Footer';
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? '';
 
 export default function ContactPage() {
   const { contact } = homepageData;
@@ -22,6 +25,19 @@ export default function ContactPage() {
   const [cooldown, setCooldown] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [cfToken, setCfToken] = useState('');
+  const widgetIdRef = useRef<string | null>(null);
+  const turnstileContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Expose callback for Turnstile to call once challenge passes
+    (window as Record<string, unknown>)['onTurnstileSuccess'] = (token: string) => setCfToken(token);
+    (window as Record<string, unknown>)['onTurnstileExpire'] = () => setCfToken('');
+    return () => {
+      delete (window as Record<string, unknown>)['onTurnstileSuccess'];
+      delete (window as Record<string, unknown>)['onTurnstileExpire'];
+    };
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -37,9 +53,19 @@ export default function ContactPage() {
     }
   };
 
+  const resetTurnstile = () => {
+    const w = (window as Record<string, unknown>)['turnstile'] as { reset?: (id: string) => void } | undefined;
+    if (w?.reset && widgetIdRef.current) {
+      w.reset(widgetIdRef.current);
+    }
+    setCfToken('');
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.phone && formData.phone.length !== 10) return;
+    if (!cfToken) return; // block if Turnstile hasn't completed
+
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
@@ -47,7 +73,7 @@ export default function ContactPage() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, _hp: honeypot, _t: pageLoadTime }),
+        body: JSON.stringify({ ...formData, _hp: honeypot, _t: pageLoadTime, _cf: cfToken }),
       });
 
       const contentType = res.headers.get('content-type') ?? '';
@@ -56,13 +82,14 @@ export default function ContactPage() {
 
       setSubmitStatus('success');
       setFormData({ firstName: '', lastName: '', email: '', phone: '', message: '' });
+      resetTurnstile();
       setTimeout(() => setSubmitStatus('idle'), 5000);
     } catch (error) {
       console.error('Error submitting form:', error);
       setSubmitStatus('error');
+      resetTurnstile();
     } finally {
       setIsSubmitting(false);
-      // 60-second cooldown between submissions
       setCooldown(60);
       const timer = setInterval(() => {
         setCooldown(prev => {
@@ -78,6 +105,26 @@ export default function ContactPage() {
 
   return (
     <main className="w-full min-h-screen bg-zinc-50 dark:bg-zinc-950 flex flex-col">
+
+      <Script
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+        strategy="lazyOnload"
+        onLoad={() => {
+          const turnstile = (window as Record<string, unknown>)['turnstile'] as {
+            render: (el: HTMLElement, opts: Record<string, unknown>) => string;
+          } | undefined;
+          if (turnstile && turnstileContainerRef.current) {
+            widgetIdRef.current = turnstile.render(turnstileContainerRef.current, {
+              sitekey: TURNSTILE_SITE_KEY,
+              theme: 'dark',
+              callback: 'onTurnstileSuccess',
+              'expired-callback': 'onTurnstileExpire',
+              size: 'invisible',
+              appearance: 'interaction-only',
+            });
+          }
+        }}
+      />
 
       {/* Navbar spacer */}
       <div className="h-24 md:h-32 shrink-0" />
@@ -185,14 +232,17 @@ export default function ContactPage() {
               />
             </div>
 
+            {/* Turnstile widget (invisible/interaction-only) */}
+            <div ref={turnstileContainerRef} />
+
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 pt-2">
               <button
                 type="submit"
-                disabled={isSubmitting || submitStatus === 'success' || cooldown > 0}
+                disabled={isSubmitting || submitStatus === 'success' || cooldown > 0 || !cfToken}
                 className="group inline-flex items-center gap-3 bg-emerald-500 hover:bg-emerald-400 text-white px-10 py-4 text-sm font-bold tracking-widest uppercase transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed w-fit"
               >
-                {isSubmitting ? 'Sending...' : submitStatus === 'success' ? 'Message Sent ✓' : cooldown > 0 ? `Wait ${cooldown}s` : 'Send Message'}
-                {!isSubmitting && submitStatus !== 'success' && cooldown === 0 && (
+                {isSubmitting ? 'Sending...' : submitStatus === 'success' ? 'Message Sent ✓' : cooldown > 0 ? `Wait ${cooldown}s` : !cfToken ? 'Verifying...' : 'Send Message'}
+                {!isSubmitting && submitStatus !== 'success' && cooldown === 0 && cfToken && (
                   <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                 )}
               </button>

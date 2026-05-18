@@ -25,6 +25,7 @@ export async function POST(req: NextRequest) {
 
   const GOOGLE_SCRIPT_URL = process.env.GOOGLE_SCRIPT_URL;
   const GOOGLE_SCRIPT_SECRET = process.env.GOOGLE_SCRIPT_SECRET;
+  const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET_KEY;
   if (!GOOGLE_SCRIPT_URL || !GOOGLE_SCRIPT_SECRET) {
     console.error('GOOGLE_SCRIPT_URL or GOOGLE_SCRIPT_SECRET env var is not set');
     return NextResponse.json({ error: 'Server misconfigured' }, { status: 500 });
@@ -37,7 +38,27 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
   }
 
-  const { firstName, lastName, email, phone, message, _hp, _t } = body as Record<string, string>;
+  const { firstName, lastName, email, phone, message, _hp, _t, _cf } = body as Record<string, string>;
+
+  // Verify Cloudflare Turnstile token (skip in dev if secret not set)
+  if (TURNSTILE_SECRET) {
+    if (!_cf) {
+      return NextResponse.json({ error: 'Human verification required.' }, { status: 403 });
+    }
+    const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        secret: TURNSTILE_SECRET,
+        response: _cf,
+        remoteip: ip,
+      }),
+    });
+    const verifyJson = await verifyRes.json() as { success: boolean };
+    if (!verifyJson.success) {
+      return NextResponse.json({ error: 'Human verification failed. Please try again.' }, { status: 403 });
+    }
+  }
 
   // Honeypot — silently succeed so bots don't know they were blocked
   if (_hp) {
