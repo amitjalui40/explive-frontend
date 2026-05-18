@@ -27,16 +27,48 @@ export default function ContactPage() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [cfToken, setCfToken] = useState('');
   const turnstileContainerRef = useRef<HTMLDivElement>(null);
+  const widgetIdRef = useRef<string | null>(null);
+
+  type TurnstileAPI = {
+    render: (el: HTMLElement, opts: Record<string, unknown>) => string;
+    reset: (id: string) => void;
+    remove: (id: string) => void;
+  };
+
+  const getTurnstile = () =>
+    (window as unknown as Record<string, unknown>)['turnstile'] as TurnstileAPI | undefined;
 
   useEffect(() => {
-    // Expose callback for Turnstile to call once challenge passes
-    const w = window as unknown as Record<string, unknown>;
-    w['onTurnstileSuccess'] = (token: string) => setCfToken(token);
-    w['onTurnstileExpire'] = () => setCfToken('');
-    return () => {
-      delete w['onTurnstileSuccess'];
-      delete w['onTurnstileExpire'];
+    const tryRender = () => {
+      const turnstile = getTurnstile();
+      if (turnstile && turnstileContainerRef.current && !widgetIdRef.current) {
+        widgetIdRef.current = turnstile.render(turnstileContainerRef.current, {
+          sitekey: TURNSTILE_SITE_KEY,
+          theme: 'dark',
+          // Pass functions directly — string names only work with HTML data attributes
+          callback: (token: string) => setCfToken(token),
+          'expired-callback': () => setCfToken(''),
+          appearance: 'interaction-only',
+        });
+      }
     };
+
+    // Script already loaded (client-side navigation) — render now
+    tryRender();
+
+    // Script not yet loaded — expose a hook for onLoad to call
+    const w = window as unknown as Record<string, unknown>;
+    w['_turnstileInit'] = tryRender;
+
+    return () => {
+      delete w['_turnstileInit'];
+      if (widgetIdRef.current) {
+        getTurnstile()?.remove?.(widgetIdRef.current);
+        widgetIdRef.current = null;
+      }
+      setCfToken('');
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -54,8 +86,7 @@ export default function ContactPage() {
   };
 
   const resetTurnstile = () => {
-    const turnstile = (window as unknown as Record<string, unknown>)['turnstile'] as { reset?: () => void } | undefined;
-    turnstile?.reset?.();
+    if (widgetIdRef.current) getTurnstile()?.reset?.(widgetIdRef.current);
     setCfToken('');
   };
 
@@ -107,6 +138,11 @@ export default function ContactPage() {
       <Script
         src="https://challenges.cloudflare.com/turnstile/v0/api.js"
         strategy="lazyOnload"
+        onLoad={() => {
+          const w = window as unknown as Record<string, unknown>;
+          const init = w['_turnstileInit'] as (() => void) | undefined;
+          init?.();
+        }}
       />
 
       {/* Navbar spacer */}
@@ -215,16 +251,8 @@ export default function ContactPage() {
               />
             </div>
 
-            {/* Turnstile widget — auto-initialised by the script via cf-turnstile class */}
-            <div
-              ref={turnstileContainerRef}
-              className="cf-turnstile"
-              data-sitekey={TURNSTILE_SITE_KEY}
-              data-callback="onTurnstileSuccess"
-              data-expired-callback="onTurnstileExpire"
-              data-theme="dark"
-              data-appearance="interaction-only"
-            />
+            {/* Turnstile mounts here — rendered programmatically so it works on client-side nav too */}
+            <div ref={turnstileContainerRef} />
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 pt-2">
               <button
