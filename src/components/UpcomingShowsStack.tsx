@@ -119,7 +119,7 @@ export const UpcomingShowsStack = () => {
             }}
           />
         ))}
-        <div className="absolute inset-0 bg-black/40 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-40 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-black/40 bg-[url('/noise.svg')] opacity-40 mix-blend-overlay" />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-80" />
       </div>
 

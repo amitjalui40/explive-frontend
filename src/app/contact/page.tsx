@@ -16,6 +16,7 @@ export default function ContactPage() {
     message: ''
   });
 
+  const [honeypot, setHoneypot] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
@@ -28,18 +29,16 @@ export default function ContactPage() {
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
-    // IMPORTANT: Replace this URL with your deployed Google Apps Script Web App URL
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzbLodytMftJLx4j52dRi83Qg5LA-X1oK8RBXtvYEjm8Jd53J32YCSnMVjZ28RndnHRrg/exec';
-
     try {
-      const data = new FormData();
-      data.append('firstName', formData.firstName);
-      data.append('lastName', formData.lastName);
-      data.append('email', formData.email);
-      data.append('phone', formData.phone);
-      data.append('message', formData.message);
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, _hp: honeypot }),
+      });
 
-      await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: data, mode: 'no-cors' });
+      const contentType = res.headers.get('content-type') ?? '';
+      const json = contentType.includes('application/json') ? await res.json() : {};
+      if (!res.ok || !json.success) throw new Error(json.error || `Server error (${res.status})`);
 
       setSubmitStatus('success');
       setFormData({ firstName: '', lastName: '', email: '', phone: '', message: '' });
@@ -115,25 +114,37 @@ export default function ContactPage() {
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-8 h-full">
 
+            {/* Honeypot — invisible to real users, bots fill it */}
+            <input
+              type="text"
+              name="_hp"
+              value={honeypot}
+              onChange={e => setHoneypot(e.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none', height: 0, width: 0 }}
+            />
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div>
                 <label className={labelClass}>First Name <span className="text-emerald-500">*</span></label>
-                <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder={placeholders.firstName} required className={inputClass} />
+                <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder={placeholders.firstName} required maxLength={50} className={inputClass} />
               </div>
               <div>
                 <label className={labelClass}>Last Name <span className="text-emerald-500">*</span></label>
-                <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder={placeholders.lastName} required className={inputClass} />
+                <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder={placeholders.lastName} required maxLength={50} className={inputClass} />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div>
                 <label className={labelClass}>Email <span className="text-emerald-500">*</span></label>
-                <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder={placeholders.email} required className={inputClass} />
+                <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder={placeholders.email} required maxLength={100} className={inputClass} />
               </div>
               <div>
                 <label className={labelClass}>Phone</label>
-                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder={placeholders.phone} className={inputClass} />
+                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder={placeholders.phone} maxLength={20} className={inputClass} />
               </div>
             </div>
 
@@ -146,6 +157,7 @@ export default function ContactPage() {
                 placeholder={placeholders.message}
                 required
                 rows={6}
+                maxLength={2000}
                 className={`${inputClass} resize-none`}
               />
             </div>

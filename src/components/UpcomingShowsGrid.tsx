@@ -76,7 +76,7 @@ export const UpcomingShowsGrid = () => {
           );
         })}
         {/* Film grain noise overlay */}
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-30 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-30 mix-blend-overlay" />
         <div className="absolute inset-0 bg-zinc-950/40 backdrop-blur-3xl" />
       </div>
 

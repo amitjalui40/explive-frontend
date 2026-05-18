@@ -113,9 +113,6 @@ export const UpcomingShows = () => {
           className="flex gap-6 md:gap-12 overflow-x-auto px-6 md:px-16 xl:px-24 pb-12 snap-x snap-mandatory scroll-smooth"
           style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
         >
-          {/* Workaround for global hidden scrollbars in Webkit */}
-          <style dangerouslySetInnerHTML={{ __html: `::-webkit-scrollbar { display: none; }` }} />
-
           {[1, 2, 3, 4, 5, 6].map((i) => (
             <div
               key={i}

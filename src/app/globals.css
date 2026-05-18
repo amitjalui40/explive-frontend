@@ -27,3 +27,9 @@ body {
 
 * { scrollbar-width: none; }
 *::-webkit-scrollbar { display: none; }
+
+@keyframes rgbBlink {
+  0%, 100% { background-color: #ef4444; box-shadow: 0 0 8px #ef4444; }
+  33%       { background-color: #22c55e; box-shadow: 0 0 8px #22c55e; }
+  66%       { background-color: #eab308; box-shadow: 0 0 8px #eab308; }
+}

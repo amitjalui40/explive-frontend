@@ -165,6 +165,7 @@ export const UpcomingShowsVerticalCard = () => {
                         alt=""
                         aria-hidden
                         fill
+                        sizes="100vw"
                         loading="eager"
                         draggable={false}
                         className={`object-cover blur-2xl md:blur-[40px] scale-110 pointer-events-none select-none ${i === activeIndex ? 'opacity-100 transition-opacity duration-1000 ease-out' : 'opacity-0'}`}
@@ -198,13 +199,6 @@ export const UpcomingShowsVerticalCard = () => {
 
                     {/* Kicker */}
                     <div className="flex items-center gap-2">
-                        <style>{`
-                            @keyframes rgbBlink {
-                                0%, 100% { background-color: #ef4444; box-shadow: 0 0 8px #ef4444; }
-                                33% { background-color: #22c55e; box-shadow: 0 0 8px #22c55e; }
-                                66% { background-color: #eab308; box-shadow: 0 0 8px #eab308; }
-                            }
-                        `}</style>
                         <span className="w-2.5 h-2.5 rounded-full" style={{ animation: 'rgbBlink 1.5s infinite' }} />
                         <p className="text-xs font-bold tracking-[0.3em] uppercase text-lime-400">{heading.kicker}</p>
                     </div>
@@ -311,6 +305,7 @@ export const UpcomingShowsVerticalCard = () => {
                                                 src={item.image}
                                                 alt={item.title}
                                                 fill
+                                                sizes="(max-width: 768px) 85vw, (max-width: 1024px) 45vw, 340px"
                                                 loading="eager"
                                                 draggable={false}
                                                 className="object-cover object-top pointer-events-none"
