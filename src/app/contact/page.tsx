@@ -31,11 +31,12 @@ export default function ContactPage() {
 
   useEffect(() => {
     // Expose callback for Turnstile to call once challenge passes
-    (window as Record<string, unknown>)['onTurnstileSuccess'] = (token: string) => setCfToken(token);
-    (window as Record<string, unknown>)['onTurnstileExpire'] = () => setCfToken('');
+    const w = window as unknown as Record<string, unknown>;
+    w['onTurnstileSuccess'] = (token: string) => setCfToken(token);
+    w['onTurnstileExpire'] = () => setCfToken('');
     return () => {
-      delete (window as Record<string, unknown>)['onTurnstileSuccess'];
-      delete (window as Record<string, unknown>)['onTurnstileExpire'];
+      delete w['onTurnstileSuccess'];
+      delete w['onTurnstileExpire'];
     };
   }, []);
 
@@ -54,7 +55,7 @@ export default function ContactPage() {
   };
 
   const resetTurnstile = () => {
-    const w = (window as Record<string, unknown>)['turnstile'] as { reset?: (id: string) => void } | undefined;
+    const w = (window as unknown as Record<string, unknown>)['turnstile'] as { reset?: (id: string) => void } | undefined;
     if (w?.reset && widgetIdRef.current) {
       w.reset(widgetIdRef.current);
     }
@@ -110,7 +111,7 @@ export default function ContactPage() {
         src="https://challenges.cloudflare.com/turnstile/v0/api.js"
         strategy="lazyOnload"
         onLoad={() => {
-          const turnstile = (window as Record<string, unknown>)['turnstile'] as {
+          const turnstile = (window as unknown as Record<string, unknown>)['turnstile'] as {
             render: (el: HTMLElement, opts: Record<string, unknown>) => string;
           } | undefined;
           if (turnstile && turnstileContainerRef.current) {
