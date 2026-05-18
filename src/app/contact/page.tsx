@@ -26,7 +26,6 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [cfToken, setCfToken] = useState('');
-  const widgetIdRef = useRef<string | null>(null);
   const turnstileContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -55,10 +54,8 @@ export default function ContactPage() {
   };
 
   const resetTurnstile = () => {
-    const w = (window as unknown as Record<string, unknown>)['turnstile'] as { reset?: (id: string) => void } | undefined;
-    if (w?.reset && widgetIdRef.current) {
-      w.reset(widgetIdRef.current);
-    }
+    const turnstile = (window as unknown as Record<string, unknown>)['turnstile'] as { reset?: () => void } | undefined;
+    turnstile?.reset?.();
     setCfToken('');
   };
 
@@ -110,21 +107,6 @@ export default function ContactPage() {
       <Script
         src="https://challenges.cloudflare.com/turnstile/v0/api.js"
         strategy="lazyOnload"
-        onLoad={() => {
-          const turnstile = (window as unknown as Record<string, unknown>)['turnstile'] as {
-            render: (el: HTMLElement, opts: Record<string, unknown>) => string;
-          } | undefined;
-          if (turnstile && turnstileContainerRef.current) {
-            widgetIdRef.current = turnstile.render(turnstileContainerRef.current, {
-              sitekey: TURNSTILE_SITE_KEY,
-              theme: 'dark',
-              callback: 'onTurnstileSuccess',
-              'expired-callback': 'onTurnstileExpire',
-              size: 'invisible',
-              appearance: 'interaction-only',
-            });
-          }
-        }}
       />
 
       {/* Navbar spacer */}
@@ -233,8 +215,16 @@ export default function ContactPage() {
               />
             </div>
 
-            {/* Turnstile widget (invisible/interaction-only) */}
-            <div ref={turnstileContainerRef} />
+            {/* Turnstile widget — auto-initialised by the script via cf-turnstile class */}
+            <div
+              ref={turnstileContainerRef}
+              className="cf-turnstile"
+              data-sitekey={TURNSTILE_SITE_KEY}
+              data-callback="onTurnstileSuccess"
+              data-expired-callback="onTurnstileExpire"
+              data-theme="dark"
+              data-appearance="interaction-only"
+            />
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 pt-2">
               <button
