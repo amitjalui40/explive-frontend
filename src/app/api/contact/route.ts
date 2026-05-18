@@ -84,8 +84,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Input exceeds allowed length' }, { status: 400 });
   }
 
-  if (phone && phone.length !== 10) {
+  // Phone: exactly 10 digits, nothing else
+  if (phone && !/^\d{10}$/.test(phone.trim())) {
     return NextResponse.json({ error: 'Phone number must be exactly 10 digits' }, { status: 400 });
+  }
+
+  // Names: letters, spaces, hyphens, apostrophes only
+  if (!/^[a-zA-Z\s'\-]+$/.test(firstName.trim()) || !/^[a-zA-Z\s'\-]+$/.test(lastName.trim())) {
+    return NextResponse.json({ error: 'Name contains invalid characters' }, { status: 400 });
   }
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
