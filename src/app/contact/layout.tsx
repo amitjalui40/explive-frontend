@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
+import { siteConfig, seoConfig } from "@/config/siteData";
 
 export const metadata: Metadata = {
-  title: "Contact Us",
-  description: "Get in touch with Exp Live Entertainment for event bookings, artist management, or collaborations. Email us at info@explive.in or fill out our contact form.",
+  title: seoConfig.pages.contact.title,
+  description: seoConfig.pages.contact.description,
   openGraph: {
-    title: "Contact Us | Exp Live Entertainment",
-    description: "Get in touch with Exp Live Entertainment for event bookings, artist management, or collaborations.",
-    url: "https://explive.in/contact",
+    title: `${seoConfig.pages.contact.title} | ${siteConfig.name}`,
+    description: seoConfig.pages.contact.description,
+    url: `${siteConfig.url}/contact`,
   },
   alternates: {
-    canonical: "https://explive.in/contact",
+    canonical: `${siteConfig.url}/contact`,
   },
 };
 

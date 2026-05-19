@@ -1,6 +1,7 @@
 import { ImageResponse } from 'next/og';
+import { siteConfig } from '@/config/siteData';
 
-export const alt = "Exp Live Entertainment — India's Premier Live Events Company";
+export const alt = siteConfig.tagline;
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -40,20 +41,14 @@ export default function Image() {
 
         {/* Logo */}
         <div style={{ display: 'flex', alignItems: 'baseline', marginBottom: '20px' }}>
-          <span style={{ fontSize: '80px', fontWeight: 900, color: 'white', letterSpacing: '-3px', lineHeight: 1 }}>
-            EXP
-          </span>
-          <span style={{ fontSize: '80px', fontWeight: 900, color: '#10b981', letterSpacing: '-3px', lineHeight: 1 }}>
-            .
-          </span>
-          <span style={{ fontSize: '80px', fontWeight: 900, color: 'white', letterSpacing: '-3px', lineHeight: 1 }}>
-            LIVE
-          </span>
+          <span style={{ fontSize: '80px', fontWeight: 900, color: 'white', letterSpacing: '-3px', lineHeight: 1 }}>EXP</span>
+          <span style={{ fontSize: '80px', fontWeight: 900, color: '#10b981', letterSpacing: '-3px', lineHeight: 1 }}>.</span>
+          <span style={{ fontSize: '80px', fontWeight: 900, color: 'white', letterSpacing: '-3px', lineHeight: 1 }}>LIVE</span>
         </div>
 
         {/* Tagline */}
-        <div style={{ fontSize: '26px', fontWeight: 500, color: '#71717a', marginBottom: '56px', letterSpacing: '0px' }}>
-          India's Premier Live Events Company
+        <div style={{ fontSize: '26px', fontWeight: 500, color: '#71717a', marginBottom: '56px' }}>
+          {siteConfig.tagline}
         </div>
 
         {/* Services row */}
@@ -70,7 +65,7 @@ export default function Image() {
 
         {/* Domain */}
         <div style={{ position: 'absolute', top: '80px', right: '80px', fontSize: '18px', fontWeight: 700, color: '#3f3f46', letterSpacing: '1px' }}>
-          explive.in
+          {siteConfig.url.replace('https://', '')}
         </div>
       </div>
     ),

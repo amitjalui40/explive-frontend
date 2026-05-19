@@ -4,7 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Navbar } from "@/components/ui/navbar";
-import { siteConfig } from "@/config/homepageData";
+import { siteConfig, seoConfig, homepageData } from "@/config/siteData";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,60 +25,50 @@ const dancingScript = Dancing_Script({
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "Exp Live Entertainment",
-  "legalName": "Exp Live Entertainment LLP",
-  "url": "https://explive.in",
-  "email": "info@explive.in",
+  "name": siteConfig.name,
+  "legalName": siteConfig.legalName,
+  "url": siteConfig.url,
+  "email": homepageData.contact.email.value,
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Shop 2 Bldg 46 Deep Jyoti, CHS Vartak Nagar, Jekegram, Vartak Nagar Police Station",
-    "addressLocality": "Thane",
-    "addressRegion": "Maharashtra",
-    "postalCode": "400606",
-    "addressCountry": "IN"
+    ...siteConfig.address,
   },
   "areaServed": "India",
   "knowsAbout": ["Live Events", "Music Festivals", "Concert Production", "Artist Management", "Artist Tours", "IP Experiences"],
-  "sameAs": [
-    "https://www.instagram.com/expliveent/",
-    "https://www.facebook.com/profile.php?id=61579060607829",
-    "https://x.com/expliveent",
-    "https://www.youtube.com/@expliveent",
-    "https://www.linkedin.com/company/exp-live-entertainment/"
-  ]
+  "sameAs": homepageData.footer.socials.map((s) => s.url),
 };
 
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Exp Live Entertainment",
-  "url": "https://explive.in"
+  "name": siteConfig.name,
+  "url": siteConfig.url,
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://explive.in"),
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Exp Live Entertainment — India's Premier Live Events Company",
-    template: "%s | Exp Live Entertainment",
+    default: seoConfig.pages.home.title,
+    template: `%s | ${siteConfig.name}`,
   },
-  description: "Exp Live Entertainment organizes music festivals, concerts, artist tours, and immersive live cultural experiences across India. Based in Mumbai and Thane, Maharashtra.",
-  keywords: ["live events India", "music festivals India", "concert organizer Mumbai", "artist management India", "live entertainment company", "event organizer Maharashtra"],
-  authors: [{ name: "Exp Live Entertainment" }],
-  creator: "Exp Live Entertainment",
+  description: seoConfig.pages.home.description,
+  keywords: siteConfig.keywords,
+  authors: [{ name: siteConfig.name }],
+  creator: siteConfig.name,
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://explive.in",
-    siteName: "Exp Live Entertainment",
-    title: "Exp Live Entertainment — India's Premier Live Events Company",
-    description: "Exp Live Entertainment organizes music festivals, concerts, artist tours, and immersive live cultural experiences across India.",
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: seoConfig.pages.home.title,
+    description: seoConfig.pages.home.description,
   },
   twitter: {
     card: "summary_large_image",
-    site: "@expliveent",
-    creator: "@expliveent",
-    title: "Exp Live Entertainment — India's Premier Live Events Company",
-    description: "Exp Live Entertainment organizes music festivals, concerts, artist tours, and immersive live cultural experiences across India.",
+    site: siteConfig.twitterHandle,
+    creator: siteConfig.twitterHandle,
+    title: seoConfig.pages.home.title,
+    description: seoConfig.pages.home.description,
   },
   robots: {
     index: true,
@@ -86,7 +76,7 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true },
   },
   alternates: {
-    canonical: "https://explive.in",
+    canonical: siteConfig.url,
   },
 };
 

@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { homepageData } from '@/config/homepageData';
+import { homepageData } from '@/config/siteData';
 
 export const Hero = () => {
   return (

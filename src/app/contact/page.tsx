@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Script from 'next/script';
-import { homepageData } from '@/config/homepageData';
+import { homepageData } from '@/config/siteData';
 import { Footer } from '@/components/Footer';
 
 const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? '';

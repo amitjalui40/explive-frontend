@@ -1,11 +1,51 @@
-
+// ─── Site-wide constants ─────────────────────────────────────────────────────
 export const siteConfig = {
+  url: "https://explive.in",
+  name: "Exp Live Entertainment",
+  legalName: "Exp Live Entertainment LLP",
+  twitterHandle: "@expliveent",
+  tagline: "India's Premier Live Events Company",
+  keywords: [
+    "live events India",
+    "music festivals India",
+    "concert organizer Mumbai",
+    "artist management India",
+    "live entertainment company",
+    "event organizer Maharashtra",
+  ],
+  address: {
+    streetAddress: "Shop 2 Bldg 46 Deep Jyoti, CHS Vartak Nagar, Jekegram, Vartak Nagar Police Station",
+    addressLocality: "Thane",
+    addressRegion: "Maharashtra",
+    postalCode: "400606",
+    addressCountry: "IN",
+  },
   theme: {
     default: "dark" as "light" | "dark" | "system",
     enableSystem: false,
   },
 };
 
+// ─── Per-page SEO metadata ────────────────────────────────────────────────────
+export const seoConfig = {
+  pages: {
+    home: {
+      title: `${siteConfig.name} — ${siteConfig.tagline}`,
+      description:
+        "Exp Live Entertainment organises music festivals, concerts, artist solo tours, and immersive live cultural experiences across India. Upcoming shows in Mumbai and Thane.",
+    },
+    about: {
+      title: "About Us",
+      description: `${siteConfig.name} is focused on shaping the future of India's festivals and live entertainment culture. We organise music festivals, concerts, artist tours, and IP experiences across India.`,
+    },
+    contact: {
+      title: "Contact Us",
+      description: `Get in touch with ${siteConfig.name} for event bookings, artist management, or collaborations. Email us at info@explive.in or fill out our contact form.`,
+    },
+  },
+};
+
+// ─── Page & component data ────────────────────────────────────────────────────
 export const homepageData = {
   hero: {
     video: {
@@ -22,7 +62,7 @@ export const homepageData = {
       visible: false,
       text: "Explore Our Capabilities",
       targetId: "event-types",
-    }
+    },
   },
 
   upcomingShowsGrid: {
@@ -53,38 +93,40 @@ export const homepageData = {
         id: "seasona-festival",
         title: "Seasona Festival 2026",
         date: "23rd May 2026",
+        isoDate: "2026-05-23",
         location: "Summer Edition",
         venue: "Bandra Fort, Mumbai",
         badge: "Live Soon",
         image: "/images/seasona_festival.jpeg",
         glowColor: "rgba(251, 146, 60, 0.4)",
         buttonText: "Get Tickets",
-        buttonLink: "#"
+        buttonLink: "#",
       },
       {
         id: "ehsaas-e-shaam",
         title: "Ehsaas e Shaam",
         date: "10th July 2026",
+        isoDate: "2026-07-10",
         location: "Ek shaam, kahi ehsaas",
         venue: "Dome at NSCI, Mumbai",
         badge: "Coming Soon",
         image: "/images/ehsaas_e_shaam.jpeg",
         glowColor: "rgba(159, 18, 57, 0.4)",
         buttonText: "Get Tickets",
-        buttonLink: "#"
-      }
+        buttonLink: "#",
+      },
     ],
     stackSettings: {
       autoPlay: true,
       intervalMs: 9000,
       transitionSpeed: 1000,
-    }
+    },
   },
 
   eventCategories: {
     settings: {
       autoPlay: true,
-      autoPlayIntervalMs: 6000, // 6 seconds per slide
+      autoPlayIntervalMs: 6000,
     },
     header: {
       kicker: "",
@@ -137,8 +179,8 @@ export const homepageData = {
         image: "https://images.pexels.com/photos/2085998/pexels-photo-2085998.jpeg?auto=compress&cs=tinysrgb&w=1600",
         colSpan: "col-span-1",
         rowSpan: "row-span-1",
-      }
-    ]
+      },
+    ],
   },
 
   featuredSpotlight: {
@@ -155,10 +197,10 @@ export const homepageData = {
     title: "We turn events into powerful live experiences.",
     descriptions: [
       "Built on a strong background in events, we are focused on delivering high quality shows that connect with audiences.",
-      "We work across music concerts, festivals, IP events, and curated shows. Whether it’s a large festival or a more personal performance, our aim is to create experiences that people enjoy and remember.",
-      "Driven by creativity and the evolving energy of live entertainment, Exp Live Entertainment is focused on shaping the future of India’s festivals and live entertainment culture."
+      "We work across music concerts, festivals, IP events, and curated shows. Whether it's a large festival or a more personal performance, our aim is to create experiences that people enjoy and remember.",
+      "Driven by creativity and the evolving energy of live entertainment, Exp Live Entertainment is focused on shaping the future of India's festivals and live entertainment culture.",
     ],
-    mission: "Shaping the future of India's festivals and live entertainment culture."
+    mission: "Shaping the future of India's festivals and live entertainment culture.",
   },
 
   aboutFull: {
@@ -166,23 +208,46 @@ export const homepageData = {
     title: "At Exp Live Entertainment, we turn events into powerful live experiences.",
     descriptions: [
       "Built on a strong background in events, we are focused on delivering high quality shows that connect with audiences.",
-      "We work across music concerts, festivals, IP events, and curated shows. Whether it’s a large festival or a more personal performance, our aim is to create experiences that people enjoy and remember.",
+      "We work across music concerts, festivals, IP events, and curated shows. Whether it's a large festival or a more personal performance, our aim is to create experiences that people enjoy and remember.",
       "We take care of everything, from planning ideas to production, logistics, hospitality, and artist management. Every detail is handled with care to make sure the event runs smoothly and gives the audience a complete and memorable experience.",
       "We also work closely with artists, helping manage and present them in the right way for every show. With a strong network across the industry, we bring together the right talent and teams to deliver impactful events.",
       "Alongside live concerts and touring, our aim is to build unique music festivals and immersive experiences across genres, communities, and artistic formats.",
-      "Driven by creativity and the evolving energy of live entertainment, Exp Live Entertainment is focused on shaping the future of India’s festivals and live entertainment culture."
-    ]
+      "Driven by creativity and the evolving energy of live entertainment, Exp Live Entertainment is focused on shaping the future of India's festivals and live entertainment culture.",
+    ],
   },
+
+  faq: [
+    {
+      q: "What kind of events does Exp Live Entertainment organise?",
+      a: "We organise music festivals, artist solo tours, concerts, and unique IP-driven cultural experiences across India — from large multi-day outdoor festivals to intimate curated shows.",
+    },
+    {
+      q: "Where does Exp Live operate?",
+      a: "We are based in Thane, Maharashtra, and primarily organise events in Mumbai. We work across India and are focused on building India's live entertainment culture.",
+    },
+    {
+      q: "Does Exp Live manage artists?",
+      a: "Yes. We offer artist management services including live bookings, strategic collaborations, and curated entertainment partnerships, backed by a strong network across the Indian music industry.",
+    },
+    {
+      q: "How can I get in touch for an event or collaboration?",
+      a: "Reach out via email at info@explive.in or use the contact form at explive.in/contact. We'd love to hear about your event, collaboration idea, or booking enquiry.",
+    },
+    {
+      q: "What upcoming events is Exp Live organising?",
+      a: "Our upcoming events include Seasona Festival 2026 (23rd May 2026 at Bandra Fort, Mumbai) and Ehsaas e Shaam (10th July 2026 at Dome at NSCI, Mumbai).",
+    },
+  ],
 
   contact: {
     title: "CONTACT US",
     email: {
       label: "Email",
-      value: "info@explive.in"
+      value: "info@explive.in",
     },
     location: {
       label: "Location",
-      value: "Shop 2 Bldg 46 Deep Jyoti, CHS Vartak Nagar, Jekegram, Vartak Nagar Police Station, Thane, Thane- 400606, Maharashtra, India"
+      value: "Shop 2 Bldg 46 Deep Jyoti, CHS Vartak Nagar, Jekegram, Vartak Nagar Police Station, Thane, Thane- 400606, Maharashtra, India",
     },
     form: {
       tagline: "Reach out through the form below, and let us help you plan an incredible event.",
@@ -191,10 +256,10 @@ export const homepageData = {
         lastName: "Last Name",
         email: "Your Email",
         phone: "Your Number",
-        message: "Tell us how we can help..."
+        message: "Tell us how we can help...",
       },
-      submitText: "Contact Us"
-    }
+      submitText: "Contact Us",
+    },
   },
 
   footer: {
@@ -206,30 +271,21 @@ export const homepageData = {
     socials: [
       { name: "Instagram", url: "https://www.instagram.com/expliveent/" },
       { name: "Facebook", url: "https://www.facebook.com/profile.php?id=61579060607829" },
-      { name: "Twitter", url: "https://x.com/expliveent" },
-      { name: "YouTube", url: "https://www.youtube.com/@expliveent" },
-      { name: "LinkedIn", url: "https://www.linkedin.com/company/exp-live-entertainment/" }
+      { name: "Twitter",  url: "https://x.com/expliveent" },
+      { name: "YouTube",  url: "https://www.youtube.com/@expliveent" },
+      { name: "LinkedIn", url: "https://www.linkedin.com/company/exp-live-entertainment/" },
     ],
     links: [
       {
         title: "Company",
         items: [
           { name: "Experiences We Curate", url: "#event-types" },
-          { name: "About Us", url: "/about" },
-          { name: "Careers", url: "#" },
-          { name: "Contact Us", url: "/contact" }
-        ]
+          { name: "About Us",              url: "/about" },
+          { name: "Careers",               url: "#" },
+          { name: "Contact Us",            url: "/contact" },
+        ],
       },
-      // {
-      //   title: "Services",
-      //   items: [
-      //     { name: "Event Production", url: "#" },
-      //     { name: "Talent Booking", url: "#" },
-      //     { name: "Venue Management", url: "#" },
-      //     { name: "Brand Activations", url: "#" }
-      //   ]
-      // }
     ],
-    copyright: "© 2026 Exp live Entertainment LLP. All rights reserved."
-  }
+    copyright: "© 2026 Exp live Entertainment LLP. All rights reserved.",
+  },
 };

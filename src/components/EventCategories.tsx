@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { homepageData } from '@/config/homepageData';
+import { homepageData } from '@/config/siteData';
 import { ChevronRight } from 'lucide-react';
 
 export const EventCategories = () => {

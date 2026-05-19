@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { homepageData } from '@/config/homepageData';
+import { homepageData } from '@/config/siteData';
 
 export const AboutUs = () => {
   const { aboutSummary: about } = homepageData;

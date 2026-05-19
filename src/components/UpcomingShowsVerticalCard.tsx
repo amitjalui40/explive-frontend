@@ -7,7 +7,7 @@ import {
     Zap, Heart, Bell, Star, ShieldCheck, Headphones, Ticket, Globe
 } from 'lucide-react';
 import { features } from '@/config/features';
-import { homepageData } from '@/config/homepageData';
+import { homepageData } from '@/config/siteData';
 
 const ICON_MAP: Record<string, React.ElementType> = {
     MapPin, Zap, Star, ShieldCheck, Headphones, Ticket, Globe, Bell,

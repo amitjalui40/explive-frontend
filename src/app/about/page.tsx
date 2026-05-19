@@ -1,19 +1,19 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { homepageData } from '@/config/homepageData';
+import { siteConfig, seoConfig, homepageData } from '@/config/siteData';
 import { Footer } from '@/components/Footer';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: "About Us",
-  description: "Exp Live Entertainment is focused on shaping the future of India's festivals and live entertainment culture. We organize music festivals, concerts, artist tours, and IP experiences across India.",
+  title: seoConfig.pages.about.title,
+  description: seoConfig.pages.about.description,
   openGraph: {
-    title: "About Us | Exp Live Entertainment",
-    description: "Exp Live Entertainment is focused on shaping the future of India's festivals and live entertainment culture.",
-    url: "https://explive.in/about",
+    title: `${seoConfig.pages.about.title} | ${siteConfig.name}`,
+    description: seoConfig.pages.about.description,
+    url: `${siteConfig.url}/about`,
   },
   alternates: {
-    canonical: "https://explive.in/about",
+    canonical: `${siteConfig.url}/about`,
   },
 };
 
@@ -94,28 +94,7 @@ export default function AboutPage() {
           Common Questions
         </p>
         <dl className="flex flex-col divide-y divide-zinc-100 dark:divide-white/5">
-          {[
-            {
-              q: "What kind of events does Exp Live Entertainment organise?",
-              a: "We organise music festivals, artist solo tours, concerts, and unique IP-driven cultural experiences across India — from large multi-day outdoor festivals to intimate curated shows."
-            },
-            {
-              q: "Where does Exp Live operate?",
-              a: "We are based in Thane, Maharashtra, and primarily organise events in Mumbai. We work across India and are focused on building India's live entertainment culture."
-            },
-            {
-              q: "Does Exp Live manage artists?",
-              a: "Yes. We offer artist management services including live bookings, strategic collaborations, and curated entertainment partnerships, backed by a strong network across the Indian music industry."
-            },
-            {
-              q: "How can I get in touch for an event or collaboration?",
-              a: "Reach out via email at info@explive.in or use the contact form at explive.in/contact. We'd love to hear about your event, collaboration idea, or booking enquiry."
-            },
-            {
-              q: "What upcoming events is Exp Live organising?",
-              a: "Our upcoming events include Seasona Festival 2026 (23rd May 2026 at Bandra Fort, Mumbai) and Ehsaas e Shaam (10th July 2026 at Dome at NSCI, Mumbai)."
-            },
-          ].map(({ q, a }) => (
+          {homepageData.faq.map(({ q, a }) => (
             <div key={q} className="py-7">
               <dt className="text-base md:text-lg font-bold text-zinc-900 dark:text-white mb-3">{q}</dt>
               <dd className="text-base text-zinc-500 dark:text-zinc-400 leading-relaxed font-medium">{a}</dd>
@@ -128,13 +107,11 @@ export default function AboutPage() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "FAQPage",
-              "mainEntity": [
-                { "@type": "Question", "name": "What kind of events does Exp Live Entertainment organise?", "acceptedAnswer": { "@type": "Answer", "text": "We organise music festivals, artist solo tours, concerts, and unique IP-driven cultural experiences across India — from large multi-day outdoor festivals to intimate curated shows." } },
-                { "@type": "Question", "name": "Where does Exp Live operate?", "acceptedAnswer": { "@type": "Answer", "text": "We are based in Thane, Maharashtra, and primarily organise events in Mumbai. We work across India and are focused on building India's live entertainment culture." } },
-                { "@type": "Question", "name": "Does Exp Live manage artists?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We offer artist management services including live bookings, strategic collaborations, and curated entertainment partnerships, backed by a strong network across the Indian music industry." } },
-                { "@type": "Question", "name": "How can I get in touch for an event or collaboration?", "acceptedAnswer": { "@type": "Answer", "text": "Reach out via email at info@explive.in or use the contact form at explive.in/contact." } },
-                { "@type": "Question", "name": "What upcoming events is Exp Live organising?", "acceptedAnswer": { "@type": "Answer", "text": "Upcoming events include Seasona Festival 2026 (23rd May 2026 at Bandra Fort, Mumbai) and Ehsaas e Shaam (10th July 2026 at Dome at NSCI, Mumbai)." } },
-              ]
+              "mainEntity": homepageData.faq.map(({ q, a }) => ({
+                "@type": "Question",
+                "name": q,
+                "acceptedAnswer": { "@type": "Answer", "text": a },
+              })),
             })
           }}
         />
