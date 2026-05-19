@@ -10,7 +10,7 @@ export const AboutUs = () => {
       <div className="w-full max-w-480 mx-auto px-6 md:px-12 xl:px-24">
 
         {/* Small label */}
-        <p className="text-xs font-bold tracking-[0.3em] uppercase text-emerald-500 mb-10 md:mb-14">
+        <p className="text-xs font-bold tracking-[0.3em] uppercase text-amber-500 mb-10 md:mb-14">
           {about.kicker}
         </p>
 
@@ -22,7 +22,7 @@ export const AboutUs = () => {
             <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] font-black tracking-tighter text-zinc-900 dark:text-white leading-[0.93] uppercase">
               {about.title.split('live').map((part, i, arr) =>
                 i < arr.length - 1
-                  ? <React.Fragment key={i}>{part}<span className="text-emerald-500 dark:text-emerald-400">live</span></React.Fragment>
+                  ? <React.Fragment key={i}>{part}<span className="text-amber-500 dark:text-amber-400">live</span></React.Fragment>
                   : <React.Fragment key={i}>{part}</React.Fragment>
               )}
             </h2>
@@ -36,7 +36,7 @@ export const AboutUs = () => {
             </div>
             <Link
               href="/about"
-              className="inline-flex items-center gap-2 text-sm font-bold tracking-widest uppercase text-zinc-900 dark:text-white hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors group w-fit"
+              className="inline-flex items-center gap-2 text-sm font-bold tracking-widest uppercase text-zinc-900 dark:text-white hover:text-amber-500 dark:hover:text-amber-400 transition-colors group w-fit"
             >
               Our Full Story
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>

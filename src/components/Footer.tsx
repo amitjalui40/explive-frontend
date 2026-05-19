@@ -30,7 +30,7 @@ export const Footer = () => {
           {/* Brand & Description (Left) */}
           <div className="lg:col-span-4 flex flex-col gap-6">
             <h3 className="text-2xl font-black tracking-tighter text-zinc-900 dark:text-white">
-              exp<span className="text-emerald-500">.</span>live
+              exp<span className="text-amber-500">.</span>live
             </h3>
             <p className="text-sm md:text-base text-zinc-600 dark:text-zinc-400 font-medium leading-relaxed max-w-sm">
               {footer.description}
@@ -42,7 +42,7 @@ export const Footer = () => {
                   <Link
                     key={social.name}
                     href={social.url}
-                    className="w-10 h-10 flex items-center justify-center rounded-full bg-zinc-200/80 dark:bg-zinc-800/50 text-zinc-600 dark:text-zinc-400 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-500 dark:hover:text-white transition-all duration-300 shadow-sm hover:shadow-[0_0_15px_rgba(16,185,129,0.5)] group"
+                    className="w-10 h-10 flex items-center justify-center rounded-full bg-zinc-200/80 dark:bg-zinc-800/50 text-zinc-600 dark:text-zinc-400 hover:bg-amber-500 hover:text-zinc-900 dark:hover:bg-amber-500 dark:hover:text-zinc-900 transition-all duration-300 shadow-sm hover:shadow-[0_0_15px_rgba(245,158,11,0.5)] group"
                     aria-label={social.name}
                   >
                     {Icon ? <Icon className="w-5 h-5 group-hover:scale-110 transition-transform" /> : social.name}
@@ -69,7 +69,7 @@ export const Footer = () => {
                   <li key={link.name}>
                     <Link
                       href={link.url}
-                      className="text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-emerald-500 transition-colors"
+                      className="text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-amber-500 transition-colors"
                     >
                       {link.name}
                     </Link>

@@ -129,7 +129,7 @@ export default function ContactPage() {
     }
   };
 
-  const inputClass = "w-full bg-transparent border-0 border-b border-white/20 text-white placeholder:text-white/25 py-3 text-base font-medium focus:outline-none focus:border-emerald-400 transition-colors duration-300";
+  const inputClass = "w-full bg-transparent border-0 border-b border-white/20 text-white placeholder:text-white/25 py-3 text-base font-medium focus:outline-none focus:border-amber-400 transition-colors duration-300";
   const labelClass = "text-xs font-bold tracking-[0.25em] uppercase text-white/40 mb-2 block";
 
   return (
@@ -152,7 +152,7 @@ export default function ContactPage() {
       <div className="w-full max-w-480 mx-auto px-6 md:px-12 xl:px-24 shrink-0">
         <div className="flex items-start justify-between pb-6 border-b border-zinc-200 dark:border-white/5">
           <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3">
-            <span className="text-xs font-bold tracking-[0.3em] uppercase text-emerald-500">Contact</span>
+            <span className="text-xs font-bold tracking-[0.3em] uppercase text-amber-500">Contact</span>
             <span className="hidden sm:inline text-zinc-300 dark:text-zinc-700 text-xs select-none">—</span>
             <span className="text-sm font-bold text-zinc-900 dark:text-white tracking-tight">Exp Live Entertainment</span>
           </div>
@@ -182,7 +182,7 @@ export default function ContactPage() {
               <p className="text-xs font-bold tracking-[0.25em] uppercase text-zinc-400 dark:text-zinc-600 mb-1">Email</p>
               <a
                 href={`mailto:${contact.email.value}`}
-                className="text-sm font-semibold text-zinc-900 dark:text-white hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors duration-300"
+                className="text-sm font-semibold text-zinc-900 dark:text-white hover:text-amber-500 dark:hover:text-amber-400 transition-colors duration-300"
               >
                 {contact.email.value}
               </a>
@@ -216,18 +216,18 @@ export default function ContactPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div>
-                <label className={labelClass}>First Name <span className="text-emerald-500">*</span></label>
+                <label className={labelClass}>First Name <span className="text-amber-500">*</span></label>
                 <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder={placeholders.firstName} required maxLength={50} className={inputClass} />
               </div>
               <div>
-                <label className={labelClass}>Last Name <span className="text-emerald-500">*</span></label>
+                <label className={labelClass}>Last Name <span className="text-amber-500">*</span></label>
                 <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder={placeholders.lastName} required maxLength={50} className={inputClass} />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div>
-                <label className={labelClass}>Email <span className="text-emerald-500">*</span></label>
+                <label className={labelClass}>Email <span className="text-amber-500">*</span></label>
                 <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder={placeholders.email} required maxLength={100} className={inputClass} />
               </div>
               <div>
@@ -238,7 +238,7 @@ export default function ContactPage() {
             </div>
 
             <div className="flex-1">
-              <label className={labelClass}>Message <span className="text-emerald-500">*</span></label>
+              <label className={labelClass}>Message <span className="text-amber-500">*</span></label>
               <textarea
                 name="message"
                 value={formData.message}
@@ -258,7 +258,7 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={isSubmitting || submitStatus === 'success' || cooldown > 0 || !cfToken}
-                className="group inline-flex items-center gap-3 bg-emerald-500 hover:bg-emerald-400 text-white px-10 py-4 text-sm font-bold tracking-widest uppercase transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed w-fit"
+                className="group inline-flex items-center gap-3 bg-amber-500 hover:bg-amber-400 text-zinc-900 px-10 py-4 text-sm font-bold tracking-widest uppercase transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed w-fit"
               >
                 {isSubmitting ? 'Sending...' : submitStatus === 'success' ? 'Message Sent ✓' : cooldown > 0 ? `Wait ${cooldown}s` : !cfToken ? 'Verifying...' : 'Send Message'}
                 {!isSubmitting && submitStatus !== 'success' && cooldown === 0 && cfToken && (
