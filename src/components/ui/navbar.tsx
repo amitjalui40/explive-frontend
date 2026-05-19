@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
-import expliveLogo from '@/assets/logo/Exp Live logo - white.png';
+import { ExpliveLogo } from '@/components/ui/explive-logo';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -79,10 +79,8 @@ export function Navbar() {
           {/* Left - Logo */}
           <div className="flex-1">
             <Link href="/" onClick={closeSidebar} className="inline-flex items-center hover:opacity-80 transition-opacity">
-              <img
-                src={expliveLogo.src}
-                alt="Explive"
-                className={`h-8 md:h-10 object-contain scale-[1.8] md:scale-[2.1] origin-left transition-all duration-500 ${isDarkBackground ? '' : 'invert dark:invert-0'}`}
+              <ExpliveLogo
+                className={`h-8 md:h-10 w-auto scale-[1.8] md:scale-[2.1] origin-left transition-all duration-500 ${isDarkBackground ? 'text-white' : 'text-zinc-900 dark:text-white'}`}
               />
             </Link>
           </div>
