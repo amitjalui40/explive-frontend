@@ -166,7 +166,6 @@ export const UpcomingShowsVerticalCard = () => {
                         aria-hidden
                         fill
                         sizes="100vw"
-                        loading="eager"
                         draggable={false}
                         className={`object-cover blur-2xl md:blur-[40px] scale-110 pointer-events-none select-none ${i === activeIndex ? 'opacity-100 transition-opacity duration-1000 ease-out' : 'opacity-0'}`}
                     />
@@ -306,7 +305,6 @@ export const UpcomingShowsVerticalCard = () => {
                                                 alt={item.title}
                                                 fill
                                                 sizes="(max-width: 768px) 85vw, (max-width: 1024px) 45vw, 340px"
-                                                loading="eager"
                                                 draggable={false}
                                                 className="object-cover object-top pointer-events-none"
                                             />

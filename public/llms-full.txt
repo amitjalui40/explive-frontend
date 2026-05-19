@@ -1,0 +1,109 @@
+# Exp Live Entertainment — Full Content Summary
+
+> This file provides extended content for AI language models and crawlers. For a quick summary see /llms.txt.
+
+---
+
+## Company Overview
+
+Exp Live Entertainment (legal name: Exp Live Entertainment LLP) is an India-based live events company headquartered in Thane, Maharashtra. The company organizes music festivals, concerts, artist solo tours, curated cultural shows, and IP-driven live experiences, primarily in Mumbai and across India.
+
+The company was founded with a focus on delivering high-quality live shows that connect artists with audiences. Its mission is to shape the future of India's festivals and live entertainment culture.
+
+Contact: info@explive.in
+Website: https://explive.in
+Location: Shop 2 Bldg 46 Deep Jyoti, CHS Vartak Nagar, Jekegram, Vartak Nagar Police Station, Thane, Maharashtra 400606, India
+
+---
+
+## Services
+
+### Music Festivals
+Exp Live creates next-generation music festivals where live performances, artist discovery, and culture shape every audience experience. Formats include outdoor multi-stage, multi-day festivals.
+
+### Artist Solo Tours
+Strategically designed touring experiences built around an artist's vision, creating deeper audience connections across regions. Includes regional and headline touring formats.
+
+### Concert Experiences
+Immersive concert productions that bring artists and audiences closer through music, emotion, and live energy. Focus on intimate and high-energy live formats.
+
+### Artist Management
+End-to-end artist representation including live bookings, strategic collaborations, and curated entertainment partnerships. The company maintains a strong network across the Indian music industry.
+
+### IP Experiences
+Innovative live intellectual property experiences inspired by tradition, creativity, and artistic performances. Includes cultural and genre-specific event formats.
+
+---
+
+## Upcoming Events
+
+### Seasona Festival 2026
+- Date: 23rd May 2026
+- Venue: Bandra Fort, Mumbai, Maharashtra, India
+- Format: Summer Edition outdoor festival
+- Status: Live Soon — tickets available
+
+### Ehsaas e Shaam
+- Date: 10th July 2026
+- Venue: Dome at NSCI, Mumbai, Maharashtra, India
+- Tagline: "Ek shaam, kahi ehsaas" (One evening, some feelings)
+- Status: Coming Soon
+
+---
+
+## About Page Content
+
+Exp Live Entertainment is built on a strong background in events, focused on delivering high quality shows that connect with audiences. The company works across music concerts, festivals, IP events, and curated shows — whether a large festival or a more personal performance, the aim is to create experiences that people enjoy and remember.
+
+The company handles everything from planning and ideation through production, logistics, hospitality, and artist management. Every detail is managed to ensure events run smoothly and give audiences a complete and memorable experience.
+
+Exp Live also works closely with artists, helping manage and present them appropriately for every show. With a strong industry network, the company brings together the right talent and teams to deliver impactful events.
+
+Alongside live concerts and touring, Exp Live aims to build unique music festivals and immersive experiences across genres, communities, and artistic formats.
+
+---
+
+## Contact Information
+
+- Email: info@explive.in
+- Address: Shop 2 Bldg 46 Deep Jyoti, CHS Vartak Nagar, Jekegram, Thane, Maharashtra 400606, India
+- Contact form: https://explive.in/contact
+
+---
+
+## Frequently Asked Questions
+
+**What kind of events does Exp Live Entertainment organise?**
+Exp Live organises music festivals, artist solo tours, concerts, artist management, and unique IP-driven cultural experiences across India.
+
+**Where does Exp Live operate?**
+The company is based in Thane, Maharashtra, and primarily organises events in Mumbai. Events are held across India.
+
+**How can I book Exp Live for an event?**
+Reach out via email at info@explive.in or use the contact form at https://explive.in/contact.
+
+**Does Exp Live manage artists?**
+Yes. Exp Live offers artist management services including live bookings, strategic collaborations, and curated entertainment partnerships.
+
+**What upcoming events is Exp Live organising?**
+Upcoming events include Seasona Festival 2026 (23rd May 2026, Bandra Fort Mumbai) and Ehsaas e Shaam (10th July 2026, Dome at NSCI Mumbai).
+
+---
+
+## Social Profiles
+
+- Instagram: https://www.instagram.com/expliveent/
+- Twitter/X: https://x.com/expliveent
+- YouTube: https://www.youtube.com/@expliveent
+- LinkedIn: https://www.linkedin.com/company/exp-live-entertainment/
+- Facebook: https://www.facebook.com/profile.php?id=61579060607829
+
+---
+
+## Site Map
+
+- Home: https://explive.in — Hero, upcoming events, event categories, company summary
+- About: https://explive.in/about — Full company story, services, mission statement
+- Contact: https://explive.in/contact — Contact form and details
+- Sitemap: https://explive.in/sitemap.xml
+- Robots: https://explive.in/robots.txt

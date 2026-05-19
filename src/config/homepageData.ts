@@ -1,5 +1,3 @@
-import seasonaFestivalImg from '@/assets/images/seasona_festival.jpeg';
-import ehsaasEShaamImg from '@/assets/images/ehsaas_e_shaam.jpeg';
 
 export const siteConfig = {
   theme: {
@@ -58,7 +56,7 @@ export const homepageData = {
         location: "Summer Edition",
         venue: "Bandra Fort, Mumbai",
         badge: "Live Soon",
-        image: seasonaFestivalImg.src,
+        image: "/images/seasona_festival.jpeg",
         glowColor: "rgba(251, 146, 60, 0.4)",
         buttonText: "Get Tickets",
         buttonLink: "#"
@@ -70,7 +68,7 @@ export const homepageData = {
         location: "Ek shaam, kahi ehsaas",
         venue: "Dome at NSCI, Mumbai",
         badge: "Coming Soon",
-        image: ehsaasEShaamImg.src,
+        image: "/images/ehsaas_e_shaam.jpeg",
         glowColor: "rgba(159, 18, 57, 0.4)",
         buttonText: "Get Tickets",
         buttonLink: "#"

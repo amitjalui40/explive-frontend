@@ -1,5 +1,72 @@
+import type { Metadata } from "next";
 import { features } from "@/config/features";
 import { homepageData } from "@/config/homepageData";
+
+const eventSchemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "Seasona Festival 2026",
+    "startDate": "2026-05-23",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "location": {
+      "@type": "Place",
+      "name": "Bandra Fort",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Mumbai",
+        "addressRegion": "Maharashtra",
+        "addressCountry": "IN"
+      }
+    },
+    "organizer": {
+      "@type": "Organization",
+      "name": "Exp Live Entertainment",
+      "url": "https://explive.in"
+    },
+    "url": "https://explive.in"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "Ehsaas e Shaam",
+    "startDate": "2026-07-10",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "location": {
+      "@type": "Place",
+      "name": "Dome at NSCI",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Mumbai",
+        "addressRegion": "Maharashtra",
+        "addressCountry": "IN"
+      }
+    },
+    "organizer": {
+      "@type": "Organization",
+      "name": "Exp Live Entertainment",
+      "url": "https://explive.in"
+    },
+    "url": "https://explive.in"
+  }
+];
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "Exp Live Entertainment — India's Premier Live Events Company",
+  },
+  description: "Exp Live Entertainment organizes music festivals, concerts, artist solo tours, and immersive live cultural experiences across India. Upcoming shows in Mumbai and Thane.",
+  openGraph: {
+    title: "Exp Live Entertainment — India's Premier Live Events Company",
+    description: "Exp Live Entertainment organizes music festivals, concerts, artist solo tours, and immersive live cultural experiences across India.",
+    url: "https://explive.in",
+  },
+  alternates: {
+    canonical: "https://explive.in",
+  },
+};
 import { EventCategories } from "@/components/EventCategories";
 import { AboutUs } from "@/components/AboutUs";
 import { Hero } from "@/components/Hero";
@@ -12,6 +79,9 @@ import { UpcomingShowsVerticalCard } from "@/components/UpcomingShowsVerticalCar
 export default function Home() {
   return (
     <main className="w-full">
+      {eventSchemas.map((schema, i) => (
+        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
       {/* Modular Hero Section Component */}
       <Hero />
 
